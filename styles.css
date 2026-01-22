@@ -1204,13 +1204,21 @@ section {
 
 /* ==================== BARTENDERS PAGE STYLES ==================== */
 .about-team {
-    background: linear-gradient(135deg, var(--dark-bg) 0%, rgba(204, 0, 0, 0.1) 100%);
+    background: linear-gradient(135deg, var(--dark-bg) 0%, rgba(221, 0, 0, 0.1) 100%);
 }
 
+/* 
+ * WHY CHOOSE OUR TEAM LAYOUT:
+ * - 3 columns on desktop (2 rows of 3 cards = 6 total cards)
+ * - Gap controls spacing between cards
+ * - Max-width keeps it centered and not too wide
+ */
 .about-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .about-card {

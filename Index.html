@@ -4,16 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JiggerOnTheMix - Premium Music & Events</title>
+    <!-- Main stylesheet - controls all visual styling -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
+    <!-- 
+        NAVIGATION BAR
+        - Sticky navigation that stays at top when scrolling
+        - Contains logo, menu links, hamburger for mobile
+        - Progress bar shows scroll position on page
+    -->
     <nav class="navbar">
         <div class="navbar-container">
+            <!-- Logo with image and text -->
             <div class="logo">
                 <img src="logo.png" alt="JiggerOnTheMix" class="logo-img">
                 <span class="logo-text">JiggerOnTheMix</span>
             </div>
+            <!-- Main navigation menu - links to sections and pages -->
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#events" class="nav-link">Events</a></li>
@@ -21,30 +29,44 @@
                 <li><a href="drinks-packages.html" class="nav-link">Drinks & Packages</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
+            <!-- Hamburger icon for mobile menu (hidden on desktop) -->
             <div class="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
         </div>
-        <!-- Progress Bar -->
+        <!-- Progress bar - fills from left to right as user scrolls -->
         <div class="progress-bar" id="progressBar"></div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- 
+        HERO/LANDING SECTION
+        - First thing visitors see
+        - Full screen height with background effects
+        - Contains main title, subtitle, and call-to-action button
+    -->
     <section id="home" class="hero">
         <div class="hero-content">
             <h1 class="hero-title">JiggerOnTheMix</h1>
             <p class="hero-subtitle">Premium Mobile Bar Service for Your Events</p>
+            <!-- Call-to-action button - scrolls to events section -->
             <button class="cta-button">Book Now</button>
         </div>
+        <!-- Animated wave background element -->
         <div class="hero-background"></div>
     </section>
 
-    <!-- Events Section -->
+    <!-- 
+        EVENTS SECTION
+        - Showcases recent events/portfolio
+        - 3 event cards in a grid layout
+        - Each card has image, title, description, date, and button
+    -->
     <section id="events" class="events">
         <h2 class="section-title">Recent Events</h2>
         <div class="events-grid">
+            <!-- Event Card 1: Corporate Gala -->
             <div class="event-card">
                 <div class="event-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
                 <h3>Corporate Gala Night</h3>
@@ -52,6 +74,7 @@
                 <p class="event-date">📅 June 15, 2026</p>
                 <button class="event-btn">View Details</button>
             </div>
+            <!-- Event Card 2: Wedding -->
             <div class="event-card">
                 <div class="event-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
                 <h3>Wedding Reception</h3>
@@ -59,6 +82,7 @@
                 <p class="event-date">📅 July 22, 2026</p>
                 <button class="event-btn">View Details</button>
             </div>
+            <!-- Event Card 3: Birthday -->
             <div class="event-card">
                 <div class="event-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
                 <h3>Birthday Bash</h3>
@@ -69,35 +93,46 @@
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- 
+        SERVICES SECTION
+        - Lists all services offered
+        - 6 service cards displayed in 3x2 grid (3 top, 3 bottom)
+        - Each card has icon, title, and description
+    -->
     <section id="services" class="services">
         <h2 class="section-title">Our Services</h2>
         <div class="services-grid">
+            <!-- Service 1: Mobile Bar Rental -->
             <div class="service-card">
                 <div class="service-icon">🚗</div>
                 <h3>Mobile Bar Rental</h3>
                 <p>Fully equipped mobile bar brought directly to your venue. Complete with professional bartenders and premium spirits.</p>
             </div>
+            <!-- Service 2: Custom Cocktails -->
             <div class="service-card">
                 <div class="service-icon">🍸</div>
                 <h3>Custom Cocktails</h3>
                 <p>Signature cocktail creation tailored to your event theme and guest preferences with premium ingredients.</p>
             </div>
+            <!-- Service 3: Professional Staff -->
             <div class="service-card">
                 <div class="service-icon">👔</div>
                 <h3>Professional Staff</h3>
                 <p>Certified, experienced bartenders and servers trained in event hospitality and customer excellence.</p>
             </div>
+            <!-- Service 4: Event Planning -->
             <div class="service-card">
                 <div class="service-icon">🎉</div>
                 <h3>Event Planning</h3>
                 <p>Full consultation and coordination services to ensure your mobile bar perfectly complements your event.</p>
             </div>
+            <!-- Service 5: Premium Liquor -->
             <div class="service-card">
                 <div class="service-icon">🥂</div>
                 <h3>Premium Liquor Selection</h3>
                 <p>Access to top-shelf spirits, craft beers, fine wines, and specialty ingredients for any preference.</p>
             </div>
+            <!-- Service 6: Flexible Packages -->
             <div class="service-card">
                 <div class="service-icon">📋</div>
                 <h3>Flexible Packages</h3>
@@ -106,17 +141,25 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- 
+        CONTACT/BOOKING SECTION
+        - Left side: Booking form with name, email, details fields
+        - Right side: Contact information cards (location, phone, email, hours)
+        - Form submissions handled by script.js
+    -->
     <section id="contact" class="contact">
         <h2 class="section-title">Book Your Event</h2>
         <div class="contact-container">
+            <!-- Booking form - collects event information -->
             <form class="contact-form" id="contactForm">
                 <input type="text" placeholder="Event Name" required>
                 <input type="email" placeholder="Your Email" required>
                 <textarea placeholder="Event Details (date, location, guest count)" rows="5" required></textarea>
                 <button type="submit" class="submit-btn">Request a Quote</button>
             </form>
+            <!-- Contact information cards -->
             <div class="contact-info">
+                <!-- Service area -->
                 <div class="info-item">
                     <span class="info-icon">📍</span>
                     <div>
@@ -124,6 +167,7 @@
                         <p>Los Angeles & Orange County, CA</p>
                     </div>
                 </div>
+                <!-- Phone number -->
                 <div class="info-item">
                     <span class="info-icon">📞</span>
                     <div>
@@ -131,6 +175,7 @@
                         <p>+1 (555) 123-4567</p>
                     </div>
                 </div>
+                <!-- Email address -->
                 <div class="info-item">
                     <span class="info-icon">✉️</span>
                     <div>
@@ -138,6 +183,7 @@
                         <p>booking@jiggeronthmix.com</p>
                     </div>
                 </div>
+                <!-- Business hours -->
                 <div class="info-item">
                     <span class="info-icon">🕐</span>
                     <div>
@@ -149,13 +195,20 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- 
+        FOOTER
+        - 4 columns: About, Quick Links, Social Media, Newsletter
+        - Bottom section with copyright
+        - Newsletter signup with validation
+    -->
     <footer class="footer">
         <div class="footer-content">
+            <!-- About section -->
             <div class="footer-section">
                 <h4>About JiggerOnTheMix</h4>
                 <p>Premium mobile bar service specializing in elevating your events with professional mixology, expert bartenders, and unforgettable experiences.</p>
             </div>
+            <!-- Quick navigation links -->
             <div class="footer-section">
                 <h4>Quick Links</h4>
                 <ul>
@@ -165,6 +218,7 @@
                     <li><a href="#services">Services</a></li>
                 </ul>
             </div>
+            <!-- Social media links -->
             <div class="footer-section">
                 <h4>Follow Us</h4>
                 <div class="social-links">
@@ -174,6 +228,7 @@
                     <a href="#">LinkedIn</a>
                 </div>
             </div>
+            <!-- Newsletter subscription -->
             <div class="footer-section">
                 <h4>Newsletter</h4>
                 <p>Get updates on new packages and event specials</p>
@@ -181,11 +236,13 @@
                 <button class="newsletter-btn">Subscribe</button>
             </div>
         </div>
+        <!-- Copyright notice -->
         <div class="footer-bottom">
             <p>&copy; 2026 JiggerOnTheMix. All rights reserved. Licensed & Insured.</p>
         </div>
     </footer>
 
+    <!-- JavaScript file - handles interactions, animations, form validation -->
     <script src="script.js"></script>
 </body>
 </html>

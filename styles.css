@@ -5,6 +5,19 @@
     box-sizing: border-box;
 }
 
+/* 
+ * QUICK CUSTOMIZATION GUIDE - COLOR PALETTE
+ * Change these values to customize the entire website theme:
+ * 
+ * --primary-color: Main black color for text and dark elements
+ * --secondary-color: Main red color (buttons, accents, borders) - Currently #dd0000
+ * --accent-color: Brighter red for hover effects and highlights - Currently #ff4444
+ * --dark-bg: Darkest background color for sections
+ * --light-bg: Lighter background for cards and containers
+ * --text-dark: Main text color (white)
+ * --text-light: Secondary text color (light gray)
+ * --transition: Animation speed for hover effects (0.3s default)
+ */
 :root {
     --primary-color: #000000;
     --secondary-color: #dd0000;
@@ -60,13 +73,19 @@ body > * {
 }
 
 /* ==================== NAVBAR STYLES ==================== */
+/* 
+ * NAVBAR QUICK EDITS:
+ * - padding: Adjust navbar height (1rem 2rem = top/bottom left/right)
+ * - background: Change navbar gradient colors
+ * - box-shadow: Modify navbar shadow effect
+ */
 .navbar {
-    background: linear-gradient(135deg, #1a1a1a 0%, #cc0000 100%);
+    background: linear-gradient(135deg, #1a1a1a 0%, #dd0000 100%);
     padding: 1rem 2rem;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 4px 20px rgba(204, 0, 0, 0.3);
+    box-shadow: 0 4px 20px rgba(221, 0, 0, 0.3);
     width: 100%;
 }
 
@@ -78,6 +97,13 @@ body > * {
     align-items: center;
 }
 
+/* 
+ * LOGO QUICK EDITS:
+ * - height: Adjust logo image size (50px default, 40px on mobile)
+ * - font-size: Change logo text size (1.3rem default)
+ * - color: Change logo text color (currently using --accent-color)
+ * - gap: Space between image and text (0.5rem default)
+ */
 .logo {
     font-size: 1.8rem;
     font-weight: 700;
@@ -180,6 +206,15 @@ body > * {
 }
 
 /* ==================== HERO SECTION ==================== */
+/* 
+ * HERO/LANDING PAGE QUICK EDITS:
+ * - height: Change landing page height (100vh = full screen)
+ * - background: Adjust radial gradient positions and colors for visual effects
+ * - First gradient: circle at 20% 50% controls left glow position
+ * - Second gradient: circle at 80% 80% controls bottom-right glow
+ * - Third/Fourth: Additional accent glows
+ * - Final linear-gradient: Base background color transition
+ */
 .hero {
     position: relative;
     height: 100vh;
@@ -188,10 +223,10 @@ body > * {
     justify-content: center;
     overflow: hidden;
     background: 
-        radial-gradient(circle at 20% 50%, rgba(204, 0, 0, 0.4) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(255, 51, 51, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 50% 20%, rgba(204, 0, 0, 0.25) 0%, transparent 40%),
-        radial-gradient(circle at 90% 30%, rgba(255, 51, 51, 0.2) 0%, transparent 35%),
+        radial-gradient(circle at 20% 50%, rgba(221, 0, 0, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 68, 68, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 50% 20%, rgba(221, 0, 0, 0.25) 0%, transparent 40%),
+        radial-gradient(circle at 90% 30%, rgba(255, 68, 68, 0.2) 0%, transparent 35%),
         linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #330000 100%);
 }
 
@@ -238,6 +273,12 @@ body > * {
     }
 }
 
+/* 
+ * HERO TITLE QUICK EDITS:
+ * - font-size: Main title size (4.5rem desktop, 2.5rem tablet, 2rem mobile)
+ * - text-shadow: Adjust shadow depth and blur
+ * - letter-spacing: Space between letters (-2px makes text tighter)
+ */
 .hero-title {
     font-size: 4.5rem;
     font-weight: 800;
@@ -246,6 +287,11 @@ body > * {
     letter-spacing: -2px;
 }
 
+/* 
+ * HERO SUBTITLE QUICK EDITS:
+ * - font-size: Subtitle text size (1.5rem desktop, 1.1rem tablet, 0.95rem mobile)
+ * - opacity: Text transparency (0.95 = slightly transparent)
+ */
 .hero-subtitle {
     font-size: 1.5rem;
     margin-bottom: 2rem;
@@ -276,11 +322,22 @@ body > * {
 }
 
 /* ==================== SECTION STYLES ==================== */
+/* 
+ * SECTION SPACING QUICK EDITS:
+ * - padding: Adjust space inside sections (5rem top/bottom, 4rem left/right)
+ * - Increase/decrease these values to change spacing between sections
+ */
 section {
     padding: 5rem 4rem;
     width: 100%;
 }
 
+/* 
+ * SECTION TITLE QUICK EDITS:
+ * - font-size: Section heading size (2.5rem desktop, 1.8rem mobile)
+ * - margin-bottom: Space below title before content (3rem default)
+ * - Underline bar controlled by ::after pseudo-element below
+ */
 .section-title {
     font-size: 2.5rem;
     font-weight: 700;
@@ -290,6 +347,7 @@ section {
     color: var(--text-dark);
 }
 
+/* Section title underline bar - change width, height, or colors */
 .section-title::after {
     content: '';
     display: block;
@@ -457,8 +515,15 @@ section {
 }
 
 /* ==================== SERVICES SECTION ==================== */
+/* 
+ * SERVICES LAYOUT QUICK EDITS:
+ * - grid-template-columns: Number of columns (repeat(3, 1fr) = 3 equal columns)
+ *   Change to repeat(2, 1fr) for 2 columns or repeat(4, 1fr) for 4 columns
+ * - gap: Space between service cards (2rem default)
+ * - max-width: Container width (1200px keeps it centered)
+ */
 .services {
-    background: linear-gradient(135deg, rgba(204, 0, 0, 0.1) 0%, var(--dark-bg) 100%);
+    background: linear-gradient(135deg, rgba(221, 0, 0, 0.1) 0%, var(--dark-bg) 100%);
 }
 
 .services-grid {
@@ -675,6 +740,14 @@ section {
 }
 
 /* ==================== RESPONSIVE DESIGN ==================== */
+/* 
+ * RESPONSIVE BREAKPOINTS:
+ * - 768px: Tablet/iPad breakpoint
+ * - 480px: Mobile phone breakpoint
+ * 
+ * MOBILE CUSTOMIZATION:
+ * Adjust these values to change how the site looks on smaller screens
+ */
 @media (max-width: 768px) {
     .hamburger {
         display: flex;

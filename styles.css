@@ -861,13 +861,18 @@ section {
 
 /* ==================== DRINKS & PACKAGES PAGE ==================== */
 .drinks-hero {
-    background: linear-gradient(135deg, #1a1a1a 0%, #cc0000 100%);
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(221, 0, 0, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 68, 68, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 50% 20%, rgba(221, 0, 0, 0.25) 0%, transparent 40%),
+        radial-gradient(circle at 90% 30%, rgba(255, 68, 68, 0.2) 0%, transparent 35%),
+        linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #330000 100%);
 }
 
 .drinks-section,
 .packages-section,
 .cta-section {
-    background: linear-gradient(135deg, var(--dark-bg) 0%, rgba(204, 0, 0, 0.1) 100%);
+    background: linear-gradient(135deg, var(--dark-bg) 0%, rgba(221, 0, 0, 0.1) 100%);
 }
 
 .drinks-section {
@@ -944,6 +949,138 @@ section {
     left: 0;
     color: var(--primary-color);
     font-weight: bold;
+}
+
+/* ==================== COCKTAILS MENU SECTION ==================== */
+/* 
+ * COCKTAILS SECTION QUICK EDITS:
+ * - cocktail-grid: Change grid columns for responsive layout
+ * - cocktail-item: Modify card styling, colors, spacing
+ * - Grid layout: 5 columns for desktop, adjusts on smaller screens
+ */
+.cocktails-section {
+    background: linear-gradient(135deg, var(--dark-bg) 0%, rgba(221, 0, 0, 0.1) 100%);
+    padding: 5rem 4rem;
+    width: 100%;
+}
+
+.cocktails-section .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--text-dark);
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.cocktails-section .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--secondary-color) 20%, var(--secondary-color) 80%, transparent);
+}
+
+.cocktail-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Shooters Grid - 4x2 Layout (4 columns, 2 rows) */
+.shooters-grid {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1200px;
+}
+
+/* Mocktails Grid - Centered 4-column Layout */
+.mocktails-grid {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.cocktail-item {
+    background: linear-gradient(135deg, rgba(221, 0, 0, 0.08), rgba(255, 68, 68, 0.05));
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-top: 2px solid var(--secondary-color);
+    transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cocktail-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(221, 0, 0, 0.2);
+    background: linear-gradient(135deg, rgba(221, 0, 0, 0.12), rgba(255, 68, 68, 0.08));
+}
+
+.cocktail-item h4 {
+    font-size: 1rem;
+    color: var(--accent-color);
+    margin-bottom: 0.7rem;
+    font-weight: 600;
+}
+
+.cocktail-item p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+/* Responsive Cocktails Grid */
+@media (max-width: 1200px) {
+    .cocktail-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.2rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .cocktail-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .cocktail-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .cocktails-section {
+        padding: 3rem 2rem;
+    }
+
+    .cocktails-section .section-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cocktail-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .cocktail-item {
+        padding: 1.2rem;
+    }
+
+    .cocktail-item h4 {
+        font-size: 0.9rem;
+    }
+
+    .cocktail-item p {
+        font-size: 0.8rem;
+    }
 }
 
 /* ==================== PACKAGES SECTION ==================== */

@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--
+    DRINKS & PACKAGES PAGE
+    Purpose: Showcase signature cocktails menu and service packages
+    Sections: Navigation, Hero, Cocktails Menu (15 cocktails, 8 shooters, 4 mocktails), Service Packages (3 tiers), CTA, Footer
+-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +12,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
+    <!-- 
+        NAVIGATION BAR
+        - Logo with image and text linking to homepage
+        - 5 navigation links: Home, Events, Bartenders, Drinks & Packages, Contact
+        - Hamburger menu for mobile responsiveness
+        - Sticky positioning at top with progress bar
+    -->
+    <nav class="navbar">
     <nav class="navbar">
         <div class="navbar-container">
             <div class="logo">
@@ -31,7 +43,13 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- 
+        HERO SECTION
+        - Full-screen landing section with page title
+        - Animated wave background with floating effect
+        - Red radial gradient glows for visual appeal
+        - Same background style as all other pages for consistency
+    -->
     <section class="hero drinks-hero">
         <div class="hero-content">
             <h1 class="hero-title">Drinks & Packages</h1>
@@ -40,11 +58,25 @@
         <div class="hero-background"></div>
     </section>
 
-    <!-- Signature Cocktails Menu Section -->
+    <!-- 
+        SIGNATURE COCKTAILS MENU SECTION
+        - Displays all available cocktails, shooters, and mocktails
+        - Three categories with custom grid layouts:
+          1. Premium Cocktails: 15 items in 5-column grid (3 rows)
+          2. Shooters: 8 items in 4x2 grid (4 columns, 2 rows)
+          3. Mocktails: 4 items centered in single row
+        - Each item shows name, number, and ingredient description
+        - Gradient background matching overall theme
+    -->
     <section id="cocktails-menu" class="cocktails-section">
         <h2 class="section-title">Signature Cocktails Menu</h2>
         
-        <!-- Cocktails Category -->
+        <!-- 
+            PREMIUM COCKTAILS CATEGORY
+            - 15 cocktails displayed in 5-column grid layout
+            - Each card has red gradient background with hover effects
+            - Includes classic cocktails like Margarita, Old Fashioned, Long Island Iced Tea
+        -->
         <div class="drinks-category">
             <h3 class="category-title">🍹 Premium Cocktails</h3>
             <div class="cocktail-grid">
@@ -111,7 +143,12 @@
             </div>
         </div>
 
-        <!-- Shooters Category -->
+        <!-- 
+            SHOOTERS CATEGORY
+            - 8 shooters in 4x2 grid layout (4 columns, 2 rows)
+            - Custom grid styling with max-width 1200px
+            - Popular shots like Blue Kamikaze, Lemon Drop, Aftershock
+        -->
         <div class="drinks-category shooters-category">
             <h3 class="category-title">🔥 Shooters</h3>
             <div class="cocktail-grid shooters-grid">
@@ -150,7 +187,12 @@
             </div>
         </div>
 
-        <!-- Mocktails Category -->
+        <!-- 
+            MOCKTAILS CATEGORY
+            - 4 non-alcoholic drinks centered in single row
+            - 4-column layout with max-width 1000px for centered appearance
+            - Family-friendly options like Shirley Temple and fruit-based drinks
+        -->
         <div class="drinks-category mocktails-category">
             <h3 class="category-title">🥤 Mocktails (Non-Alcoholic)</h3>
             <div class="cocktail-grid mocktails-grid">
@@ -174,36 +216,23 @@
         </div>
     </section>
 
-    <!-- Packages Section -->
+    <!-- 
+        SERVICE PACKAGES SECTION
+        - Two-tier pricing structure for mobile bar services
+        - Packages: Professional ($800-1200), Premium ($1500-2500)
+        - Each package card displays:
+          * Badge/label (Most Popular, Premium)
+          * Service duration (4-6, 6-10 hours)
+          * Price range
+          * Feature list with checkmarks/X marks
+          * "Choose Plan" button
+        - Professional package highlighted as "Most Popular" with featured styling
+    -->
     <section id="packages" class="packages-section">
         <h2 class="section-title">Service Packages</h2>
         <p class="packages-intro">Choose the perfect package for your event. All packages include professional bartenders, custom cocktails, and premium glassware.</p>
         
         <div class="packages-grid">
-            <!-- Starter Package -->
-            <div class="package-card starter">
-                <div class="package-badge">Starter</div>
-                <h3>Basic Mobile Bar</h3>
-                <p class="package-duration">2 - 4 Hours</p>
-                <p class="package-price">$450 - $650</p>
-                
-                <div class="package-features">
-                    <h4>Includes:</h4>
-                    <ul>
-                        <li>✓ 1 Professional Bartender</li>
-                        <li>✓ Mobile Bar Setup</li>
-                        <li>✓ Premium Spirits Selection</li>
-                        <li>✓ Standard Mixers</li>
-                        <li>✓ Up to 50 Guests</li>
-                        <li>✓ Basic Glassware</li>
-                        <li>✗ Signature Cocktails</li>
-                        <li>✗ Video Projection</li>
-                    </ul>
-                </div>
-                
-                <button class="package-btn">Choose Plan</button>
-            </div>
-
             <!-- Professional Package -->
             <div class="package-card professional featured">
                 <div class="package-badge featured-badge">Most Popular</div>
@@ -254,14 +283,27 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
+    <!-- 
+        CALL-TO-ACTION SECTION
+        - Encourages visitors to book services
+        - Links to contact form on homepage (Index.html#contact)
+        - Gradient background with centered text and prominent button
+    -->
     <section class="cta-section">
         <h2>Ready to Elevate Your Event?</h2>
         <p>Let's create an unforgettable experience with JiggerOnTheMix</p>
         <a href="Index.html#contact" class="cta-button">Book Your Mobile Bar Now</a>
     </section>
 
-    <!-- Footer -->
+    <!-- 
+        FOOTER SECTION
+        - 4-column layout: About, Quick Links, Social Media, Newsletter
+        - About: Brief company description
+        - Quick Links: Navigation to main pages
+        - Social: Links to Facebook, Instagram, TikTok, LinkedIn
+        - Newsletter: Email signup form
+        - Footer bottom: Copyright and licensing info
+    -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">

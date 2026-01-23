@@ -20,24 +20,10 @@ const newsletterBtn = document.querySelector('.newsletter-btn');
  * - Only runs if hamburger element exists on page
  */
 if (hamburger) {
-hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    hamburger.classList.toggle('active');
-    
-    // Animate hamburger icon into X shape
-    const spans = hamburger.querySelectorAll('span');
-    if (navMenu.classList.contains('active')) {
-        // Transform to X when menu opens
-        spans[0].style.transform = 'rotate(45deg) translate(10px, 10px)';
-        spans[1].style.opacity = '0';
-        spans[2].style.transform = 'rotate(-45deg) translate(8px, -8px)';
-    } else {
-        // Reset to hamburger shape when menu closes
-        spans[0].style.transform = 'none';
-        spans[1].style.opacity = '1';
-        spans[2].style.transform = 'none';
-    }
-});
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
+    });
 }
 
 // Close menu when a link is clicked
@@ -48,18 +34,12 @@ hamburger.addEventListener('click', () => {
  * - Improves mobile UX by hiding menu after navigation
  */
 if (navLinks.length > 0) {
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        if (hamburger) hamburger.classList.remove('active');
-        
-        // Reset hamburger animation when menu closes
-        const spans = hamburger.querySelectorAll('span');
-        spans[0].style.transform = 'none';
-        spans[1].style.opacity = '1';
-        spans[2].style.transform = 'none';
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            if (hamburger) hamburger.classList.remove('active');
+        });
     });
-});
 }
 
 // ==================== SMOOTH SCROLL FOR NAVIGATION ====================
@@ -93,40 +73,40 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
  * - Only runs if contact form exists on page
  */
 if (contactForm) {
-contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Extract form values
-    const formData = new FormData(this);
-    const name = this.querySelector('input[type="text"]').value;
-    const email = this.querySelector('input[type="email"]').value;
-    const message = this.querySelector('textarea').value;
-    
-    // Validate form inputs
-    if (!name || !email || !message) {
-        showNotification('Please fill in all fields', 'error');
-        return;
-    }
-    
-    // Validate email format
-    if (!isValidEmail(email)) {
-        showNotification('Please enter a valid email', 'error');
-        return;
-    }
-    
-    // Simulate form submission with loading state
-    const submitBtn = this.querySelector('.submit-btn');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Sending...';
-    submitBtn.disabled = true;
-    
-    setTimeout(() => {
-        showNotification('Message sent successfully! We\'ll be in touch soon.', 'success');
-        this.reset();
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-    }, 1500);
-});
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Extract form values
+        const formData = new FormData(this);
+        const name = this.querySelector('input[type="text"]').value;
+        const email = this.querySelector('input[type="email"]').value;
+        const message = this.querySelector('textarea').value;
+        
+        // Validate form inputs
+        if (!name || !email || !message) {
+            showNotification('Please fill in all fields', 'error');
+            return;
+        }
+        
+        // Validate email format
+        if (!isValidEmail(email)) {
+            showNotification('Please enter a valid email', 'error');
+            return;
+        }
+        
+        // Simulate form submission with loading state
+        const submitBtn = this.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
+        
+        setTimeout(() => {
+            showNotification('Message sent successfully! We\'ll be in touch soon.', 'success');
+            this.reset();
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }, 1500);
+    });
 }
 
 // ==================== EVENT BUTTON INTERACTIONS ====================
@@ -138,18 +118,18 @@ contactForm.addEventListener('submit', function(e) {
  * - Only runs if event buttons exist on page
  */
 if (eventButtons.length > 0) {
-eventButtons.forEach(button => {
-    button.addEventListener('click', function(e) {
-        e.preventDefault();
-        const eventCard = this.closest('.event-card');
-        const eventTitle = eventCard.querySelector('h3').textContent;
-        
-        // Create ripple effect animation
-        createRipple(this, e);
-        
-        showNotification(`Great! You clicked on ${eventTitle}. Booking page coming soon!`, 'success');
+    eventButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const eventCard = this.closest('.event-card');
+            const eventTitle = eventCard.querySelector('h3').textContent;
+            
+            // Create ripple effect animation
+            createRipple(this, e);
+            
+            showNotification(`Great! You clicked on ${eventTitle}. Booking page coming soon!`, 'success');
+        });
     });
-});
 }
 
 // ==================== PACKAGE BUTTON INTERACTIONS ====================
@@ -162,22 +142,22 @@ eventButtons.forEach(button => {
  */
 const packageButtons = document.querySelectorAll('.package-btn');
 if (packageButtons.length > 0) {
-packageButtons.forEach(button => {
-    button.addEventListener('click', function(e) {
-        e.preventDefault();
-        const packageCard = this.closest('.package-card');
-        const packageName = packageCard.querySelector('h3').textContent;
-        
-        // Create ripple effect
-        createRipple(this, e);
-        
-        showNotification(`You selected ${packageName}. Redirecting to booking...`, 'success');
-        setTimeout(() => {
-            // Redirect to contact form on main page
-            window.location.href = 'index.html#contact';
-        }, 1000);
+    packageButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const packageCard = this.closest('.package-card');
+            const packageName = packageCard.querySelector('h3').textContent;
+            
+            // Create ripple effect
+            createRipple(this, e);
+            
+            showNotification(`You selected ${packageName}. Redirecting to booking...`, 'success');
+            setTimeout(() => {
+                // Redirect to contact form on main page
+                window.location.href = 'index.html#contact';
+            }, 1000);
+        });
     });
-});
 }
 
 // ==================== CTA BUTTON ====================
@@ -188,11 +168,11 @@ packageButtons.forEach(button => {
  * - Only runs if CTA button exists on page
  */
 if (ctaButton) {
-ctaButton.addEventListener('click', function() {
-    createRipple(this, event);
-    const eventsSection = document.querySelector('#events');
-    if (eventsSection) eventsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-});
+    ctaButton.addEventListener('click', function() {
+        createRipple(this, event);
+        const eventsSection = document.querySelector('#events');
+        if (eventsSection) eventsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
 }
 
 // ==================== NEWSLETTER SUBSCRIPTION ====================
@@ -206,34 +186,34 @@ ctaButton.addEventListener('click', function() {
  * - Only runs if newsletter button exists on page
  */
 if (newsletterBtn) {
-newsletterBtn.addEventListener('click', function() {
-    const input = this.previousElementSibling;
-    const email = input.value;
-    
-    // Validate email exists
-    if (!email) {
-        showNotification('Please enter your email', 'error');
-        return;
-    }
-    
-    // Validate email format
-    if (!isValidEmail(email)) {
-        showNotification('Please enter a valid email', 'error');
-        return;
-    }
-    
-    // Show loading state
-    const originalText = this.textContent;
-    this.textContent = 'Subscribing...';
-    this.disabled = true;
-    
-    setTimeout(() => {
-        showNotification('Subscribed successfully! Check your email.', 'success');
-        input.value = '';
-        this.textContent = originalText;
-        this.disabled = false;
-    }, 1000);
-});
+    newsletterBtn.addEventListener('click', function() {
+        const input = this.previousElementSibling;
+        const email = input.value;
+        
+        // Validate email exists
+        if (!email) {
+            showNotification('Please enter your email', 'error');
+            return;
+        }
+        
+        // Validate email format
+        if (!isValidEmail(email)) {
+            showNotification('Please enter a valid email', 'error');
+            return;
+        }
+        
+        // Show loading state
+        const originalText = this.textContent;
+        this.textContent = 'Subscribing...';
+        this.disabled = true;
+        
+        setTimeout(() => {
+            showNotification('Subscribed successfully! Check your email.', 'success');
+            input.value = '';
+            this.textContent = originalText;
+            this.disabled = false;
+        }, 1000);
+    });
 }
 
 // ==================== SCROLL ANIMATIONS ====================
@@ -468,7 +448,7 @@ function isValidEmail(email) {
  * - Sizing ripple to cover entire button (uses max of width/height)
  * - Positioning ripple from center of click point
  * - Animating ripple with CSS animation
- * - Removing ripple element after animation completes (300ms)
+ * - Removing ripple element after animation completes (600ms)
  * 
  * Provides visual feedback for button interactions
  * Used on: CTA button, event buttons, package buttons, form submit button
@@ -635,7 +615,6 @@ document.head.appendChild(style);
  * - Only applies while user is in hero section (not scrolled down)
  */
 document.addEventListener('mousemove', (e) => {
-    // Add subtle mouse movement effect to hero section
     const hero = document.querySelector('.hero');
     if (hero && window.scrollY < window.innerHeight) {
         const xPos = (e.clientX / window.innerWidth) * 10;
@@ -649,12 +628,9 @@ document.addEventListener('mousemove', (e) => {
  * Handle page load animation
  * - Ensures page is fully visible after load
  * - Sets opacity to 1 and smooth transition for fade effect
- * - Removed problematic opacity animation that was hiding content
  * - Runs after window 'load' event (all resources loaded)
  */
 window.addEventListener('load', () => {
-    // Remove this - it was hiding content
-    // Just ensure page is visible
     document.body.style.opacity = '1';
     document.body.style.transition = 'opacity 0.5s ease-in';
 });
@@ -693,17 +669,6 @@ if (localStorage.getItem('darkMode') === 'true') {
 if ('IntersectionObserver' in window) {
     const images = document.querySelectorAll('img[data-src]');
     const imageObserver = new IntersectionObserver((entries, observer) => {
-        /**
-         * Load image when it enters viewport
-         * - Checks if image is intersecting (becoming visible)
-         * - Gets real image URL from data-src attribute
-         * - Sets src attribute to trigger image download
-         * - Removes data-src attribute (no longer needed)
-         * - Stops observing image (no longer needed)
-         * 
-         * This ensures images only load when user will see them
-         * Reduces initial page load time and bandwidth usage
-         */
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
@@ -715,6 +680,7 @@ if ('IntersectionObserver' in window) {
     });
     images.forEach(img => imageObserver.observe(img));
 }
+
 // ==================== PAGE INITIALIZATION COMPLETE ====================
 /**
  * Log successful page initialization

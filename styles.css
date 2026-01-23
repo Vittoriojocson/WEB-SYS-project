@@ -171,6 +171,33 @@ body > * {
     width: 100%;
 }
 
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: var(--transition);
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(10px, 10px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(8px, -8px);
+}
+
 /* ==================== PROGRESS BAR STYLES ==================== */
 /**
  * Progress bar that shows user scroll position on page
@@ -188,12 +215,6 @@ body > * {
     width: 0%;
     transition: width 0.1s ease-out;
     box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
-}
-
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
 }
 
 /* ==================== HERO SECTION ==================== */

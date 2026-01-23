@@ -196,15 +196,6 @@ body > * {
     cursor: pointer;
 }
 
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background: var(--white);
-    margin: 4px 0;
-    transition: var(--transition);
-    border-radius: 2px;
-}
-
 /* ==================== HERO SECTION ==================== */
 /* 
  * HERO/LANDING PAGE QUICK EDITS:

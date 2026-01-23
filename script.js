@@ -271,44 +271,69 @@ document.querySelectorAll('.event-card, .artist-card, .service-card, .drink-card
 
 // ==================== SCROLL EFFECTS ====================
 /**
- * Optimized scroll handler - combines all scroll effects into one listener
- * - Direct updates without throttling for instant response
- * - Updates progress bar, navbar shadow, parallax, and active nav links
- * - Uses transform for GPU-accelerated smooth animations
+ * Tracks scroll position and updates UI based on scroll depth
+ * - Calculates scroll progress percentage (how far down page user has scrolled)
+ * - Window height is total scrollable height minus viewport height
+ * - Adds shadow to navbar when user scrolls past 50px
+ * - Brighter shadow when scrolling, dimmer shadow at top
+ * - Uses rgba color to create smooth overlay effect
+ * - Provides visual feedback that navbar is floating above content
+ * - Updates progress bar width based on scroll percentage
  */
+let scrollProgress = 0;
 window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
     const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollProgress = (scrollY / windowHeight) * 100;
+    scrollProgress = (window.scrollY / windowHeight) * 100;
     
-    // Update progress bar with transform for GPU acceleration - instant update
+    // Update progress bar width
     const progressBar = document.getElementById('progressBar');
     if (progressBar) {
-        progressBar.style.transform = `scaleX(${scrollProgress / 100})`;
+        progressBar.style.width = scrollProgress + '%';
     }
     
-    // Navbar shadow effect
+    // Add navbar shadow effect based on scroll position
     const navbar = document.querySelector('.navbar');
-    if (navbar) {
-        navbar.style.boxShadow = scrollY > 50 
-            ? '0 4px 25px rgba(102, 126, 234, 0.3)' 
-            : '0 4px 20px rgba(102, 126, 234, 0.2)';
+    if (window.scrollY > 50) {
+        navbar.style.boxShadow = '0 4px 25px rgba(102, 126, 234, 0.3)';
+    } else {
+        navbar.style.boxShadow = '0 4px 20px rgba(102, 126, 234, 0.2)';
     }
-    
-    // Parallax effect
+});
+
+// ==================== PARALLAX EFFECT ====================
+/**
+ * Creates parallax scrolling effect on hero background
+ * - Moves background slower than foreground as user scrolls
+ * - Multiplier 0.5 means background moves at half scroll speed
+ * - Creates depth illusion - hero section moves slower than page scroll
+ * - Works by translating hero background Y position based on scroll amount
+ * - Only activates if hero-background element exists on page
+ */
+window.addEventListener('scroll', () => {
     const heroBackground = document.querySelector('.hero-background');
     if (heroBackground) {
-        heroBackground.style.transform = `translateY(${scrollY * 0.5}px)`;
+        heroBackground.style.transform = `translateY(${window.scrollY * 0.5}px)`;
     }
-    
-    // Active nav link highlighting
+});
+
+// ==================== ACTIVE NAV LINK HIGHLIGHTING ====================
+/**
+ * Highlight navigation links based on current scroll position
+ * - Checks which section is currently visible on screen
+ * - Updates nav link color to yellow (#ffeb3b) for active section
+ * - Resets other nav links to white
+ * - Uses section offset with 200px buffer for scroll position calculation
+ * - Compares link href (without #) to current section id
+ * - Provides visual feedback of which page section user is viewing
+ */
+window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link');
-    let current = '';
     
+    let current = '';
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        if (scrollY >= sectionTop - 200) {
+        if (window.scrollY >= sectionTop - 200) {
             current = section.getAttribute('id');
         }
     });
@@ -321,7 +346,7 @@ window.addEventListener('scroll', () => {
             link.style.color = 'white';
         }
     });
-}, { passive: true });
+});
 
 // Add CSS for smooth progress bar animations
 const progressBarStyle = document.createElement('style');

@@ -271,38 +271,58 @@ document.querySelectorAll('.event-card, .artist-card, .service-card, .drink-card
 
 // ==================== SCROLL EFFECTS ====================
 /**
- * Tracks scroll position and updates UI based on scroll depth
- * - Calculates scroll progress percentage (how far down page user has scrolled)
- * - Window height is total scrollable height minus viewport height
- * - Adds shadow to navbar when user scrolls past 50px
- * - Brighter shadow when scrolling, dimmer shadow at top
- * - Uses rgba color to create smooth overlay effect
- * - Provides visual feedback that navbar is floating above content
- * - Updates progress bar width based on scroll percentage
- * - Uses requestAnimationFrame for smooth, optimized updates
+ * Optimized scroll handler - combines all scroll effects into one listener
+ * - Uses requestAnimationFrame for 60fps smooth updates
+ * - Updates progress bar, navbar shadow, parallax, and active nav links
+ * - Throttled with ticking flag to prevent performance issues
  */
 let ticking = false;
+
 window.addEventListener('scroll', () => {
     if (!ticking) {
         window.requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
             const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollProgress = (window.scrollY / windowHeight) * 100;
+            const scrollProgress = (scrollY / windowHeight) * 100;
             
-            // Update progress bar width immediately
+            // Update progress bar with transform for GPU acceleration
             const progressBar = document.getElementById('progressBar');
             if (progressBar) {
-                progressBar.style.width = scrollProgress + '%';
+                progressBar.style.transform = `scaleX(${scrollProgress / 100})`;
             }
             
-            // Add navbar shadow effect based on scroll position
+            // Navbar shadow effect
             const navbar = document.querySelector('.navbar');
             if (navbar) {
-                if (window.scrollY > 50) {
-                    navbar.style.boxShadow = '0 4px 25px rgba(102, 126, 234, 0.3)';
-                } else {
-                    navbar.style.boxShadow = '0 4px 20px rgba(102, 126, 234, 0.2)';
-                }
+                navbar.style.boxShadow = scrollY > 50 
+                    ? '0 4px 25px rgba(102, 126, 234, 0.3)' 
+                    : '0 4px 20px rgba(102, 126, 234, 0.2)';
             }
+            
+            // Parallax effect
+            const heroBackground = document.querySelector('.hero-background');
+            if (heroBackground) {
+                heroBackground.style.transform = `translateY(${scrollY * 0.5}px)`;
+            }
+            
+            // Active nav link highlighting
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                link.style.color = link.getAttribute('href').slice(1) === current 
+                    ? '#ffeb3b' 
+                    : 'white';
+            });
             
             ticking = false;
         });
@@ -310,21 +330,16 @@ window.addEventListener('scroll', () => {
     }
 }, { passive: true });
 
-// ==================== PARALLAX EFFECT ====================
-/**
- * Creates parallax scrolling effect on hero background
- * - Moves background slower than foreground as user scrolls
- * - Multiplier 0.5 means background moves at half scroll speed
- * - Creates depth illusion - hero section moves slower than page scroll
- * - Works by translating hero background Y position based on scroll amount
- * - Only activates if hero-background element exists on page
- */
-window.addEventListener('scroll', () => {
-    const heroBackground = document.querySelector('.hero-background');
-    if (heroBackground) {
-        heroBackground.style.transform = `translateY(${window.scrollY * 0.5}px)`;
+// Add CSS for smooth progress bar animations
+const progressBarStyle = document.createElement('style');
+progressBarStyle.textContent = `
+    #progressBar {
+        transform-origin: left center;
+        will-change: transform;
+        transition: none !important;
     }
-});
+`;
+document.head.appendChild(progressBarStyle);
 
 // ==================== KEYBOARD NAVIGATION ====================
 /**

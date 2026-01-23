@@ -279,26 +279,36 @@ document.querySelectorAll('.event-card, .artist-card, .service-card, .drink-card
  * - Uses rgba color to create smooth overlay effect
  * - Provides visual feedback that navbar is floating above content
  * - Updates progress bar width based on scroll percentage
+ * - Uses requestAnimationFrame for smooth, optimized updates
  */
-let scrollProgress = 0;
+let ticking = false;
 window.addEventListener('scroll', () => {
-    const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
-    scrollProgress = (window.scrollY / windowHeight) * 100;
-    
-    // Update progress bar width
-    const progressBar = document.getElementById('progressBar');
-    if (progressBar) {
-        progressBar.style.width = scrollProgress + '%';
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollProgress = (window.scrollY / windowHeight) * 100;
+            
+            // Update progress bar width immediately
+            const progressBar = document.getElementById('progressBar');
+            if (progressBar) {
+                progressBar.style.width = scrollProgress + '%';
+            }
+            
+            // Add navbar shadow effect based on scroll position
+            const navbar = document.querySelector('.navbar');
+            if (navbar) {
+                if (window.scrollY > 50) {
+                    navbar.style.boxShadow = '0 4px 25px rgba(102, 126, 234, 0.3)';
+                } else {
+                    navbar.style.boxShadow = '0 4px 20px rgba(102, 126, 234, 0.2)';
+                }
+            }
+            
+            ticking = false;
+        });
+        ticking = true;
     }
-    
-    // Add navbar shadow effect based on scroll position
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.style.boxShadow = '0 4px 25px rgba(102, 126, 234, 0.3)';
-    } else {
-        navbar.style.boxShadow = '0 4px 20px rgba(102, 126, 234, 0.2)';
-    }
-});
+}, { passive: true });
 
 // ==================== PARALLAX EFFECT ====================
 /**

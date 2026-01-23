@@ -272,62 +272,55 @@ document.querySelectorAll('.event-card, .artist-card, .service-card, .drink-card
 // ==================== SCROLL EFFECTS ====================
 /**
  * Optimized scroll handler - combines all scroll effects into one listener
- * - Uses requestAnimationFrame for 60fps smooth updates
+ * - Direct updates without throttling for instant response
  * - Updates progress bar, navbar shadow, parallax, and active nav links
- * - Throttled with ticking flag to prevent performance issues
+ * - Uses transform for GPU-accelerated smooth animations
  */
-let ticking = false;
-
 window.addEventListener('scroll', () => {
-    if (!ticking) {
-        window.requestAnimationFrame(() => {
-            const scrollY = window.scrollY;
-            const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollProgress = (scrollY / windowHeight) * 100;
-            
-            // Update progress bar with transform for GPU acceleration
-            const progressBar = document.getElementById('progressBar');
-            if (progressBar) {
-                progressBar.style.transform = `scaleX(${scrollProgress / 100})`;
-            }
-            
-            // Navbar shadow effect
-            const navbar = document.querySelector('.navbar');
-            if (navbar) {
-                navbar.style.boxShadow = scrollY > 50 
-                    ? '0 4px 25px rgba(102, 126, 234, 0.3)' 
-                    : '0 4px 20px rgba(102, 126, 234, 0.2)';
-            }
-            
-            // Parallax effect
-            const heroBackground = document.querySelector('.hero-background');
-            if (heroBackground) {
-                heroBackground.style.transform = `translateY(${scrollY * 0.5}px)`;
-            }
-            
-            // Active nav link highlighting
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-link');
-            let current = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (scrollY >= sectionTop - 200) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                link.style.color = link.getAttribute('href').slice(1) === current 
-                    ? '#ffeb3b' 
-                    : 'white';
-            });
-            
-            ticking = false;
-        });
-        ticking = true;
+    const scrollY = window.scrollY;
+    const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollProgress = (scrollY / windowHeight) * 100;
+    
+    // Update progress bar with transform for GPU acceleration - instant update
+    const progressBar = document.getElementById('progressBar');
+    if (progressBar) {
+        progressBar.style.transform = `scaleX(${scrollProgress / 100})`;
     }
+    
+    // Navbar shadow effect
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        navbar.style.boxShadow = scrollY > 50 
+            ? '0 4px 25px rgba(102, 126, 234, 0.3)' 
+            : '0 4px 20px rgba(102, 126, 234, 0.2)';
+    }
+    
+    // Parallax effect
+    const heroBackground = document.querySelector('.hero-background');
+    if (heroBackground) {
+        heroBackground.style.transform = `translateY(${scrollY * 0.5}px)`;
+    }
+    
+    // Active nav link highlighting
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    let current = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 200) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) {
+            link.style.color = '#ffeb3b';
+        } else {
+            link.style.color = 'white';
+        }
+    });
 }, { passive: true });
 
 // Add CSS for smooth progress bar animations
@@ -632,38 +625,6 @@ window.addEventListener('load', () => {
     // Just ensure page is visible
     document.body.style.opacity = '1';
     document.body.style.transition = 'opacity 0.5s ease-in';
-});
-
-// ==================== ACTIVE NAV LINK HIGHLIGHTING ====================
-/**
- * Highlight navigation links based on current scroll position
- * - Checks which section is currently visible on screen
- * - Updates nav link color to yellow (#ffeb3b) for active section
- * - Resets other nav links to white
- * - Uses section offset with 200px buffer for scroll position calculation
- * - Compares link href (without #) to current section id
- * - Provides visual feedback of which page section user is viewing
- */
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (window.scrollY >= sectionTop - 200) {
-            current = section.getAttribute('id');
-        }
-    });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').slice(1) === current) {
-            link.style.color = '#ffeb3b';
-        } else {
-            link.style.color = 'white';
-        }
-    });
 });
 
 // ==================== DARK MODE TOGGLE (OPTIONAL) ====================

@@ -327,6 +327,13 @@ window.addEventListener('scroll', () => {
 const progressBarStyle = document.createElement('style');
 progressBarStyle.textContent = `
     #progressBar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        z-index: 9999;
+        width: 0%;
         transform-origin: left center;
         will-change: transform;
         transition: none !important;

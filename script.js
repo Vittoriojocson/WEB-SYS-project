@@ -174,7 +174,7 @@ packageButtons.forEach(button => {
         showNotification(`You selected ${packageName}. Redirecting to booking...`, 'success');
         setTimeout(() => {
             // Redirect to contact form on main page
-            window.location.href = 'Index.html#contact';
+            window.location.href = 'index.html#contact';
         }, 1000);
     });
 });

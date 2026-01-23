@@ -697,7 +697,6 @@ if ('IntersectionObserver' in window) {
     });
     images.forEach(img => imageObserver.observe(img));
 }
-1
 // ==================== PAGE INITIALIZATION COMPLETE ====================
 /**
  * Log successful page initialization

@@ -310,7 +310,13 @@ body > * {
     opacity: 0.95;
     font-weight: 300;
 }
-
+/* 
+ * CALL-TO-ACTION BUTTON QUICK EDITS:
+ * - padding: Button size (15px 50px default)
+ * - font-size: Button text size (1.1rem default)
+ * - border-radius: Button roundness (50px = pill shape)
+ * - box-shadow: Button shadow depth
+ */
 .cta-button {
     padding: 15px 50px;
     font-size: 1.1rem;

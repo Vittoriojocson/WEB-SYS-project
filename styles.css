@@ -319,6 +319,8 @@ body > * {
     color: var(--primary-color);
     border: none;
     border-radius: 50px;
+    text-decoration: none;
+    display: inline-block;
     cursor: pointer;
     transition: var(--transition);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -1305,9 +1307,10 @@ section {
     color: var(--white);
     padding: 4rem 2rem;
     text-align: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    border-radius: 15px;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    border-radius: 0;
 }
 
 .cta-section h2 {

@@ -154,6 +154,15 @@
             <form class="contact-form" id="contactForm">
                 <input type="text" placeholder="Event Name" required>
                 <input type="email" placeholder="Your Email" required>
+                
+                <!-- Package selection dropdown -->
+                <select name="package" id="packageSelect" class="package-select" required>
+                    <option value="">Select a Package</option>
+                    <option value="professional">Package 1 - Professional Service (3 Hours: 6,000 - 10,000 php)</option>
+                    <option value="elite">Package 2 - Elite Experience (4 Hours: 7,000 - 50,000 php)</option>
+                    <option value="custom">Custom Package (Contact for Quote)</option>
+                </select>
+                
                 <textarea placeholder="Event Details (date, location, guest count)" rows="5" required></textarea>
                 <button type="submit" class="submit-btn">Request a Quote</button>
             </form>

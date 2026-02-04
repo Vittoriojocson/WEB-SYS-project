@@ -632,6 +632,34 @@ section {
     box-shadow: 0 0 0 3px rgba(221, 0, 0, 0.1);
 }
 
+.package-select {
+    padding: 15px;
+    border: 2px solid #333333;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    background: var(--light-bg);
+    color: var(--text-dark);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.package-select:hover {
+    border-color: var(--secondary-color);
+}
+
+.package-select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(221, 0, 0, 0.1);
+}
+
+.package-select option {
+    background: var(--light-bg);
+    color: var(--text-dark);
+    padding: 10px;
+}
+
 .submit-btn {
     padding: 15px;
     background: linear-gradient(135deg, #dd0000 0%, #ff4444 100%);
@@ -1257,6 +1285,60 @@ section {
 
 .featured-btn:hover {
     box-shadow: 0 10px 30px rgba(255, 68, 68, 0.4);
+}
+
+/* ==================== PACKAGE SELECTION MENU ==================== */
+.package-selection {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid rgba(221, 0, 0, 0.2);
+}
+
+.package-selection h4 {
+    font-size: 1rem;
+    color: var(--text-dark);
+    margin-bottom: 1.2rem;
+}
+
+.selection-group {
+    margin-bottom: 1rem;
+}
+
+.selection-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+}
+
+.drink-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #333333;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    background: var(--dark-bg);
+    color: var(--text-dark);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.drink-select:hover {
+    border-color: var(--secondary-color);
+}
+
+.drink-select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(221, 0, 0, 0.1);
+}
+
+.drink-select option {
+    background: var(--dark-bg);
+    color: var(--text-dark);
+    padding: 8px;
 }
 
 /* ==================== ADD-ONS SECTION ==================== */

@@ -1,3 +1,48 @@
+/*
+ * ============================================================================
+ * JIGGERONTHEMIX WEBSITE - MAIN JAVASCRIPT FILE
+ * ============================================================================
+ * 
+ * FILE PURPOSE:
+ * Handles all interactive behavior, animations, and user interactions
+ * 
+ * KEY FUNCTIONALITIES:
+ * 1. Mobile hamburger menu toggle
+ * 2. Smooth scrolling for anchor links
+ * 3. Contact form validation and submission
+ * 4. Event card button interactions
+ * 5. Package selection and booking
+ * 6. Newsletter email subscription
+ * 7. Scroll-triggered animations (fade-in)
+ * 8. Progress bar based on scroll position
+ * 9. Active navigation link highlighting
+ * 10. Ripple button effects
+ * 11. Notification system (success/error messages)
+ * 12. Parallax scrolling effects
+ * 13. Navbar shadow based on scroll
+ * 
+ * HELPER FUNCTIONS:
+ * - isValidEmail(): Email format validation with regex
+ * - showNotification(): Display toast messages
+ * - createRipple(): Button click ripple animation
+ * 
+ * PERFORMANCE OPTIMIZATIONS:
+ * - Uses IntersectionObserver for scroll animations (better than scroll listeners)
+ * - DOM elements cached at start for faster access
+ * - Event delegation where appropriate
+ * - Animations use CSS transforms (GPU accelerated)
+ * 
+ * DEPENDENCIES:
+ * - Requires HTML elements with specific classes/IDs
+ * - Works with styles.css for animation classes
+ * - No external JavaScript libraries (vanilla JS)
+ * 
+ * BROWSER COMPATIBILITY:
+ * - Modern browsers (Chrome, Firefox, Safari, Edge)
+ * - Uses ES6+ features (arrow functions, const/let, template literals)
+ * - IntersectionObserver API (IE not supported, needs polyfill)
+ */
+
 // ==================== WAIT FOR DOM TO LOAD ====================
 // Ensures all HTML elements are loaded before JavaScript runs
 document.addEventListener('DOMContentLoaded', function() {

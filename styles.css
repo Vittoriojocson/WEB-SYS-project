@@ -1,4 +1,58 @@
+/*
+ * ============================================================================
+ * JIGGERONTHEMIX WEBSITE - MAIN STYLESHEET
+ * ============================================================================
+ * 
+ * FILE PURPOSE:
+ * Central stylesheet controlling all visual styling for the entire website
+ * 
+ * PAGES STYLED:
+ * - index.html (Homepage)
+ * - bartenders.html (Team page)
+ * - drinks-packages.html (Menu & packages)
+ * 
+ * KEY SECTIONS:
+ * 1. General Styles - CSS reset, color variables, body background
+ * 2. Navbar - Fixed navigation with logo, links, hamburger, progress bar
+ * 3. Hero - Full-screen landing sections with animations
+ * 4. Events - Portfolio cards with images
+ * 5. Services - Service offering cards
+ * 6. Artists/Team - Bartender profile cards
+ * 7. Contact - Booking form and contact info
+ * 8. Footer - Site-wide footer with links and newsletter
+ * 9. Drinks & Packages - Menu grids and pricing cards
+ * 10. Responsive - Media queries for mobile/tablet
+ * 
+ * CUSTOMIZATION TIPS:
+ * - Color theme: Edit CSS variables in :root
+ * - Layout: Adjust grid-template-columns in section grids
+ * - Spacing: Modify padding/margin values
+ * - Animations: Edit @keyframes durations and properties
+ * 
+ * DEPENDENCIES:
+ * - Uses system fonts (no external font files)
+ * - No external CSS frameworks
+ * - JavaScript in script.js handles interactions
+ */
+
 /* ==================== GENERAL STYLES ==================== */
+/*
+ * KEY FEATURES:
+ * - CSS reset (*) removes default browser spacing
+ * - CSS variables (:root) for easy theme customization
+ * - Body gradient background with radial glows
+ * - Overlay pattern for texture
+ * 
+ * HOW IT FUNCTIONS:
+ * - box-sizing: border-box includes padding in element width/height
+ * - scroll-behavior: smooth enables smooth anchor link scrolling
+ * - CSS custom properties (--variable-name) allow global color changes
+ * - Body uses multiple backgrounds: radials for glows, linear gradient for base
+ * - background-attachment: fixed keeps background stationary during scroll
+ * - ::before pseudo-element adds repeating line pattern overlay
+ * - z-index: 0 on ::before keeps pattern behind content
+ * - All direct body children get z-index: 1 to sit above pattern
+ */
 * {
     margin: 0;
     padding: 0;
@@ -73,6 +127,24 @@ body > * {
 }
 
 /* ==================== NAVBAR STYLES ==================== */
+/*
+ * KEY FEATURES:
+ * - Fixed position navbar stays at top during scroll
+ * - Gradient background (black to red)
+ * - Logo, navigation links, hamburger menu for mobile
+ * - Progress bar showing scroll position
+ * 
+ * HOW IT FUNCTIONS:
+ * - position: sticky keeps navbar at top: 0
+ * - z-index: 1000 ensures navbar stays above all content
+ * - Flexbox (.navbar-container) aligns logo left, links center, hamburger right
+ * - Gradient background: linear-gradient(135deg, #1a1a1a 0%, #dd0000 100%)
+ * - .nav-menu uses flexbox with gap for spacing
+ * - Hover effects on links: color change and bottom border
+ * - .hamburger hidden on desktop (display: none) shown on mobile
+ * - Media queries show/hide elements based on screen width
+ * - JavaScript toggles .active class on .nav-menu for mobile menu
+ */
 /* 
  * NAVBAR QUICK EDITS:
  * - padding: Adjust navbar height (1rem 2rem = top/bottom left/right)
@@ -199,6 +271,20 @@ body > * {
 }
 
 /* ==================== PROGRESS BAR STYLES ==================== */
+/*
+ * KEY FEATURES:
+ * - Visual indicator of page scroll progress
+ * - Appears below navbar as thin red line
+ * - Width grows from 0% to 100% as user scrolls
+ * 
+ * HOW IT FUNCTIONS:
+ * - position: absolute within navbar container
+ * - Initial width: 0%, height: 3px
+ * - JavaScript calculates scroll percentage: (scrollTop / (scrollHeight - windowHeight)) * 100
+ * - Updates style.width via script.js on scroll event
+ * - Red background matches theme color (#dd0000)
+ * - Smooth transition via CSS transition property
+ */
 /**
  * Progress bar that shows user scroll position on page
  * - Fixed to bottom of navbar
@@ -218,6 +304,24 @@ body > * {
 }
 
 /* ==================== HERO SECTION ==================== */
+/*
+ * KEY FEATURES:
+ * - Full viewport height landing section
+ * - Animated wave background with floating effect
+ * - Radial gradient glows (red spheres)
+ * - Centered title, subtitle, call-to-action button
+ * 
+ * HOW IT FUNCTIONS:
+ * - min-height: 100vh ensures section fills entire screen height
+ * - Flexbox with justify-content/align-items: center for perfect centering
+ * - .hero-background div animates using @keyframes float
+ * - ::before and ::after pseudo-elements create radial gradient circles
+ * - Pseudo-elements positioned absolute with blur filters
+ * - Animation: translateY moves elements up/down creating wave effect
+ * - overflow: hidden prevents animation from causing scrollbars
+ * - .cta-button styled as prominent red button with hover effects
+ * - Text has text-shadow for readability over animated background
+ */
 /* 
  * HERO/LANDING PAGE QUICK EDITS:
  * - height: Change landing page height (100vh = full screen)
@@ -379,6 +483,25 @@ section {
 }
 
 /* ==================== EVENTS SECTION ==================== */
+/*
+ * KEY FEATURES:
+ * - Portfolio showcase with 3 event cards
+ * - Each card: image, title, description, date, button
+ * - Grid layout for even spacing
+ * - Hover effects for interactivity
+ * 
+ * HOW IT FUNCTIONS:
+ * - .events-grid: CSS Grid with repeat(3, 1fr) creates 3 equal columns
+ * - gap: 2rem adds space between cards
+ * - Each .event-card has border-radius for rounded corners
+ * - .event-image height: 200px, contains <img> with object-fit: cover
+ * - overflow: hidden on .event-image prevents images from breaking layout
+ * - Pulse animation on images: @keyframes pulse changes opacity
+ * - Hover: transform: translateY(-10px) lifts card up
+ * - box-shadow increases on hover for depth effect
+ * - .event-btn styled but no click functionality (placeholder)
+ * - Responsive: 3 columns -> 2 columns -> 1 column as screen narrows
+ */
 .events {
     background: var(--dark-bg);
 }
@@ -539,6 +662,24 @@ section {
 }
 
 /* ==================== SERVICES SECTION ==================== */
+/*
+ * KEY FEATURES:
+ * - Displays 6 service offerings in grid
+ * - Each card: emoji icon, title, description
+ * - 3x2 grid layout (3 columns, 2 rows)
+ * - Hover effects for engagement
+ * 
+ * HOW IT FUNCTIONS:
+ * - .services-grid: repeat(3, 1fr) creates 3 equal columns
+ * - 6 items automatically create 2 rows
+ * - .service-card: white background (#fff) contrasts with dark theme
+ * - .service-icon: large emoji (3rem) centered at top
+ * - Cards have border, border-radius, box-shadow for depth
+ * - Hover: translateY(-5px) lifts card, shadow increases
+ * - Transition smooths all hover effects (0.3s duration)
+ * - Responsive: 3 -> 2 -> 1 columns via media queries
+ * - max-width: 1200px centers grid on large screens
+ */
 /* 
  * SERVICES LAYOUT QUICK EDITS:
  * - grid-template-columns: Number of columns (repeat(3, 1fr) = 3 equal columns)
@@ -600,6 +741,26 @@ section {
 }
 
 /* ==================== CONTACT SECTION ==================== */
+/*
+ * KEY FEATURES:
+ * - Split layout: booking form (left) + contact info (right)
+ * - Form fields: name, email, package select, details textarea
+ * - Contact cards: location, phone, email, hours
+ * - Form validation and submission
+ * 
+ * HOW IT FUNCTIONS:
+ * - .contact-container: CSS Grid with 2 columns (1fr 1fr)
+ * - .contact-form contains input, select, textarea, button elements
+ * - All inputs styled consistently (border, padding, border-radius)
+ * - focus: outline color changes to red theme color
+ * - .package-select dropdown styled to match form inputs
+ * - required attribute on inputs triggers HTML5 validation
+ * - .submit-btn: red background with white text, hover darkens
+ * - .contact-info: 4 info cards stacked vertically
+ * - Each .info-item uses flexbox to align icon and text
+ * - Form submission handled by JavaScript in script.js
+ * - Responsive: 2 columns stack to 1 column on mobile
+ */
 .contact {
     background: linear-gradient(135deg, var(--dark-bg) 0%, rgba(221, 0, 0, 0.1) 100%);
 }
@@ -715,6 +876,26 @@ section {
 }
 
 /* ==================== FOOTER ==================== */
+/*
+ * KEY FEATURES:
+ * - Site-wide footer with 4 columns
+ * - Sections: About, Quick Links, Social Media, Newsletter
+ * - Social links (Facebook, Instagram - no TikTok)
+ * - Newsletter signup form
+ * - Copyright notice at bottom
+ * 
+ * HOW IT FUNCTIONS:
+ * - .footer: dark background (#1a1a1a) with light text
+ * - .footer-content: CSS Grid repeat(4, 1fr) for 4 equal columns
+ * - Each .footer-section is a grid column
+ * - Quick Links <ul> styled with list-style: none
+ * - Links have hover effects (color changes to red accent)
+ * - .social-links: flexbox layout for horizontal links
+ * - .newsletter-input and .newsletter-btn styled consistently
+ * - .footer-bottom: centered text with top border separator
+ * - Responsive: 4 columns -> 2 columns -> 1 column
+ * - padding and gap create spacing within footer
+ */
 .footer {
     background: linear-gradient(135deg, #000000 0%, #dd0000 100%);
     color: var(--white);
@@ -1012,6 +1193,25 @@ section {
 }
 
 /* ==================== COCKTAILS MENU SECTION ==================== */
+/*
+ * KEY FEATURES:
+ * - Three drink categories: Premium Cocktails (15), Shooters (8), Mocktails (4)
+ * - Each category has custom grid layout
+ * - Cards show drink number, name, ingredients
+ * - Gradient backgrounds with hover effects
+ * 
+ * HOW IT FUNCTIONS:
+ * - .cocktails-section contains multiple .drinks-category divs
+ * - Default .cocktail-grid: repeat(5, 1fr) for 5 columns
+ * - .shooters-grid override: repeat(4, 1fr) for 4 columns
+ * - .mocktails-grid override: repeat(4, 1fr) but only 4 items (1 row)
+ * - Each .cocktail-item: gradient background, white text, rounded corners
+ * - Hover: translateY(-5px) lift effect with increased shadow
+ * - Category titles (.category-title) have emoji icons
+ * - max-width on specialty grids centers items
+ * - Responsive: columns reduce on smaller screens (5->3->2->1)
+ * - Gap spacing ensures cards don't touch
+ */
 /* 
  * COCKTAILS SECTION QUICK EDITS:
  * - cocktail-grid: Change grid columns for responsive layout
@@ -1144,6 +1344,25 @@ section {
 }
 
 /* ==================== PACKAGES SECTION ==================== */
+/*
+ * KEY FEATURES:
+ * - Two service package tiers: Professional and Premium
+ * - Each package shows: badge, duration, price, features list, button
+ * - Professional package has "Most Popular" featured styling
+ * - Feature lists with checkmarks
+ * 
+ * HOW IT FUNCTIONS:
+ * - .packages-grid: flexbox or grid with 2 columns
+ * - Each .package-card: white background, border, shadow
+ * - .package-badge: absolute position at top-right corner
+ * - .featured class adds gold/special styling to Professional package
+ * - Features <ul> styled with custom checkmark bullets (✓)
+ * - .package-btn: call-to-action button at bottom of card
+ * - Hover on cards: slight scale increase (transform: scale(1.02))
+ * - Price displayed prominently in larger font
+ * - Responsive: 2 columns stack to 1 column on mobile
+ * - Border-radius creates rounded card corners
+ */
 .packages-section {
     background: var(--dark-bg);
     padding: 4rem 2rem;

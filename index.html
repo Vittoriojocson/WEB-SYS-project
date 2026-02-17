@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--
+    HOMEPAGE - index.html
+    PURPOSE: Main landing page for JiggerOnTheMix mobile bar service
+    SECTIONS: Navigation, Hero, Events, Services, Contact/Booking, Footer
+    DEPENDENCIES: styles.css (styling), script.js (interactions)
+-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,9 +16,21 @@
 <body>
     <!-- 
         NAVIGATION BAR
+        KEY FEATURES:
         - Sticky navigation that stays at top when scrolling
         - Contains logo, menu links, hamburger for mobile
         - Progress bar shows scroll position on page
+        - Smooth scroll anchors to page sections
+        
+        HOW IT FUNCTIONS:
+        - .navbar has position: fixed with top: 0 to stay at top
+        - Z-index keeps navbar above all other content
+        - Logo (.logo) clickable but no href (static on homepage)
+        - .nav-menu contains anchor links (#home, #events, #services, #contact)
+        - Smooth scroll behavior enabled in CSS (scroll-behavior: smooth)
+        - .hamburger toggles mobile menu via JavaScript click event
+        - #progressBar width updates on scroll event (0-100%)
+        - Active link highlighting via JavaScript based on scroll position
     -->
     <nav class="navbar">
         <div class="navbar-container">
@@ -42,9 +60,20 @@
 
     <!-- 
         HERO/LANDING SECTION
-        - First thing visitors see
-        - Full screen height with background effects
-        - Contains main title, subtitle, and call-to-action button
+        KEY FEATURES:
+        - First thing visitors see - full viewport height
+        - Animated wave background effects
+        - Main title, subtitle, and call-to-action button
+        - Red gradient radial glows for visual appeal
+        
+        HOW IT FUNCTIONS:
+        - .hero class sets min-height: 100vh for full screen
+        - Flexbox centers .hero-content vertically and horizontally
+        - .hero-background creates animated wave effect using CSS @keyframes float
+        - ::before and ::after pseudo-elements add radial gradient glows
+        - .cta-button is anchor link (#contact) with smooth scroll
+        - Button has hover effects (transform, box-shadow) for interactivity
+        - Background animation loops infinitely (6s duration)
     -->
     <section id="home" class="hero">
         <div class="hero-content">
@@ -59,9 +88,21 @@
 
     <!-- 
         EVENTS SECTION
-        - Showcases recent events/portfolio
-        - 3 event cards in a grid layout
+        KEY FEATURES:
+        - Showcases recent events/portfolio with photos
+        - 3 event cards in responsive grid layout
         - Each card has image, title, description, date, and button
+        - Real event photos: corp.JPG, wedding.jpg, BDAY.jpg
+        
+        HOW IT FUNCTIONS:
+        - .events-grid uses CSS Grid with 3 columns (repeat(3, 1fr))
+        - Each .event-card has white background with border-radius
+        - .event-image contains <img> with object-fit: cover for consistent sizing
+        - Images have pulse animation (opacity 1 to 0.8) for subtle effect
+        - Hover on cards: translateY(-10px) lifts card, increases box-shadow
+        - .event-btn buttons styled but no functionality (placeholder)
+        - Responsive: grid becomes 1 column on mobile screens
+        - Date emojis (📅) provide visual cue for event timing
     -->
     <section id="events" class="events">
         <h2 class="section-title">Recent Events</h2>
@@ -101,9 +142,21 @@
 
     <!-- 
         SERVICES SECTION
-        - Lists all services offered
-        - 6 service cards displayed in 3x2 grid (3 top, 3 bottom)
-        - Each card has icon, title, and description
+        KEY FEATURES:
+        - Lists all services offered by JiggerOnTheMix
+        - 6 service cards displayed in 3x2 grid layout
+        - Each card has emoji icon, title, and description
+        - Services cover mobile bar, cocktails, staff, planning, liquor, packages
+        
+        HOW IT FUNCTIONS:
+        - .services-grid uses CSS Grid: repeat(3, 1fr) for 3 columns
+        - Creates 2 rows automatically (6 items ÷ 3 columns = 2 rows)
+        - Each .service-card has white background, padding, border-radius
+        - .service-icon displays large emoji (3rem font-size) with margin
+        - Hover effects: card lifts (translateY(-5px)) and shadow increases
+        - Transition property smooths all hover animations
+        - Responsive: 2 columns on tablets, 1 column on mobile
+        - Grid gap provides spacing between cards
     -->
     <section id="services" class="services">
         <h2 class="section-title">Our Services</h2>
@@ -149,9 +202,23 @@
 
     <!-- 
         CONTACT/BOOKING SECTION
-        - Left side: Booking form with name, email, details fields
+        KEY FEATURES:
+        - Left side: Booking form with name, email, package select, details fields
         - Right side: Contact information cards (location, phone, email, hours)
-        - Form submissions handled by script.js
+        - Package dropdown mirrors pricing from drinks-packages.html
+        - Form submissions handled by script.js with validation
+        
+        HOW IT FUNCTIONS:
+        - .contact-container uses CSS Grid: 2 columns (1fr 1fr)
+        - .contact-form (left) collects: text, email, select, textarea inputs
+        - Form has id="contactForm" for JavaScript event listener
+        - All inputs have "required" attribute for HTML5 validation
+        - #packageSelect dropdown has 3 options matching service packages
+        - Submit triggers JavaScript function to validate and process form
+        - .contact-info (right) displays 4 info cards with icons and details
+        - Each .info-item uses flexbox to align icon and text
+        - Responsive: stacks to 1 column on mobile (grid-template-columns: 1fr)
+        - Form submission currently shows alert (can be connected to backend)
     -->
     <section id="contact" class="contact">
         <h2 class="section-title">Book Your Event</h2>
@@ -214,9 +281,25 @@
 
     <!-- 
         FOOTER
+        KEY FEATURES:
         - 4 columns: About, Quick Links, Social Media, Newsletter
-        - Bottom section with copyright
-        - Newsletter signup with validation
+        - About section provides brief company description
+        - Quick Links enable navigation to all main sections
+        - Social links connect to Facebook and Instagram (no TikTok)
+        - Newsletter signup for email list building
+        - Bottom section with copyright and licensing info
+        
+        HOW IT FUNCTIONS:
+        - .footer-content uses CSS Grid: repeat(4, 1fr) for 4 equal columns
+        - Each .footer-section contains different content type
+        - Quick Links <ul> has list-style: none, anchor links navigate page
+        - .social-links uses flexbox for horizontal link layout
+        - Social links open external pages (Facebook, Instagram)
+        - Newsletter .newsletter-input and .newsletter-btn styled for subscriptions
+        - .footer-bottom has top border for visual separation
+        - Text center-aligned with copyright symbol (&copy;) and year
+        - Responsive: 4 columns become 2, then 1 on smaller screens
+        - Dark background (#1a1a1a) with light text for contrast
     -->
     <footer class="footer">
         <div class="footer-content">

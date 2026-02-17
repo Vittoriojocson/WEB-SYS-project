@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--
+    BARTENDERS PAGE - bartenders.html
+    PURPOSE: Showcase team members, their expertise, and company strengths
+    SECTIONS: Navigation, Hero, Team Profiles, Why Choose Us, Specialties, CTA, Footer
+    DEPENDENCIES: styles.css (styling), script.js (interactions)
+-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +13,22 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
+    <!--
+        NAVIGATION BAR
+        KEY FEATURES:
+        - Logo with clickable link back to homepage
+        - 5 navigation links with "active" class on current page
+        - Hamburger menu for mobile responsiveness
+        - Progress bar indicates scroll position
+        
+        HOW IT FUNCTIONS:
+        - Logo links to index.html (not just image)
+        - .active class on "Bartenders" link highlights current page
+        - External page links (index.html#home) navigate to other sections
+        - Hamburger menu (.hamburger) toggles .nav-menu on mobile via JavaScript
+        - #progressBar width calculated as scroll percentage in script.js
+        - Sticky positioning (position: fixed) keeps navbar visible when scrolling
+    -->
     <nav class="navbar">
         <div class="navbar-container">
             <div class="logo">
@@ -31,6 +52,20 @@
         <div class="progress-bar" id="progressBar"></div>
     </nav>
 
+    <!--
+        HERO SECTION
+        KEY FEATURES:
+        - Page-specific title and subtitle
+        - Same animated background style as all pages
+        - Full viewport height for impactful first impression
+        
+        HOW IT FUNCTIONS:
+        - .hero class provides base styling (flexbox centering, min-height: 100vh)
+        - .hero-background creates animated wave effect via CSS @keyframes
+        - Radial gradient glows added with ::before and ::after pseudo-elements
+        - Text is white with text-shadow for readability over animated background
+        - Animation loops infinitely (float animation, 6s duration)
+    -->
     <!-- Bartenders Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
@@ -40,6 +75,25 @@
         <div class="hero-background"></div>
     </section>
 
+    <!--
+        TEAM PROFILES SECTION
+        KEY FEATURES:
+        - 3 team members with photos and detailed bios
+        - Real photos: owner.jpg (Mr. Apao), owner2.jpg (Mrs. Apao), sean.jpg
+        - Displays names, roles, experience, and credentials
+        - Professional layout with circular profile images
+        
+        HOW IT FUNCTIONS:
+        - .artists-grid uses CSS Grid: repeat(auto-fit, minmax(280px, 1fr))
+        - Auto-fit creates responsive columns that adapt to screen size
+        - Each .artist-card has white background, padding, border-radius
+        - .artist-image is 100px circle containing <img> with object-fit: cover
+        - Hover on .artist-card: bounce animation plays on .artist-image
+        - Bounce triggered by :hover pseudo-class (.artist-card:hover .artist-image)
+        - Animation keyframes: translateY(0) -> translateY(-10px) -> translateY(0)
+        - Cards lift on hover (translateY(-5px)) with increased shadow
+        - .artist-role styled with primary color for visual hierarchy
+    -->
     <!-- Bartenders Section -->
     <section id="bartenders" class="artists">
         <h2 class="section-title">Meet Our Team</h2>
@@ -72,6 +126,22 @@
         </div>
     </section>
 
+    <!--
+        WHY CHOOSE OUR TEAM SECTION
+        KEY FEATURES:
+        - 6 value propositions with emoji icons
+        - Highlights: Awards, Certifications, Excellence, Custom solutions, Experience, Client focus
+        - 3x2 grid layout for organized presentation
+        
+        HOW IT FUNCTIONS:
+        - .about-grid uses CSS Grid: repeat(3, 1fr) for 3 columns
+        - Creates 2 rows automatically (6 items ÷ 3 columns)
+        - Each .about-card has gradient background and hover effects
+        - .about-icon displays large emoji (3rem) for visual appeal
+        - Hover: card lifts slightly (translateY(-3px)) and shadow increases
+        - Gradient backgrounds: red gradient theme consistent with site
+        - Responsive: 2 columns on tablets, 1 column on mobile
+    -->
     <!-- About Our Team Section -->
     <section id="about-team" class="about-team">
         <h2 class="section-title">Why Choose Our Team</h2>
@@ -109,6 +179,21 @@
         </div>
     </section>
 
+    <!--
+        SPECIALTIES SECTION
+        KEY FEATURES:
+        - 6 specialty services offered by bartenders
+        - Covers: Signature cocktails, Molecular mixology, Wine/spirits, Flair, Sustainability, High-volume
+        - Each card has emoji icon and description
+        
+        HOW IT FUNCTIONS:
+        - .specialties-grid similar to about-grid: 3 columns in CSS Grid
+        - Each .specialty-card has white background (contrast to about-cards)
+        - Emoji in <h3> tags for inline display with service name
+        - Hover effects: lift and shadow increase for interactivity
+        - Responsive grid adapts to 2 columns, then 1 on smaller screens
+        - Border and shadow styling creates card depth
+    -->
     <!-- Specialties Section -->
     <section id="specialties" class="specialties">
         <h2 class="section-title">Our Specialties</h2>
@@ -140,6 +225,21 @@
         </div>
     </section>
 
+    <!--
+        CALL-TO-ACTION SECTION
+        KEY FEATURES:
+        - Encourages booking with prominent button
+        - Links back to homepage contact form
+        - Gradient background for visual emphasis
+        
+        HOW IT FUNCTIONS:
+        - .contact-cta class provides centered flexbox layout
+        - Background: red gradient matching site theme
+        - Anchor link (index.html#contact) navigates to contact section on homepage
+        - .cta-button has hover effects (darker shade, scale)
+        - White text on gradient background for high contrast
+        - Padding creates spacious, breathable section
+    -->
     <!-- Contact CTA Section -->
     <section id="contact-cta" class="contact-cta">
         <h2>Ready to Book Our Team?</h2>
@@ -147,6 +247,22 @@
         <a href="index.html#contact" class="cta-button">Book Now</a>
     </section>
 
+    <!--
+        FOOTER
+        KEY FEATURES:
+        - Same 4-column layout as all pages for consistency
+        - About, Quick Links, Social Media, Newsletter sections
+        - Social links: Facebook and Instagram only (no TikTok)
+        
+        HOW IT FUNCTIONS:
+        - .footer-content: CSS Grid with repeat(4, 1fr)
+        - Quick Links navigate to homepage sections (index.html#...)
+        - Social .social-links use actual URLs (not placeholder #)
+        - Newsletter input/button styled but not functional (would need backend)
+        - .footer-bottom provides copyright with top border separator
+        - Dark background (#1a1a1a) with light text for contrast
+        - Responsive: 4 columns -> 2 -> 1 as screen narrows
+    -->
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">

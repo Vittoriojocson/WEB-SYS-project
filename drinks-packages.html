@@ -14,10 +14,18 @@
 <body>
     <!-- 
         NAVIGATION BAR
+        KEY FEATURES:
         - Logo with image and text linking to homepage
         - 5 navigation links: Home, Events, Bartenders, Drinks & Packages, Contact
         - Hamburger menu for mobile responsiveness
         - Sticky positioning at top with progress bar
+        
+        HOW IT FUNCTIONS:
+        - Logo is wrapped in <a> tag for clickable homepage navigation
+        - Active page link highlighted with "nav-link" class
+        - Hamburger menu toggles on mobile via JavaScript in script.js
+        - Position fixed to stay at top during scrolling
+        - Z-index ensures navbar stays above other content
     -->
     <nav class="navbar">
         <div class="navbar-container">
@@ -44,10 +52,18 @@
 
     <!-- 
         HERO SECTION
-        - Full-screen landing section with page title
+        KEY FEATURES:
+        - Full-screen landing section with page title and subtitle
         - Animated wave background with floating effect
         - Red radial gradient glows for visual appeal
         - Same background style as all other pages for consistency
+        
+        HOW IT FUNCTIONS:
+        - Uses .hero class for base styling from styles.css
+        - .drinks-hero class can add page-specific modifications
+        - .hero-background div creates animated wave effect with CSS @keyframes
+        - Full viewport height (100vh) ensures hero fills visible screen
+        - Centered flexbox layout positions title and subtitle
     -->
     <section class="hero drinks-hero">
         <div class="hero-content">
@@ -59,6 +75,7 @@
 
     <!-- 
         SIGNATURE COCKTAILS MENU SECTION
+        KEY FEATURES:
         - Displays all available cocktails, shooters, and mocktails
         - Three categories with custom grid layouts:
           1. Premium Cocktails: 15 items in 5-column grid (3 rows)
@@ -66,15 +83,32 @@
           3. Mocktails: 4 items centered in single row
         - Each item shows name, number, and ingredient description
         - Gradient background matching overall theme
+        
+        HOW IT FUNCTIONS:
+        - .cocktails-section class provides container styling and padding
+        - .drinks-category wraps each drink category (cocktails, shooters, mocktails)
+        - .cocktail-grid uses CSS Grid with responsive columns
+        - Custom grid classes (.shooters-grid, .mocktails-grid) override column count
+        - .cocktail-item cards have hover effects (transform, box-shadow)
+        - Red gradient backgrounds with white text for readability
+        - Responsive: columns reduce on smaller screens via media queries
     -->
     <section id="cocktails-menu" class="cocktails-section">
         <h2 class="section-title">Signature Cocktails Menu</h2>
         
         <!-- 
             PREMIUM COCKTAILS CATEGORY
+            KEY FEATURES:
             - 15 cocktails displayed in 5-column grid layout
             - Each card has red gradient background with hover effects
             - Includes classic cocktails like Margarita, Old Fashioned, Long Island Iced Tea
+            
+            HOW IT FUNCTIONS:
+            - Default .cocktail-grid creates 5-column layout (repeat(5, 1fr))
+            - Each .cocktail-item is a grid cell with padding and styling
+            - Hover state: translateY(-5px) lifts card, adds larger shadow
+            - Numbered items (1-15) for easy reference/ordering
+            - Ingredient descriptions help guests choose drinks
         -->
         <div class="drinks-category">
             <h3 class="category-title">🍹 Premium Cocktails</h3>
@@ -144,9 +178,16 @@
 
         <!-- 
             SHOOTERS CATEGORY
+            KEY FEATURES:
             - 8 shooters in 4x2 grid layout (4 columns, 2 rows)
             - Custom grid styling with max-width 1200px
             - Popular shots like Blue Kamikaze, Lemon Drop, Aftershock
+            
+            HOW IT FUNCTIONS:
+            - .shooters-grid class overrides default to 4 columns (grid-template-columns: repeat(4, 1fr))
+            - Centered layout with max-width prevents cards from stretching too wide
+            - Same hover effects as cocktails for consistency
+            - Fire emoji (🔥) indicates stronger/bolder drinks
         -->
         <div class="drinks-category shooters-category">
             <h3 class="category-title">🔥 Shooters</h3>
@@ -188,9 +229,16 @@
 
         <!-- 
             MOCKTAILS CATEGORY
+            KEY FEATURES:
             - 4 non-alcoholic drinks centered in single row
             - 4-column layout with max-width 1000px for centered appearance
             - Family-friendly options like Shirley Temple and fruit-based drinks
+            
+            HOW IT FUNCTIONS:
+            - .mocktails-grid sets exact 4 columns for all items in one row
+            - Smaller max-width (1000px) keeps cards centered without stretching
+            - Glass emoji (🥤) differentiates from alcoholic beverages
+            - Important for family events and non-drinking guests
         -->
         <div class="drinks-category mocktails-category">
             <h3 class="category-title">🥤 Mocktails (Non-Alcoholic)</h3>
@@ -217,15 +265,26 @@
 
     <!-- 
         SERVICE PACKAGES SECTION
+        KEY FEATURES:
         - Two-tier pricing structure for mobile bar services
-        - Packages: Professional ($800-1200), Premium ($1500-2500)
+        - Packages: Professional (6,000-10,000 php), Premium (7,000-50,000 php)
         - Each package card displays:
           * Badge/label (Most Popular, Premium)
-          * Service duration (4-6, 6-10 hours)
+          * Service duration (3-4 hours)
           * Price range
-          * Feature list with checkmarks/X marks
-          * "Choose Plan" button
+          * Feature list with checkmarks for included items
+          * "Choose Plan" button for booking
         - Professional package highlighted as "Most Popular" with featured styling
+        
+        HOW IT FUNCTIONS:
+        - .packages-grid creates 2-column flexbox layout
+        - .package-card provides card styling with borders and shadows
+        - .featured class on Professional package adds gold accent styling
+        - .package-badge positions at top-right with absolute positioning
+        - Features list uses <ul> with custom checkmark symbols (✓)
+        - Hover effects scale cards slightly (transform: scale(1.02))
+        - .package-btn buttons styled for call-to-action
+        - Responsive: stacks to single column on mobile
     -->
     <section id="packages" class="packages-section">
         <h2 class="section-title">Service Packages</h2>
@@ -282,9 +341,18 @@
 
     <!-- 
         CALL-TO-ACTION SECTION
+        KEY FEATURES:
         - Encourages visitors to book services
         - Links to contact form on homepage (index.html#contact)
         - Gradient background with centered text and prominent button
+        
+        HOW IT FUNCTIONS:
+        - .cta-section class provides full-width section with padding
+        - Background gradient matches theme colors (red gradient)
+        - Centered flexbox layout (flex-direction: column)
+        - .cta-button styled as prominent call-to-action
+        - Anchor link uses #contact to scroll to contact section on index.html
+        - Hover effects on button (darker background, slight scale)
     -->
     <section class="cta-section">
         <h2>Ready to Elevate Your Event?</h2>
@@ -294,12 +362,23 @@
 
     <!-- 
         FOOTER SECTION
+        KEY FEATURES:
         - 4-column layout: About, Quick Links, Social Media, Newsletter
         - About: Brief company description
         - Quick Links: Navigation to main pages
-        - Social: Links to Facebook, Instagram
+        - Social: Links to Facebook, Instagram (no TikTok)
         - Newsletter: Email signup form
         - Footer bottom: Copyright and licensing info
+        
+        HOW IT FUNCTIONS:
+        - .footer class provides dark background container
+        - .footer-content uses CSS Grid with 4 equal columns (repeat(4, 1fr))
+        - .footer-section wraps each footer column
+        - Social links styled with hover effects
+        - Newsletter form has .newsletter-input and .newsletter-btn classes
+        - .footer-bottom centers copyright text with top border
+        - Responsive: columns stack vertically on mobile (grid-template-columns: 1fr)
+        - Links in Quick Links navigate to different pages/sections
     -->
     <footer class="footer">
         <div class="footer-content">

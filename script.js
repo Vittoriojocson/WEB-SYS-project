@@ -498,7 +498,7 @@ document.addEventListener('keydown', (e) => {
  * - Appears in top-right corner with smooth animation
  * - Has color-coded background based on type
  * - Shows white text with shadow for visibility
- * - Auto-dismisses after 12 seconds with fade-out animation
+ * - Auto-dismisses after 20 seconds with fade-out animation
  * - Supports responsive max-width for mobile screens
  * 
  * Used for: form confirmations, validation errors, button feedback
@@ -509,26 +509,30 @@ function showNotification(message, type = 'info') {
     notification.textContent = message;
     notification.style.cssText = `
         position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 15px 25px;
-        border-radius: 8px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 25px 40px;
+        border-radius: 12px;
         background: ${type === 'success' ? '#4caf50' : type === 'error' ? '#f44336' : '#2196f3'};
         color: white;
-        font-weight: 600;
+        font-weight: 700;
+        font-size: 1.2em;
         z-index: 9999;
-        animation: slideIn 0.3s ease-out;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        animation: fadeIn 0.5s ease-out;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         max-width: 90%;
+        text-align: center;
+        min-width: 300px;
     `;
     
     document.body.appendChild(notification);
     
-    // Auto remove after 12 seconds
+    // Auto remove after 20 seconds
     setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease-out';
-        setTimeout(() => notification.remove(), 300);
-    }, 12000);
+        notification.style.animation = 'fadeOut 0.5s ease-out';
+        setTimeout(() => notification.remove(), 500);
+    }, 20000);
 }
 
 /**

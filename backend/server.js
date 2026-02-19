@@ -53,16 +53,40 @@ const corsOrigins = (process.env.CORS_ORIGINS || 'http://localhost:3000,http://l
 
 console.log('CORS Origins allowed:', corsOrigins);
 
-// Middleware
-app.use(cors({
-    origin: corsOrigins,
+// CORS configuration with function-based origin checker
+const corsOptions = {
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        
+        // Allow if origin is in our list
+        if (corsOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        
+        // Allow GitHub Pages even if subdomain changes
+        if (origin && origin.includes('github.io')) {
+            return callback(null, true);
+        }
+        
+        // Allow localhost variants
+        if (origin && (origin.includes('localhost') || origin.includes('127.0.0.1'))) {
+            return callback(null, true);
+        }
+        
+        // For development, log rejected origins
+        console.log('CORS rejected origin:', origin);
+        callback(new Error('Not allowed by CORS'));
+    },
     credentials: true,
-    methods: ['GET', 'POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Accept']
-}));
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Accept', 'Authorization'],
+    optionsSuccessStatus: 200
+};
 
-// Explicitly handle preflight requests
-app.options('*', cors());
+// Middleware - CORS must be before routes
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

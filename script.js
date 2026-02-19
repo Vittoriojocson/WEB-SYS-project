@@ -498,7 +498,7 @@ document.addEventListener('keydown', (e) => {
  * - Appears in top-right corner with smooth animation
  * - Has color-coded background based on type
  * - Shows white text with shadow for visibility
- * - Auto-dismisses after 4 seconds with fade-out animation
+ * - Auto-dismisses after 8 seconds with fade-out animation
  * - Supports responsive max-width for mobile screens
  * 
  * Used for: form confirmations, validation errors, button feedback
@@ -524,11 +524,11 @@ function showNotification(message, type = 'info') {
     
     document.body.appendChild(notification);
     
-    // Auto remove after 4 seconds
+    // Auto remove after 8 seconds
     setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease-out';
         setTimeout(() => notification.remove(), 300);
-    }, 4000);
+    }, 8000);
 }
 
 /**

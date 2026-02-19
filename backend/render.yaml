@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: jiggeronthemix-api
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: DATABASE_URL
+        value: sqlite:///data/jiggeronthemix.db
+      - key: CORS_ORIGINS
+        sync: false
+      - key: MAIL_SERVER
+        sync: false
+      - key: MAIL_PORT
+        value: 587
+      - key: MAIL_USERNAME
+        sync: false
+      - key: MAIL_PASSWORD
+        sync: false
+      - key: MAIL_SENDER
+        value: JiggerOnTheMix <noreply@jiggeronthemix.com>
+    disk:
+      name: data
+      mountPath: /data
+      sizeGB: 1

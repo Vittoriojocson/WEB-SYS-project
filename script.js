@@ -109,27 +109,38 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // ==================== CONTACT FORM HANDLING ====================
 /**
- * Handles contact form submission with validation
- * - Validates all fields are filled (name, email, message)
+ * Handles contact form submission with validation and backend integration
+ * - Validates all fields are filled (name, email, event_name, package, details)
  * - Validates email format using regex
  * - Shows error notifications for validation failures
+ * - Sends form data to backend API /api/contact/submit
  * - Disables button during submission to prevent double-submit
  * - Shows success message and resets form on successful submission
+ * - Handles backend errors gracefully
  * - Only runs if contact form exists on page
+ * 
+ * BACKEND INTEGRATION:
+ * - POST to /api/contact/submit (URL configured in config.js)
+ * - Sends: name, email, event_name, package, details
+ * - Receives: success (bool), message, status_code
+ * - Auto-reply email sent to user on success via backend
  */
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // Extract form values
-        const formData = new FormData(this);
-        const name = this.querySelector('input[type="text"]').value;
-        const email = this.querySelector('input[type="email"]').value;
-        const message = this.querySelector('textarea').value;
+        // Extract form values - order matters!
+        // inputs[0] = Your Name, inputs[1] = Your Email, inputs[2] = Event Name
+        const inputs = this.querySelectorAll('input');
+        const name = inputs[0].value.trim();
+        const email = inputs[1].value.trim();
+        const eventName = inputs[2].value.trim();
+        const packageType = this.querySelector('select').value;
+        const details = this.querySelector('textarea').value.trim();
         
         // Validate form inputs
-        if (!name || !email || !message) {
-            showNotification('Please fill in all fields', 'error');
+        if (!name || !email || !eventName || !packageType || !details) {
+            showNotification('Please fill in all required fields', 'error');
             return;
         }
         
@@ -139,18 +150,50 @@ if (contactForm) {
             return;
         }
         
-        // Simulate form submission with loading state
+        // Get submit button and show loading state
         const submitBtn = this.querySelector('.submit-btn');
         const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Sending...';
         submitBtn.disabled = true;
         
-        setTimeout(() => {
-            showNotification('Message sent successfully! We\'ll be in touch soon.', 'success');
-            this.reset();
+        try {
+            // Send form data to backend
+            const response = await fetch(`${window.APP_CONFIG.API_URL}/api/contact/submit`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    event_name: eventName,
+                    package: packageType,
+                    details: details
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                showNotification('Message sent successfully! We\'ll be in touch soon.', 'success');
+                this.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            } else {
+                // Show validation errors from backend
+                const errorMsg = Array.isArray(result.errors) ? 
+                               result.errors.join(', ') : 
+                               (result.message || 'Failed to send message');
+                showNotification(errorMsg, 'error');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            showNotification('Failed to send message. Please try again.', 'error');
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
-        }, 1500);
+        }
     });
 }
 
@@ -222,18 +265,27 @@ if (ctaButton) {
 
 // ==================== NEWSLETTER SUBSCRIPTION ====================
 /**
- * Handles newsletter email subscription
+ * Handles newsletter email subscription with backend integration
  * - Gets email from input field
  * - Validates email format
  * - Shows error if email is missing or invalid
+ * - Sends subscription request to backend API /api/newsletter/subscribe
  * - Changes button text to "Subscribing..." during submission
- * - Shows success message and clears input after 1 second
+ * - Shows success message and clears input after subscription
+ * - Handles backend errors and prevents duplicate subscriptions
  * - Only runs if newsletter button exists on page
+ * 
+ * BACKEND INTEGRATION:
+ * - POST to /api/newsletter/subscribe (URL configured in config.js)
+ * - Sends: email
+ * - Receives: success (bool), message, status_code
+ * - Backend prevents duplicate emails automatically
+ * - Welcome email sent to subscriber on success
  */
 if (newsletterBtn) {
-    newsletterBtn.addEventListener('click', function() {
+    newsletterBtn.addEventListener('click', async function() {
         const input = this.previousElementSibling;
-        const email = input.value;
+        const email = input.value.trim();
         
         // Validate email exists
         if (!email) {
@@ -252,12 +304,38 @@ if (newsletterBtn) {
         this.textContent = 'Subscribing...';
         this.disabled = true;
         
-        setTimeout(() => {
-            showNotification('Subscribed successfully! Check your email.', 'success');
-            input.value = '';
+        try {
+            // Send subscription to backend
+            const response = await fetch(`${window.APP_CONFIG.API_URL}/api/newsletter/subscribe`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                showNotification('Subscribed successfully! Check your email.', 'success');
+                input.value = '';
+                this.textContent = originalText;
+                this.disabled = false;
+            } else {
+                // Show error message from backend
+                const errorMsg = result.message || 'Failed to subscribe. Please try again.';
+                showNotification(errorMsg, 'error');
+                this.textContent = originalText;
+                this.disabled = false;
+            }
+        } catch (error) {
+            console.error('Error subscribing:', error);
+            showNotification('Failed to subscribe. Please try again.', 'error');
             this.textContent = originalText;
             this.disabled = false;
-        }, 1000);
+        }
     });
 }
 

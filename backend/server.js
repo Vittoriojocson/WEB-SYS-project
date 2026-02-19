@@ -45,9 +45,17 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Parse CORS origins - allow GitHub Pages and localhost
+const corsOrigins = (process.env.CORS_ORIGINS || 'http://localhost:3000,http://localhost:8000,https://vittoriojocson.github.io')
+    .split(',')
+    .map(url => url.trim())
+    .filter(url => url);
+
+console.log('CORS Origins allowed:', corsOrigins);
+
 // Middleware
 app.use(cors({
-    origin: (process.env.CORS_ORIGINS || 'http://localhost:3000').split(',').map(url => url.trim()),
+    origin: corsOrigins,
     credentials: true
 }));
 

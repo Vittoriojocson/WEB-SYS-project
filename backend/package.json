@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "export:xml": "node tools/export-db-xml.js",
+    "export:csv": "node tools/export-db-csv.js"
   },
   "keywords": ["mobile-bar", "event", "booking"],
   "author": "JiggerOnTheMix",

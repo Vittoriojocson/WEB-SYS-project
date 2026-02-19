@@ -3,6 +3,9 @@
  * 
  * GET /api/admin/statistics  - Dashboard statistics
  * GET /api/admin/email-logs  - Email sending logs
+ * GET /api/admin/contacts    - View all contact messages
+ * GET /api/admin/subscribers - View all newsletter subscribers
+ * GET /api/admin/bookings    - View all bookings
  */
 
 import express from 'express';
@@ -116,6 +119,90 @@ router.get('/email-logs', async (req, res) => {
     } catch (error) {
         console.error('Error fetching email logs:', error);
         res.status(500).json(errorResponse('Failed to fetch email logs', 500));
+    }
+});
+
+/**
+ * Get all contact messages
+ * GET /api/admin/contacts?limit=50
+ */
+router.get('/contacts', async (req, res) => {
+    try {
+        const { limit = 50 } = req.query;
+
+        const contacts = await getAllRows(
+            'SELECT * FROM contact_messages ORDER BY created_at DESC LIMIT ?',
+            [parseInt(limit)]
+        );
+
+        res.status(200).json(successResponse(
+            {
+                count: contacts.length,
+                contacts: contacts
+            },
+            'Contact messages retrieved successfully',
+            200
+        ));
+
+    } catch (error) {
+        console.error('Error fetching contacts:', error);
+        res.status(500).json(errorResponse('Failed to fetch contacts', 500));
+    }
+});
+
+/**
+ * Get all newsletter subscribers
+ * GET /api/admin/subscribers?limit=50
+ */
+router.get('/subscribers', async (req, res) => {
+    try {
+        const { limit = 50 } = req.query;
+
+        const subscribers = await getAllRows(
+            'SELECT * FROM newsletter_subscribers ORDER BY subscribed_at DESC LIMIT ?',
+            [parseInt(limit)]
+        );
+
+        res.status(200).json(successResponse(
+            {
+                count: subscribers.length,
+                subscribers: subscribers
+            },
+            'Newsletter subscribers retrieved successfully',
+            200
+        ));
+
+    } catch (error) {
+        console.error('Error fetching subscribers:', error);
+        res.status(500).json(errorResponse('Failed to fetch subscribers', 500));
+    }
+});
+
+/**
+ * Get all bookings
+ * GET /api/admin/bookings?limit=50
+ */
+router.get('/bookings', async (req, res) => {
+    try {
+        const { limit = 50 } = req.query;
+
+        const bookings = await getAllRows(
+            'SELECT * FROM bookings ORDER BY created_at DESC LIMIT ?',
+            [parseInt(limit)]
+        );
+
+        res.status(200).json(successResponse(
+            {
+                count: bookings.length,
+                bookings: bookings
+            },
+            'Bookings retrieved successfully',
+            200
+        ));
+
+    } catch (error) {
+        console.error('Error fetching bookings:', error);
+        res.status(500).json(errorResponse('Failed to fetch bookings', 500));
     }
 });
 

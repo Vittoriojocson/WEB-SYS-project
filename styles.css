@@ -1798,6 +1798,29 @@ section {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
+/* ==================== NOTIFICATION ANIMATIONS ==================== */
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}
+
 /* ==================== RESPONSIVE BARTENDERS PAGE ==================== */
 @media (max-width: 768px) {
     .specialties-grid {

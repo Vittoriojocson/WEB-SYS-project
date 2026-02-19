@@ -10,7 +10,7 @@
 
 const config = {
     // Change this to your deployed backend URL after deployment
-    PRODUCTION_API_URL: 'https://your-backend-app.onrender.com',
+    PRODUCTION_API_URL: 'https://web-sys-project.onrender.com',
     DEVELOPMENT_API_URL: 'http://localhost:5501',
     
     // Auto-detect environment

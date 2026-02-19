@@ -49,9 +49,12 @@ router.post('/submit', async (req, res) => {
             ]
         );
 
-        // Send automated reply
-        await sendContactReply(email, name, event_name);
+        // Send automated reply in background (don't wait for it)
+        sendContactReply(email, name, event_name).catch(err => {
+            console.error('Error sending reply email:', err.message);
+        });
 
+        // Respond immediately without waiting for email
         res.status(201).json(successResponse(
             { id: result.lastID },
             'Contact form submitted successfully',

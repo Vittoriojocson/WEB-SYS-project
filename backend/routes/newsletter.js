@@ -65,9 +65,12 @@ router.post('/subscribe', async (req, res) => {
             [normalizedEmail]
         );
 
-        // Send welcome email
-        await sendNewsletterConfirmation(normalizedEmail);
+        // Send welcome email in background (don't wait for it)
+        sendNewsletterConfirmation(normalizedEmail).catch(err => {
+            console.error('Error sending welcome email:', err.message);
+        });
 
+        // Respond immediately without waiting for email
         res.status(201).json(successResponse(
             { id: result.lastID },
             'Subscribed successfully',

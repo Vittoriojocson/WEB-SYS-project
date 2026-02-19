@@ -56,8 +56,13 @@ console.log('CORS Origins allowed:', corsOrigins);
 // Middleware
 app.use(cors({
     origin: corsOrigins,
-    credentials: true
+    credentials: true,
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Accept']
 }));
+
+// Explicitly handle preflight requests
+app.options('*', cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

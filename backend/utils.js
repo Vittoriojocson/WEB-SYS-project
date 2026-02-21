@@ -131,6 +131,10 @@ export async function sendContactReply(recipientEmail, contactName, eventName) {
                         <li>Once confirmed, we'll send a booking confirmation</li>
                     </ul>
                     
+                    <div style="margin: 30px 0; text-align: center;">
+                        <a href="https://vittoriojocson.github.io/WEB-SYS-project/" style="background: #dd0000; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">Visit Our Website</a>
+                    </div>
+                    
                     <p style="margin-top: 30px; color: #666; font-size: 12px;">
                         Questions? Contact us at +63 995-551-1748 or jiggeronthemix.atyourservice@gmail.com
                     </p>
@@ -167,6 +171,10 @@ export async function sendNewsletterConfirmation(recipientEmail) {
                         <li>✓ Special promotions and discounts</li>
                         <li>✓ Event planning tips from our experts</li>
                     </ul>
+                    
+                    <div style="margin: 30px 0; text-align: center;">
+                        <a href="https://vittoriojocson.github.io/WEB-SYS-project/" style="background: #dd0000; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">Explore Our Packages</a>
+                    </div>
                     
                     <p style="margin-top: 30px; color: #666; font-size: 12px;">
                         Not interested? You can unsubscribe anytime by replying to this email.

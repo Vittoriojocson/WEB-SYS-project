@@ -619,93 +619,6 @@ section {
  * - Tags indicate popularity or premium status
  * - Responsive: 4 -> 2 -> 1 columns on smaller screens
  */
-.bar-showcase {
-    background: var(--dark-bg);
-    padding: 5rem 2rem;
-}
-
-.bar-options-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto 3rem;
-}
-
-.bar-option-card {
-    height: 300px;
-    border-radius: 15px;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-}
-
-.bar-option-card[data-setup="warm-white"] {
-    background: linear-gradient(135deg, #fff8dc 0%, #f5f5dc 100%);
-}
-
-.bar-option-card[data-setup="blue"] {
-    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-}
-
-.bar-option-card[data-setup="pink"] {
-    background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
-}
-
-.bar-option-card[data-setup="black"] {
-    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
-}
-
-.bar-option-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%);
-    padding: 2rem;
-    transform: translateY(100px);
-    transition: var(--transition);
-}
-
-.bar-option-card:hover .bar-option-overlay {
-    transform: translateY(0);
-}
-
-.bar-option-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(221, 0, 0, 0.3);
-}
-
-.bar-option-overlay h3 {
-    color: var(--white);
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.bar-option-overlay p {
-    color: var(--text-light);
-    font-size: 0.9rem;
-}
-
-.bar-tag {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: var(--secondary-color);
-    color: var(--white);
-    padding: 0.4rem 1rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-.bar-cta {
-    text-align: center;
-    margin-top: 2rem;
-}
 
 /* ==================== WHY CHOOSE US SECTION ==================== */
 /*
@@ -1922,14 +1835,15 @@ section {
 .package-nav-btn:hover {
     background: rgba(221, 0, 0, 0.15);
     border-color: var(--secondary-color);
-    color: var(--text-dark);
+    border-width: 2px;
+    color: var(--text-light);
 }
 
 .package-nav-btn.active {
-    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
-    border-color: var(--secondary-color);
-    color: var(--white);
-    box-shadow: 0 8px 20px rgba(221, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(221, 0, 0, 0.3);
+    color: var(--text-light);
+    box-shadow: none;
 }
 
 /* Backward compatibility for old class names */
@@ -1956,14 +1870,15 @@ section {
 .package-category-btn:hover {
     background: rgba(221, 0, 0, 0.15);
     border-color: var(--secondary-color);
-    color: var(--text-dark);
+    border-width: 2px;
+    color: var(--text-light);
 }
 
 .package-category-btn.active {
-    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
-    border-color: var(--secondary-color);
-    color: var(--white);
-    box-shadow: 0 8px 20px rgba(221, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(221, 0, 0, 0.3);
+    color: var(--text-light);
+    box-shadow: none;
 }
 
 .package-category-content {
@@ -4137,6 +4052,18 @@ section {
     padding: 2rem;
     margin-bottom: 2rem;
     text-align: center;
+}
+
+.qr-code-image {
+    max-width: 100%;
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
 }
 
 .qr-placeholder {

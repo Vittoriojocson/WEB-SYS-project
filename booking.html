@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking & Customization - JiggerOnTheMix</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.5rem;">
+                    <img src="logo.png" alt="JiggerOnTheMix" class="logo-img">
+                    <span class="logo-text">JiggerOnTheMix</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#events" class="nav-link">Events</a></li>
+                <li><a href="bartenders.html" class="nav-link">Bartenders</a></li>
+                <li><a href="drinks-packages.html" class="nav-link">Packages</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section package-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Complete Your Booking</h1>
+            <p class="hero-subtitle">Add customizations and select premium add-ons for your event</p>
+        </div>
+    </section>
+
+    <!-- BOOKING CONTAINER -->
+    <section class="booking-container">
+        <div class="booking-wrapper">
+            <!-- LEFT COLUMN: BOOKING DETAILS -->
+            <div class="booking-details-section">
+                <!-- PACKAGE SUMMARY -->
+                <div class="booking-card">
+                    <h2>Your Package</h2>
+                    <div class="booking-summary-details">
+                        <p><strong id="bookingPackageName">Basic - Small Event</strong></p>
+                        <p id="bookingPackagePrice" class="price">₱6,500 - 8,500</p>
+                        <p id="bookingPackageDesc" class="description">Perfect for intimate gatherings (50-100 Pax)</p>
+                    </div>
+                </div>
+
+                <!-- SELECTED DRINKS -->
+                <div class="booking-card">
+                    <h2>Selected Drinks</h2>
+                    <div id="bookingDrinksList" class="drinks-list">
+                        <p>Loading...</p>
+                    </div>
+                </div>
+
+                <!-- CUSTOMIZATIONS -->
+                <div class="booking-card">
+                    <h2>Customizations</h2>
+                    <div class="customization-section">
+                        <div class="customization-group">
+                            <label>
+                                <input type="checkbox" class="customization-checkbox" value="bars" data-qty="1">
+                                <span>Additional Bar Setup</span>
+                            </label>
+                            <p class="customization-desc">Add an extra bar for larger events</p>
+                        </div>
+
+                        <div class="customization-group">
+                            <label>
+                                <input type="checkbox" class="customization-checkbox" value="hours" data-qty="1">
+                                <span>Extra Service Hours</span>
+                            </label>
+                            <p class="customization-desc">Extend service beyond standard duration</p>
+                        </div>
+
+                        <div class="customization-group">
+                            <label>
+                                <input type="checkbox" class="customization-checkbox" value="bartenders" data-qty="1">
+                                <span>Additional Bartender</span>
+                            </label>
+                            <p class="customization-desc">Add more professional bartending staff</p>
+                        </div>
+
+                        <div class="customization-group">
+                            <label>
+                                <input type="checkbox" class="customization-checkbox" value="decor" data-qty="1">
+                                <span>Premium Bar Décor</span>
+                            </label>
+                            <p class="customization-desc">Themed bar setup with premium decorations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: ADD-ONS & PRICING -->
+            <div class="booking-summary-section">
+                <!-- PRICE SUMMARY -->
+                <div class="booking-card price-summary">
+                    <h2>Price Summary</h2>
+                    
+                    <div class="price-line">
+                        <span>Package Price</span>
+                        <span id="packageTotal">₱7,000</span>
+                    </div>
+
+                    <div id="addonsLineItems"></div>
+
+                    <div class="price-divider"></div>
+
+                    <div class="price-line total">
+                        <span>Total</span>
+                        <span id="totalPrice">₱7,000</span>
+                    </div>
+
+                    <button class="proceed-to-contact-btn" id="proceedToContactBtn">Proceed to Contact Info</button>
+                    <a href="drinks-selection.html" class="back-link">← Change Drinks</a>
+                </div>
+
+                <!-- ADD-ONS -->
+                <div class="booking-card addons-card">
+                    <h2>Premium Add-Ons</h2>
+                    <p class="addon-intro">Enhance your event with these optional services</p>
+
+                    <div class="addon-items">
+                        <div class="addon-item">
+                            <div class="addon-header">
+                                <input type="checkbox" class="addon-checkbox" data-addon="wine" data-price="3500">
+                                <div class="addon-info">
+                                    <h4>🍷 Wine Selection</h4>
+                                    <p class="addon-desc">Premium red, white & rosé wines</p>
+                                </div>
+                            </div>
+                            <span class="addon-price">₱3,500</span>
+                        </div>
+
+                        <div class="addon-item">
+                            <div class="addon-header">
+                                <input type="checkbox" class="addon-checkbox" data-addon="coffee" data-price="2000">
+                                <div class="addon-info">
+                                    <h4>☕ Coffee Bar</h4>
+                                    <p class="addon-desc">Specialty espresso & coffee drinks</p>
+                                </div>
+                            </div>
+                            <span class="addon-price">₱2,000</span>
+                        </div>
+
+                        <div class="addon-item">
+                            <div class="addon-header">
+                                <input type="checkbox" class="addon-checkbox" data-addon="mocktail" data-price="1500">
+                                <div class="addon-info">
+                                    <h4>🥤 Mocktail Station</h4>
+                                    <p class="addon-desc">Non-alcoholic specialty drinks</p>
+                                </div>
+                            </div>
+                            <span class="addon-price">₱1,500</span>
+                        </div>
+
+                        <div class="addon-item">
+                            <div class="addon-header">
+                                <input type="checkbox" class="addon-checkbox" data-addon="beer" data-price="2000">
+                                <div class="addon-info">
+                                    <h4>🍺 Craft Beer Selection</h4>
+                                    <p class="addon-desc">Premium craft & imported beers</p>
+                                </div>
+                            </div>
+                            <span class="addon-price">₱2,000</span>
+                        </div>
+
+                        <div class="addon-item">
+                            <div class="addon-header">
+                                <input type="checkbox" class="addon-checkbox" data-addon="charcuterie" data-price="3000">
+                                <div class="addon-info">
+                                    <h4>🥃 Charcuterie & Graze</h4>
+                                    <p class="addon-desc">Premium cheeses & appetizers</p>
+                                </div>
+                            </div>
+                            <span class="addon-price">₱3,000</span>
+                        </div>
+
+                        <div class="addon-item">
+                            <div class="addon-header">
+                                <input type="checkbox" class="addon-checkbox" data-addon="dj" data-price="5000">
+                                <div class="addon-info">
+                                    <h4>🎵 DJ & Music</h4>
+                                    <p class="addon-desc">Professional DJ service</p>
+                                </div>
+                            </div>
+                            <span class="addon-price">₱5,000</span>
+                        </div>
+
+                        <div class="addon-item">
+                            <div class="addon-header">
+                                <input type="checkbox" class="addon-checkbox" data-addon="flair" data-price="2500">
+                                <div class="addon-info">
+                                    <h4>📸 Flair Bartending Show</h4>
+                                    <p class="addon-desc">Bartender entertainment & tricks</p>
+                                </div>
+                            </div>
+                            <span class="addon-price">₱2,500</span>
+                        </div>
+
+                        <div class="addon-item">
+                            <div class="addon-header">
+                                <input type="checkbox" class="addon-checkbox" data-addon="vip" data-price="4000">
+                                <div class="addon-info">
+                                    <h4>🏆 VIP Lounge Setup</h4>
+                                    <p class="addon-desc">Premium VIP area with exclusive service</p>
+                                </div>
+                            </div>
+                            <span class="addon-price">₱4,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About JiggerOnTheMix</h4>
+                <p>Premium mobile bar service specializing in elevating your events with professional mixology, expert bartenders, and unforgettable experiences.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#events">Recent Events</a></li>
+                    <li><a href="bartenders.html">Our Bartenders</a></li>
+                    <li><a href="drinks-packages.html">Drinks & Packages</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/share/16U9SrDSPY/?mibextid=wwXIfr">Facebook</a>
+                    <a href="https://www.instagram.com/jigger_onthemix?igsh=cWJkdjR1anVxdXBv">Instagram</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <p>Get updates on new packages and event specials</p>
+                <input type="email" placeholder="Your email" class="newsletter-input">
+                <button class="newsletter-btn">Subscribe</button>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 JiggerOnTheMix. All rights reserved. Licensed & Insured.</p>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="booking.js"></script>
+</body>
+</html>

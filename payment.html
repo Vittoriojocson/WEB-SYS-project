@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment - JiggerOnTheMix</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.5rem;">
+                    <img src="logo.png" alt="JiggerOnTheMix" class="logo-img">
+                    <span class="logo-text">JiggerOnTheMix</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#events" class="nav-link">Events</a></li>
+                <li><a href="bartenders.html" class="nav-link">Bartenders</a></li>
+                <li><a href="drinks-packages.html" class="nav-link">Packages</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section package-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Secure Payment</h1>
+            <p class="hero-subtitle">Complete your booking with a secure payment method</p>
+        </div>
+    </section>
+
+    <!-- PAYMENT CONTAINER -->
+    <section class="payment-container">
+        <div class="payment-wrapper">
+            <!-- LEFT COLUMN: ORDER SUMMARY -->
+            <div class="order-summary-section">
+                <div class="payment-card order-summary-card">
+                    <h2>Order Summary</h2>
+                    
+                    <!-- Package -->
+                    <div class="summary-section">
+                        <h3>Package</h3>
+                        <p id="summaryPackage" class="summary-text">Basic - Small Event</p>
+                        <span id="summaryPackagePrice" class="summary-price">₱7,000</span>
+                    </div>
+
+                    <!-- Drinks -->
+                    <div class="summary-section">
+                        <h3>Drinks Selected</h3>
+                        <ul id="summaryDrinks" class="summary-list">
+                            <li>Loading...</li>
+                        </ul>
+                    </div>
+
+                    <!-- Add-ons -->
+                    <div class="summary-section">
+                        <h3>Add-Ons & Services</h3>
+                        <ul id="summaryAddons" class="summary-list">
+                            <li class="no-addons">No add-ons selected</li>
+                        </ul>
+                    </div>
+
+                    <!-- Customizations -->
+                    <div class="summary-section">
+                        <h3>Customizations</h3>
+                        <ul id="summaryCustomizations" class="summary-list">
+                            <li class="no-addons">No customizations selected</li>
+                        </ul>
+                    </div>
+
+                    <!-- Total -->
+                    <div class="summary-section total-section">
+                        <h3>Total Amount</h3>
+                        <p id="summaryTotal" class="total-price">₱7,000</p>
+                    </div>
+
+                    <a href="booking.html" class="back-to-booking-link">← Back to Booking</a>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: PAYMENT METHODS -->
+            <div class="payment-methods-section">
+                <div class="payment-card payment-card-main">
+                    <h2>Select Payment Method</h2>
+                    <p class="payment-intro">Choose your preferred payment option to complete your booking</p>
+
+                    <!-- CREDIT/DEBIT CARD -->
+                    <div class="payment-method-option">
+                        <input type="radio" id="payment-card" name="payment-method" value="card" class="payment-radio">
+                        <label for="payment-card" class="payment-label">
+                            <div class="payment-method-header">
+                                <span class="payment-icon">💳</span>
+                                <div class="payment-method-info">
+                                    <h4>Credit/Debit Card</h4>
+                                    <p>Visa, Mastercard, or American Express</p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- GCASH -->
+                    <div class="payment-method-option">
+                        <input type="radio" id="payment-gcash" name="payment-method" value="gcash" class="payment-radio">
+                        <label for="payment-gcash" class="payment-label">
+                            <div class="payment-method-header">
+                                <span class="payment-icon">📱</span>
+                                <div class="payment-method-info">
+                                    <h4>GCash</h4>
+                                    <p>Fast and secure mobile payment</p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- PAYMAYA -->
+                    <div class="payment-method-option">
+                        <input type="radio" id="payment-paymaya" name="payment-method" value="paymaya" class="payment-radio">
+                        <label for="payment-paymaya" class="payment-label">
+                            <div class="payment-method-header">
+                                <span class="payment-icon">💰</span>
+                                <div class="payment-method-info">
+                                    <h4>PayMaya</h4>
+                                    <p>Digital wallet for instant payments</p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- BANK TRANSFER -->
+                    <div class="payment-method-option">
+                        <input type="radio" id="payment-bank" name="payment-method" value="bank" class="payment-radio">
+                        <label for="payment-bank" class="payment-label">
+                            <div class="payment-method-header">
+                                <span class="payment-icon">🏦</span>
+                                <div class="payment-method-info">
+                                    <h4>Bank Transfer</h4>
+                                    <p>Direct bank account transfer</p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- SECURITY INFO -->
+                    <div class="security-info">
+                        <p>🔒 Your payment information is encrypted and secure</p>
+                        <p>All transactions are processed through secure payment gateways</p>
+                    </div>
+
+                    <!-- PAYMENT BUTTON -->
+                    <button class="payment-button" id="proceedPaymentBtn">Proceed to Payment</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About JiggerOnTheMix</h4>
+                <p>Premium mobile bar service specializing in elevating your events with professional mixology, expert bartenders, and unforgettable experiences.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#events">Recent Events</a></li>
+                    <li><a href="bartenders.html">Our Bartenders</a></li>
+                    <li><a href="drinks-packages.html">Drinks & Packages</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/share/16U9SrDSPY/?mibextid=wwXIfr">Facebook</a>
+                    <a href="https://www.instagram.com/jigger_onthemix?igsh=cWJkdjR1anVxdXBv">Instagram</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <p>Get updates on new packages and event specials</p>
+                <input type="email" placeholder="Your email" class="newsletter-input">
+                <button class="newsletter-btn">Subscribe</button>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 JiggerOnTheMix. All rights reserved. Licensed & Insured.</p>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="payment.js"></script>
+</body>
+</html>

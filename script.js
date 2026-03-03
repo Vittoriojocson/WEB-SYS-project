@@ -248,6 +248,82 @@ if (packageButtons.length > 0) {
     });
 }
 
+// ==================== DRINK FILTERS ====================
+/**
+ * Interactive filter buttons for drink categories
+ * - Allows users to toggle between Cocktails, Shooters, Mocktails, or All
+ * - Updates active button styling
+ * - Shows/hides drink category sections based on filter
+ * - Mobile-friendly: collapses categories on smaller screens
+ * 
+ * HOW IT WORKS:
+ * - .filter-btn buttons have data-filter attribute (all, cocktails, shooters, mocktails)
+ * - .drinks-category sections have data-category attribute matching filter values
+ * - Clicking button toggles 'active' class and filters drinks
+ * - All categories visible on desktop, hidden by default on mobile
+ * - .hidden class hides categories, .visible class shows them
+ */
+const filterButtons = document.querySelectorAll('.filter-btn');
+const drinkCategories = document.querySelectorAll('.drinks-category');
+
+if (filterButtons.length > 0 && drinkCategories.length > 0) {
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filterValue = this.getAttribute('data-filter');
+            
+            // Update active button styling
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Show/hide categories based on filter
+            drinkCategories.forEach(category => {
+                const categoryType = category.getAttribute('data-category');
+                
+                if (filterValue === 'all') {
+                    // Show all categories
+                    category.classList.remove('hidden');
+                    category.classList.add('visible');
+                } else if (categoryType === filterValue) {
+                    // Show matching category
+                    category.classList.remove('hidden');
+                    category.classList.add('visible');
+                } else {
+                    // Hide non-matching categories
+                    category.classList.add('hidden');
+                    category.classList.remove('visible');
+                }
+            });
+        });
+    });
+}
+
+// ==================== PACKAGE NAVIGATION STATE ====================
+/**
+ * Sets the active package navigation link based on current page
+ * - Detects which package page is currently loaded
+ * - Highlights corresponding navigation button
+ * - Works for: drinks-packages.html (shows Basic as active), basic-packages.html, premium-packages.html, custom-packages.html
+ */
+
+function setActivePackageNav() {
+    const navButtons = document.querySelectorAll('.package-nav-btn');
+    if (navButtons.length === 0) return;
+    
+    const currentPage = window.location.pathname.split('/').pop() || 'drinks-packages.html';
+    
+    navButtons.forEach(btn => {
+        btn.classList.remove('active');
+        const href = btn.getAttribute('href');
+        if ((currentPage === 'drinks-packages.html' && href === 'basic-packages.html') ||
+            (currentPage === href)) {
+            btn.classList.add('active');
+        }
+    });
+}
+
+// Run on page load
+setActivePackageNav();
+
 // ==================== CTA BUTTON ====================
 /**
  * Handles main call-to-action button click

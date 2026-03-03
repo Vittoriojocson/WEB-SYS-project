@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCash Payment QR - JiggerOnTheMix</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.5rem;">
+                    <img src="logo.png" alt="JiggerOnTheMix" class="logo-img">
+                    <span class="logo-text">JiggerOnTheMix</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#events" class="nav-link">Events</a></li>
+                <li><a href="bartenders.html" class="nav-link">Bartenders</a></li>
+                <li><a href="drinks-packages.html" class="nav-link">Packages</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section package-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">GCash Payment</h1>
+            <p class="hero-subtitle">Scan the QR code with your GCash app to complete payment</p>
+        </div>
+    </section>
+
+    <!-- QR CODE CONTAINER -->
+    <section class="gcash-qr-container">
+        <div class="qr-wrapper">
+            <div class="qr-card">
+                <h2>Scan to Pay via GCash</h2>
+                <p class="qr-instruction">Use your GCash app to scan this QR code</p>
+
+                <!-- QR CODE PLACEHOLDER -->
+                <div class="qr-code-box">
+                    <div class="qr-placeholder">
+                        <div class="qr-grid">
+                            <!-- Visual QR representation -->
+                            <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; width: 200px; height: 200px; margin: 0 auto;">
+                                <div class="qr-module"></div><div class="qr-module"></div><div class="qr-module"></div><div class="qr-module"></div><div class="qr-module"></div><div class="qr-module"></div><div class="qr-module"></div>
+                                <div class="qr-module"></div><div class="qr-module blank"></div><div class="qr-module blank"></div><div class="qr-module blank"></div><div class="qr-module blank"></div><div class="qr-module blank"></div><div class="qr-module"></div>
+                                <div class="qr-module"></div><div class="qr-module blank"></div><div class="qr-module"></div><div class="qr-module"></div><div class="qr-module"></div><div class="qr-module blank"></div><div class="qr-module"></div>
+                                <div class="qr-module"></div><div class="qr-module blank"></div><div class="qr-module"></div><div class="qr-module"></div><div class="qr-module"></div><div class="qr-module blank"></div><div class="qr-module"></div>
+                                <div class="qr-module"></div><div class="qr-module blank"></div><div class="qr-module"></div><div class="qr-module"></div><div class="qr-module"></div><div class="qr-module blank"></div><div class="qr-module"></div>
+                                <div class="qr-module"></div><div class="qr-module blank"></div><div class="qr-module blank"></div><div class="qr-module blank"></div><div class="qr-module blank"></div><div class="qr-module blank"></div><div class="qr-module"></div>
+                                <div class="qr-module"></div><div class="qr-module"></div><div class="qr-module"></div><div class="qr-module"></div><div class="qr-module"></div><div class="qr-module"></div><div class="qr-module"></div>
+                            </div>
+                        </div>
+                        <p class="qr-amount">Amount: <span id="qrAmount">₱7,000</span></p>
+                    </div>
+                </div>
+
+                <!-- TIMER -->
+                <div class="timer-section">
+                    <p class="timer-text">Time remaining to scan:</p>
+                    <div class="timer-display" id="timerDisplay">05:00</div>
+                    <p class="timer-subtitle">If timer expires, you can still continue with the next step</p>
+                </div>
+
+                <!-- PAYMENT INSTRUCTIONS -->
+                <div class="payment-instructions">
+                    <h3>📱 How to pay with GCash:</h3>
+                    <ol>
+                        <li>Open your GCash app</li>
+                        <li>Tap "Scan QR"</li>
+                        <li>Point camera at the QR code above</li>
+                        <li>Confirm the transaction details and amount</li>
+                        <li>Enter your PIN to complete payment</li>
+                        <li>Take a screenshot of the confirmation</li>
+                    </ol>
+                </div>
+
+                <!-- CONTINUE BUTTON -->
+                <button class="continue-btn" id="continueBtn">
+                    <span class="btn-text">Continue</span>
+                </button>
+
+                <a href="payment.html" class="back-link">← Back to Payment Methods</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About JiggerOnTheMix</h4>
+                <p>Premium mobile bar service specializing in elevating your events with professional mixology, expert bartenders, and unforgettable experiences.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#events">Recent Events</a></li>
+                    <li><a href="bartenders.html">Our Bartenders</a></li>
+                    <li><a href="drinks-packages.html">Drinks & Packages</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/share/16U9SrDSPY/?mibextid=wwXIfr">Facebook</a>
+                    <a href="https://www.instagram.com/jigger_onthemix?igsh=cWJkdjR1anVxdXBv">Instagram</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <p>Get updates on new packages and event specials</p>
+                <input type="email" placeholder="Your email" class="newsletter-input">
+                <button class="newsletter-btn">Subscribe</button>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 JiggerOnTheMix. All rights reserved. Licensed & Insured.</p>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="gcash-qr.js"></script>
+</body>
+</html>

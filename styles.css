@@ -410,10 +410,42 @@ body > * {
  */
 .hero-subtitle {
     font-size: 1.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     opacity: 0.95;
     font-weight: 300;
 }
+
+/* Hero Badge - "Since 2020" credibility indicator */
+.hero-badge {
+    background: rgba(221, 0, 0, 0.2);
+    color: var(--accent-color);
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid rgba(221, 0, 0, 0.3);
+    display: inline-block;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+}
+
+/* Hero Tagline */
+.hero-tagline {
+    font-size: 1.1rem;
+    opacity: 0.85;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+}
+
+/* Hero Buttons Container */
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 /* 
  * CALL-TO-ACTION BUTTON QUICK EDITS:
  * - padding: Button size (15px 50px default)
@@ -422,11 +454,9 @@ body > * {
  * - box-shadow: Button shadow depth
  */
 .cta-button {
-    padding: 15px 50px;
-    font-size: 1.1rem;
+    padding: 15px 40px;
+    font-size: 1rem;
     font-weight: 600;
-    background: var(--white);
-    color: var(--primary-color);
     border: none;
     border-radius: 50px;
     text-decoration: none;
@@ -434,6 +464,26 @@ body > * {
     cursor: pointer;
     transition: var(--transition);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button.primary {
+    background: var(--secondary-color);
+    color: var(--white);
+}
+
+.cta-button.primary:hover {
+    background: var(--accent-color);
+}
+
+.cta-button.secondary {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+}
+
+.cta-button.secondary:hover {
+    background: var(--white);
+    color: var(--primary-color);
 }
 
 .cta-button:hover {
@@ -480,6 +530,242 @@ section {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     margin: 1rem auto 0;
     border-radius: 2px;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: -1.5rem auto 3rem;
+    line-height: 1.6;
+}
+
+/* ==================== STATS/SOCIAL PROOF SECTION ==================== */
+/*
+ * KEY FEATURES:
+ * - Display key metrics and credibility indicators
+ * - Shows experience, events served, satisfaction rate
+ * - Inspired by Mixed Mobile Bar's social proof
+ * - Eye-catching numbers with icons
+ * 
+ * HOW IT FUNCTIONS:
+ * - Flexbox layout for horizontal stat display
+ * - Each stat-item contains icon, number, label
+ * - Large numbers emphasized with color and size
+ * - Responsive: wraps to 2x2 grid on tablet, stacks on mobile
+ */
+.stats-section {
+    background: linear-gradient(135deg, rgba(221, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.3) 100%);
+    padding: 4rem 2rem;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    text-align: center;
+    flex: 1;
+    min-width: 200px;
+}
+
+.stat-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 1rem;
+    color: var(--text-light);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ==================== BAR SETUP SHOWCASE SECTION ==================== */
+/*
+ * KEY FEATURES:
+ * - Visual showcase of different bar lighting/setup options
+ * - Inspired by Mixed Mobile Bar's "Choose Your Bar" section
+ * - Grid of setup options with gradient backgrounds
+ * - Hover effects reveal details
+ * 
+ * HOW IT FUNCTIONS:
+ * - Grid layout with 4 columns for bar options
+ * - Each card has gradient background representing lighting
+ * - Overlay shows on hover with setup details
+ * - Tags indicate popularity or premium status
+ * - Responsive: 4 -> 2 -> 1 columns on smaller screens
+ */
+.bar-showcase {
+    background: var(--dark-bg);
+    padding: 5rem 2rem;
+}
+
+.bar-options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+}
+
+.bar-option-card {
+    height: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.bar-option-card[data-setup="warm-white"] {
+    background: linear-gradient(135deg, #fff8dc 0%, #f5f5dc 100%);
+}
+
+.bar-option-card[data-setup="blue"] {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+}
+
+.bar-option-card[data-setup="pink"] {
+    background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+}
+
+.bar-option-card[data-setup="black"] {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+}
+
+.bar-option-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%);
+    padding: 2rem;
+    transform: translateY(100px);
+    transition: var(--transition);
+}
+
+.bar-option-card:hover .bar-option-overlay {
+    transform: translateY(0);
+}
+
+.bar-option-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(221, 0, 0, 0.3);
+}
+
+.bar-option-overlay h3 {
+    color: var(--white);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.bar-option-overlay p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.bar-tag {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--secondary-color);
+    color: var(--white);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.bar-cta {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* ==================== WHY CHOOSE US SECTION ==================== */
+/*
+ * KEY FEATURES:
+ * - Highlights unique selling propositions
+ * - 6 key benefits in grid layout
+ * - Icons and concise copy
+ * - Inspired by Mixed Mobile Bar's "Why Us?" page
+ * 
+ * HOW IT FUNCTIONS:
+ * - Grid: 3 columns on desktop, 2 on tablet, 1 on mobile
+ * - Each card emphasizes a key differentiator
+ * - Icons draw attention with animation
+ * - Hover effects for interactivity
+ */
+.why-us-section {
+    background: linear-gradient(135deg, var(--dark-bg) 0%, rgba(221, 0, 0, 0.08) 100%);
+    padding: 5rem 2rem;
+}
+
+.why-us-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.why-card {
+    background: var(--light-bg);
+    padding: 2.5rem;
+    border-radius: 15px;
+    text-align: center;
+    transition: var(--transition);
+    border-top: 3px solid var(--secondary-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.why-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(221, 0, 0, 0.3);
+}
+
+.why-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.why-card h3 {
+    color: var(--text-dark);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.why-card p {
+    color: var(--text-light);
+    line-height: 1.6;
+    font-size: 0.95rem;
 }
 
 /* ==================== EVENTS SECTION ==================== */
@@ -738,6 +1024,98 @@ section {
 .service-card p {
     color: var(--text-light);
     line-height: 1.8;
+}
+
+/* ==================== BOOKING CTA SECTION ==================== */
+/*
+ * KEY FEATURES:
+ * - Mid-page call-to-action to encourage bookings
+ * - Showcases 3 quick benefits before main button
+ * - Eye-catching gradient background
+ * - Large, prominent button design
+ * 
+ * HOW IT FUNCTIONS:
+ * - .booking-cta-section: full-width with gradient background
+ * - .booking-cta-content: centered max-width container with padding
+ * - h2 and p: prominent text hierarchy
+ * - .booking-benefits: 3-column grid for benefit items
+ * - .benefit-item: centered card with icon, title, description
+ * - .benefit-icon: large emoji (2rem) for visual appeal
+ * - .book-now-btn: large, prominent call-to-action button
+ * - Hover effects on benefits and button for interactivity
+ * - Responsive: benefits stack to 1 column on mobile
+ */
+.booking-cta-section {
+    background: linear-gradient(135deg, rgba(221, 0, 0, 0.2) 0%, rgba(255, 68, 68, 0.1) 100%);
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.booking-cta-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.booking-cta-section h2 {
+    font-size: 2.2rem;
+    color: var(--text-dark);
+    margin-bottom: 0.8rem;
+}
+
+.booking-cta-section > div > p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.booking-benefits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.benefit-item {
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    transition: var(--transition);
+}
+
+.benefit-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--secondary-color);
+    transform: translateY(-5px);
+}
+
+.benefit-icon {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+    display: block;
+}
+
+.benefit-item h4 {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.benefit-item p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.book-now-btn {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
 }
 
 /* ==================== CONTACT SECTION ==================== */
@@ -1038,6 +1416,14 @@ section {
         grid-template-columns: 1fr;
     }
 
+    .booking-benefits {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-cta-section h2 {
+        font-size: 1.8rem;
+    }
+
     section {
         padding: 3rem 1rem;
     }
@@ -1055,6 +1441,19 @@ section {
     .cta-button {
         padding: 12px 30px;
         font-size: 1rem;
+    }
+
+    .book-now-btn {
+        padding: 1rem 2rem;
+        font-size: 0.95rem;
+    }
+
+    .booking-cta-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .booking-cta-section > div > p {
+        font-size: 0.95rem;
     }
 
     .hero-subtitle {
@@ -1130,6 +1529,23 @@ section {
     color: var(--text-dark);
     margin-bottom: 2rem;
     text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--secondary-color);
+    letter-spacing: 0.5px;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.category-title::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent-color) 20%, var(--accent-color) 80%, transparent);
 }
 
 .drinks-grid {
@@ -1199,9 +1615,11 @@ section {
  * - Each category has custom grid layout
  * - Cards show drink number, name, ingredients
  * - Gradient backgrounds with hover effects
+ * - Interactive filter buttons for category selection
  * 
  * HOW IT FUNCTIONS:
  * - .cocktails-section contains multiple .drinks-category divs
+ * - .drinks-filters provides toggle buttons for each category
  * - Default .cocktail-grid: repeat(5, 1fr) for 5 columns
  * - .shooters-grid override: repeat(4, 1fr) for 4 columns
  * - .mocktails-grid override: repeat(4, 1fr) but only 4 items (1 row)
@@ -1242,6 +1660,46 @@ section {
     width: 80px;
     height: 3px;
     background: linear-gradient(90deg, transparent, var(--secondary-color) 20%, var(--secondary-color) 80%, transparent);
+}
+
+/* ==================== DRINK FILTERS ==================== */
+/*
+ * Interactive filter buttons to toggle between drink categories
+ * - Helps mobile users navigate through 27+ drinks easily
+ * - Desktop: shows all categories at once
+ * - Mobile: toggle categories to reduce visual clutter
+ */
+.drinks-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+    border: 2px solid transparent;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-btn:hover {
+    background: rgba(221, 0, 0, 0.2);
+    border-color: var(--secondary-color);
+    color: var(--text-dark);
+}
+
+.filter-btn.active {
+    background: var(--secondary-color);
+    color: var(--white);
+    border-color: var(--secondary-color);
+    box-shadow: 0 4px 12px rgba(221, 0, 0, 0.3);
 }
 
 .cocktail-grid {
@@ -1293,11 +1751,20 @@ section {
     line-height: 1.5;
 }
 
+/* Hidden category - show/hide based on filter */
+.drinks-category.hidden {
+    display: none;
+}
+
 /* Responsive Cocktails Grid */
 @media (max-width: 1200px) {
     .cocktail-grid {
         grid-template-columns: repeat(4, 1fr);
         gap: 1.2rem;
+    }
+    
+    .shooters-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -1306,12 +1773,28 @@ section {
         grid-template-columns: repeat(3, 1fr);
         gap: 1rem;
     }
+    
+    .shooters-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .mocktails-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
     .cocktail-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
+    }
+    
+    .shooters-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .mocktails-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .cocktails-section {
@@ -1322,12 +1805,32 @@ section {
         font-size: 2rem;
         margin-bottom: 2rem;
     }
+    
+    /* On mobile, hide shooters and mocktails by default */
+    .drinks-category.shooters-category,
+    .drinks-category.mocktails-category {
+        display: none;
+    }
+    
+    /* Show all when "All Drinks" filter is active */
+    .drinks-category.shooters-category.visible,
+    .drinks-category.mocktails-category.visible {
+        display: block;
+    }
 }
 
 @media (max-width: 480px) {
     .cocktail-grid {
         grid-template-columns: 1fr;
         gap: 0.8rem;
+    }
+    
+    .shooters-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .mocktails-grid {
+        grid-template-columns: 1fr;
     }
 
     .cocktail-item {
@@ -1341,6 +1844,16 @@ section {
     .cocktail-item p {
         font-size: 0.8rem;
     }
+    
+    .drinks-filters {
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .filter-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
 }
 
 /* ==================== PACKAGES SECTION ==================== */
@@ -1349,19 +1862,20 @@ section {
  * - Two service package tiers: Professional and Premium
  * - Each package shows: badge, duration, price, features list, button
  * - Professional package has "Most Popular" featured styling
- * - Feature lists with checkmarks
+ * - Feature lists with checkmarks for visual clarity
+ * - Improved layout with better visual hierarchy
  * 
  * HOW IT FUNCTIONS:
  * - .packages-grid: flexbox or grid with 2 columns
- * - Each .package-card: white background, border, shadow
+ * - Each .package-card: card styling with border, shadow, gradient header
  * - .package-badge: absolute position at top-right corner
- * - .featured class adds gold/special styling to Professional package
+ * - .featured class adds special styling to Professional package
  * - Features <ul> styled with custom checkmark bullets (✓)
- * - .package-btn: call-to-action button at bottom of card
+ * - .package-btn: prominent call-to-action button at bottom of card
  * - Hover on cards: slight scale increase (transform: scale(1.02))
- * - Price displayed prominently in larger font
+ * - Price displayed prominently in larger font with color accent
  * - Responsive: 2 columns stack to 1 column on mobile
- * - Border-radius creates rounded card corners
+ * - Better mobile experience with full-width cards
  */
 .packages-section {
     background: var(--dark-bg);
@@ -1376,9 +1890,414 @@ section {
     margin: 0 auto 3rem;
 }
 
-.packages-grid {
+/* ==================== PACKAGE CATEGORY TABS ==================== */
+/*
+ * Main category navigation between Basic, Premium, and Custom packages
+ * - Top-level tab navigation
+ * - Shows/hides entire package categories
+ */
+.package-category-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.package-nav-btn {
+    padding: 1rem 2.5rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(221, 0, 0, 0.3);
+    border-radius: 10px;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.package-nav-btn:hover {
+    background: rgba(221, 0, 0, 0.15);
+    border-color: var(--secondary-color);
+    color: var(--text-dark);
+}
+
+.package-nav-btn.active {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+    border-color: var(--secondary-color);
+    color: var(--white);
+    box-shadow: 0 8px 20px rgba(221, 0, 0, 0.3);
+}
+
+/* Backward compatibility for old class names */
+.package-category-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.package-category-btn {
+    padding: 1rem 2.5rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(221, 0, 0, 0.3);
+    border-radius: 10px;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.package-category-btn:hover {
+    background: rgba(221, 0, 0, 0.15);
+    border-color: var(--secondary-color);
+    color: var(--text-dark);
+}
+
+.package-category-btn.active {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+    border-color: var(--secondary-color);
+    color: var(--white);
+    box-shadow: 0 8px 20px rgba(221, 0, 0, 0.3);
+}
+
+.package-category-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.package-category-content.active {
+    display: block;
+}
+
+/* ==================== PACKAGE TIERS OVERVIEW ==================== */
+.package-tiers-overview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.tier-overview-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(221, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+}
+
+.tier-overview-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(221, 0, 0, 0.3);
+    border-color: var(--secondary-color);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.tier-overview-card h3 {
+    font-size: 1.8rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.tier-overview-card p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.tier-overview-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+}
+
+.tier-overview-card li {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 0.4rem 0;
+}
+
+.tier-overview-card li:before {
+    content: "✓ ";
+    color: var(--secondary-color);
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.tier-cta-btn {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: var(--transition);
+    font-size: 0.95rem;
+}
+
+.tier-cta-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(221, 0, 0, 0.3);
+}
+
+
+/* ==================== PREMIUM CATEGORY TITLE ==================== */
+.premium-category-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-align: center;
+    margin-bottom: 0.7rem;
+}
+
+.premium-category-desc {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ==================== PACKAGE VARIANTS GRID ==================== */
+/*
+ * Grid layout for package variant cards
+ * - 3 columns on desktop
+ * - 2 columns on tablet
+ * - 1 column on mobile
+ */
+.package-variants-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ==================== PACKAGE VARIANT CARD ==================== */
+/*
+ * Individual package option card with two-tone design
+ * - Large image section at top (60% of card)
+ * - White content section at bottom (40% of card)
+ * - Matches Mixed Mobile Bar professional style
+ */
+.package-variant-card {
+    background: white;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.package-variant-card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    transform: translateY(-6px);
+}
+
+.package-variant-card.premium-variant {
+    background: white;
+    border: none;
+}
+
+.package-variant-card.premium-variant:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+.package-variant-card.featured-variant {
+    transform: none;
+    border: none;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+.package-variant-card.featured-variant:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3);
+}
+
+/* ==================== CARD IMAGE SECTION ==================== */
+.card-image-container {
+    width: 100%;
+    height: 320px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.card-image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 70%, rgba(221, 0, 0, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.card-image-container.featured-image {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    height: 340px;
+}
+
+.card-image-placeholder {
+    font-size: 4rem;
+    color: rgba(221, 0, 0, 0.25);
+    text-align: center;
+    font-weight: 600;
+    z-index: 1;
+    transition: var(--transition);
+}
+
+.card-image-container.featured-image .card-image-placeholder {
+    font-size: 4.5rem;
+    color: rgba(221, 0, 0, 0.3);
+}
+
+.package-variant-card:hover .card-image-placeholder {
+    transform: scale(1.08);
+    color: rgba(221, 0, 0, 0.35);
+}
+
+/* ==================== VARIANT BADGE ==================== */
+.variant-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--secondary-color);
+    color: var(--white);
+    padding: 10px 18px;
+    border-radius: 25px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 6px 15px rgba(221, 0, 0, 0.4);
+    z-index: 10;
+}
+
+/* ==================== VARIANT HEADER ==================== */
+.variant-header {
+    padding: 2rem 2rem 0 2rem;
+}
+
+.variant-header h4 {
+    font-size: 1.6rem;
+    color: #000;
+    margin: 0 0 0.3rem 0;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.guest-count,
+.drink-count {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+/* ==================== VARIANT DETAILS ==================== */
+.variant-details {
+    flex-grow: 1;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.variant-price {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--secondary-color);
+    margin: 0.5rem 0 1.2rem 0;
+    line-height: 1.1;
+}
+
+.variant-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.variant-features li {
+    padding: 0.5rem 0;
+    color: #333;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    border-bottom: none;
+}
+
+.variant-features li:last-child {
+    border-bottom: none;
+    margin-bottom: 0.5rem;
+}
+
+/* ==================== VARIANT BUTTON ==================== */
+.variant-btn {
+    padding: 14px 32px;
+    background: white;
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    align-self: flex-start;
+    margin-top: auto;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+}
+
+.variant-btn:hover {
+    background: var(--secondary-color);
+    color: white;
+    box-shadow: 0 6px 15px rgba(221, 0, 0, 0.3);
+}
+
+.featured-variant-btn {
+    background: var(--secondary-color);
+    color: white;
+    border-color: var(--secondary-color);
+    align-self: flex-start;
+}
+
+.featured-variant-btn:hover {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    box-shadow: 0 8px 20px rgba(221, 0, 0, 0.4);
+}
+
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2.5rem;
     margin-bottom: 4rem;
     max-width: 1200px;
@@ -1394,6 +2313,19 @@ section {
     transition: var(--transition);
     position: relative;
     border-top: 4px solid var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.package-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--secondary-color) 0%, rgba(221, 0, 0, 0.3) 100%);
 }
 
 .package-card:hover {
@@ -1410,8 +2342,11 @@ section {
 }
 
 .package-card.featured {
-    transform: scale(1.05);
     z-index: 10;
+}
+
+.package-card.featured:hover {
+    transform: translateY(-10px);
 }
 
 .package-badge {
@@ -1424,10 +2359,12 @@ section {
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .package-badge.featured-badge {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
     box-shadow: 0 4px 12px rgba(221, 0, 0, 0.3);
 }
 
@@ -1442,45 +2379,54 @@ section {
     color: var(--text-light);
     font-size: 0.95rem;
     margin-bottom: 0.5rem;
+    font-weight: 500;
 }
 
 .package-price {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--secondary-color);
     margin-bottom: 1.5rem;
     padding-bottom: 1.5rem;
     border-bottom: 2px solid #e0e0e0;
+    word-spacing: 100vw;
+}
+
+.package-features {
+    flex-grow: 1;
+    margin-bottom: 2rem;
 }
 
 .package-features h4 {
     font-size: 1rem;
     color: var(--text-dark);
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+    opacity: 0.9;
 }
 
 .package-features ul {
     list-style: none;
     padding: 0;
-    margin-bottom: 2rem;
+    margin-bottom: 0;
 }
 
 .package-features li {
-    padding: 0.6rem 0;
+    padding: 0.75rem 0;
     color: var(--text-light);
     font-size: 0.95rem;
+    line-height: 1.6;
 }
 
 .package-features li::before {
     content: '✓';
     color: #4caf50;
     font-weight: bold;
-    margin-right: 0.7rem;
-}
-
-.package-features li:has-text("✗")::before {
-    content: '✗';
-    color: #f44336;
+    margin-right: 0.8rem;
+    font-size: 1.1rem;
 }
 
 .package-btn {
@@ -1655,8 +2601,32 @@ section {
         transform: scale(1);
     }
 
+    .package-card:hover {
+        transform: translateY(-5px);
+    }
+    
     .packages-grid {
         grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .package-tabs {
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .package-tab-btn {
+        min-width: 200px;
+        padding: 1.2rem 1.5rem;
+        font-size: 0.95rem;
+    }
+    
+    .tab-label {
+        font-size: 1rem;
+    }
+    
+    .tab-price {
+        font-size: 0.85rem;
     }
 
     .drinks-grid,
@@ -1666,10 +2636,66 @@ section {
 
     .category-title {
         font-size: 1.5rem;
+        margin-bottom: 1.5rem;
     }
 
     .cta-section h2 {
         font-size: 1.8rem;
+    }
+    
+    .package-price {
+        font-size: 1.6rem;
+    }
+    
+    .package-card h3 {
+        font-size: 1.4rem;
+    }
+    
+    .filter-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .drinks-filters {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .packages-section {
+        padding: 2rem 1rem;
+    }
+    
+    .package-tabs {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .package-tab-btn {
+        min-width: 100%;
+        padding: 1rem 1.5rem;
+    }
+    
+    .package-card {
+        padding: 1.5rem;
+    }
+    
+    .package-price {
+        font-size: 1.4rem;
+    }
+    
+    .package-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .package-features li {
+        font-size: 0.9rem;
+        padding: 0.5rem 0;
+    }
+    
+    .package-btn {
+        padding: 10px;
+        font-size: 0.95rem;
     }
 }
 
@@ -1860,4 +2886,1957 @@ section {
     .contact-cta p {
         font-size: 1rem;
     }
+    
+    /* Stats Section Responsive */
+    .stats-container {
+        gap: 2rem;
+    }
+    
+    .stat-item {
+        min-width: 150px;
+    }
+    
+    .stat-icon {
+        font-size: 2.5rem;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
+    
+    .stat-label {
+        font-size: 0.9rem;
+    }
+    
+    /* Bar Showcase Responsive */
+    .bar-options-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .bar-option-card {
+        height: 250px;
+    }
+    
+    /* Why Us Section Responsive */
+    .why-us-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .why-card {
+        padding: 2rem;
+    }
+    
+    .why-icon {
+        font-size: 3rem;
+    }
+    
+    /* Hero Section Responsive */
+    .hero-badge {
+        font-size: 0.8rem;
+        padding: 0.4rem 1rem;
+    }
+    
+    .hero-tagline {
+        font-size: 0.95rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .cta-button {
+        width: 100%;
+        text-align: center;
+    }
 }
+
+@media (max-width: 480px) {
+    /* Stats Section Mobile */
+    .stats-container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .stat-item {
+        width: 100%;
+    }
+    
+    /* Bar Showcase Mobile */
+    .bar-options-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .bar-option-card {
+        height: 200px;
+    }
+    
+    .bar-option-overlay {
+        padding: 1.5rem;
+    }
+    
+    .bar-option-overlay h3 {
+        font-size: 1.2rem;
+    }
+}
+
+/* ==================== RESPONSIVE PACKAGE SYSTEM ==================== */
+@media (max-width: 992px) {
+    .package-variants-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+    
+    .card-image-container {
+        height: 280px;
+    }
+    
+    .card-image-container.featured-image {
+        height: 300px;
+    }
+    
+    .card-image-placeholder {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .package-category-nav,
+    .package-category-tabs {
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .package-nav-btn,
+    .package-category-btn {
+        padding: 0.9rem 2rem;
+        font-size: 1rem;
+    }
+    
+    .package-tiers-overview {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .tier-overview-card {
+        padding: 1.5rem;
+    }
+    
+    .tier-overview-card h3 {
+        font-size: 1.5rem;
+    }
+    
+    .package-type-selector {
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .type-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .type-icon {
+        font-size: 1.2rem;
+    }
+    
+    .package-variants-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .card-image-container {
+        height: 220px;
+    }
+    
+    .card-image-container.featured-image {
+        height: 240px;
+    }
+    
+    .card-image-placeholder {
+        font-size: 2.8rem;
+    }
+    
+    .variant-header {
+        padding: 1.5rem 1.5rem 0 1.5rem;
+    }
+    
+    .variant-header h4 {
+        font-size: 1.3rem;
+    }
+    
+    .variant-details {
+        padding: 1rem 1.5rem;
+    }
+    
+    .variant-price {
+        font-size: 1.8rem;
+        margin: 0.3rem 0 1rem 0;
+    }
+    
+    .variant-features li {
+        font-size: 0.85rem;
+        padding: 0.4rem 0;
+    }
+    
+    .variant-btn {
+        padding: 12px 26px;
+        font-size: 0.85rem;
+    }
+    
+    .premium-category-title {
+        font-size: 1.7rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .premium-category-desc {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .package-category-nav,
+    .package-category-tabs {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .package-nav-btn,
+    .package-category-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
+        width: 100%;
+    }
+    
+    .package-tiers-overview {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    
+    .tier-overview-card {
+        padding: 1.2rem;
+    }
+    
+    .tier-overview-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    .tier-cta-btn {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.85rem;
+    }
+    
+    .package-variants-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    
+    .package-variant-card.featured-variant:hover {
+        transform: translateY(-6px);
+    }
+    
+    .card-image-container {
+        height: 180px;
+    }
+    
+    .card-image-container.featured-image {
+        height: 180px;
+    }
+    
+    .card-image-placeholder {
+        font-size: 2.2rem;
+    }
+    
+    .variant-badge {
+        top: 15px;
+        right: 15px;
+        font-size: 0.7rem;
+        padding: 8px 14px;
+    }
+    
+    .variant-header {
+        padding: 1.2rem 1.5rem 0 1.5rem;
+    }
+    
+    .variant-header h4 {
+        font-size: 1.2rem;
+        margin-bottom: 0.2rem;
+    }
+    
+    .guest-count,
+    .drink-count {
+        font-size: 0.75rem;
+    }
+    
+    .variant-details {
+        padding: 0.8rem 1.5rem;
+    }
+    
+    .variant-price {
+        font-size: 1.6rem;
+        margin: 0.2rem 0 0.8rem 0;
+    }
+    
+    .variant-features {
+        margin-bottom: 0.8rem;
+    }
+    
+    .variant-features li {
+        padding: 0.35rem 0;
+        font-size: 0.8rem;
+    }
+    
+    .variant-btn {
+        padding: 12px 24px;
+        font-size: 0.8rem;
+        align-self: flex-start;
+    }
+    
+    .premium-category-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.4rem;
+    }
+    
+    .premium-category-desc {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* ==================== DRINKS SELECTION PAGE ==================== */
+.drinks-selection-container {
+    background: var(--bg-dark);
+    padding: 3rem 2rem;
+}
+
+.selection-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.package-summary-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(221, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    backdrop-filter: blur(10px);
+}
+
+.package-summary-card h2 {
+    font-size: 1.8rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+}
+
+.package-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.package-details p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.package-details p strong {
+    color: var(--secondary-color);
+}
+
+.drinks-selection-form {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(221, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 2.5rem;
+}
+
+.drinks-selection-form h2 {
+    font-size: 2rem;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.selection-intro {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+.drinks-category-section {
+    margin-bottom: 2.5rem;
+}
+
+.category-header {
+    font-size: 1.4rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 2px solid rgba(221, 0, 0, 0.3);
+}
+
+.drinks-checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.2rem;
+}
+
+.drink-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-light);
+}
+
+.drink-checkbox-label:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(221, 0, 0, 0.3);
+}
+
+.drink-checkbox-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--secondary-color);
+}
+
+.drink-checkbox-label input[type="checkbox"]:checked {
+    accent-color: var(--secondary-color);
+}
+
+.drink-checkbox-label span {
+    font-size: 1rem;
+    user-select: none;
+}
+
+.selected-drinks-summary {
+    background: rgba(221, 0, 0, 0.1);
+    border: 2px solid rgba(221, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.selected-drinks-summary h3 {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.selected-drinks-list {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.empty-selection {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.drinks-list-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.drinks-list-items li {
+    background: rgba(221, 0, 0, 0.3);
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    display: inline-block;
+}
+
+.selection-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-between;
+}
+
+.back-btn {
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(221, 0, 0, 0.3);
+    border-radius: 8px;
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-block;
+    text-align: center;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.proceed-btn {
+    padding: 1rem 3rem;
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+    border: none;
+    border-radius: 8px;
+    color: var(--white);
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.proceed-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(221, 0, 0, 0.4);
+}
+
+.proceed-btn:active {
+    transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+    .drinks-selection-form {
+        padding: 1.5rem;
+    }
+
+    .drinks-checkbox-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1rem;
+    }
+
+    .selection-buttons {
+        flex-direction: column;
+    }
+
+    .back-btn,
+    .proceed-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .drinks-selection-container {
+        padding: 1.5rem 1rem;
+    }
+
+    .drinks-selection-form {
+        padding: 1.2rem;
+    }
+
+    .category-header {
+        font-size: 1.2rem;
+    }
+
+    .drinks-checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .package-summary-card {
+        padding: 1.5rem;
+    }
+
+    .drinks-list-items {
+        flex-direction: column;
+    }
+
+    .drinks-list-items li {
+        width: 100%;
+    }
+}
+
+/* ==================== BOOKING PAGE ==================== */
+.booking-container {
+    background: var(--bg-dark);
+    padding: 3rem 2rem;
+}
+
+.booking-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.booking-details-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.booking-summary-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.booking-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(221, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.booking-card h2 {
+    font-size: 1.5rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(221, 0, 0, 0.3);
+    padding-bottom: 1rem;
+}
+
+.booking-summary-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.booking-summary-details p {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
+.booking-summary-details .price {
+    color: var(--secondary-color);
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.booking-summary-details .description {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-style: italic;
+}
+
+.drinks-list {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.drinks-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.drinks-items li {
+    background: rgba(221, 0, 0, 0.2);
+    padding: 0.8rem 1.2rem;
+    border-radius: 6px;
+    border-left: 3px solid var(--secondary-color);
+}
+
+/* CUSTOMIZATION SECTION */
+.customization-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.customization-group {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1.2rem;
+    border-radius: 8px;
+}
+
+.customization-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.customization-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--secondary-color);
+}
+
+.customization-desc {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0.5rem 0 0 2.8rem;
+}
+
+/* PRICE SUMMARY */
+.price-summary {
+    background: rgba(221, 0, 0, 0.08);
+    border: 2px solid rgba(221, 0, 0, 0.3);
+    position: sticky;
+    top: 100px;
+}
+
+.price-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 0;
+    color: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid rgba(221, 0, 0, 0.2);
+}
+
+.price-line.total {
+    border-bottom: none;
+    padding-top: 1rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.price-divider {
+    height: 2px;
+    background: rgba(221, 0, 0, 0.3);
+    margin: 1rem 0;
+}
+
+.proceed-to-contact-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+    border: none;
+    border-radius: 8px;
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 1.5rem;
+}
+
+.proceed-to-contact-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(221, 0, 0, 0.4);
+}
+
+.back-link {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    transition: var(--transition);
+}
+
+.back-link:hover {
+    color: var(--secondary-color);
+}
+
+/* ADD-ONS SECTION */
+.addons-card {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.addon-intro {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem !important;
+}
+
+.addon-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.addon-item {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1.2rem;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    transition: var(--transition);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.addon-item:hover {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: rgba(221, 0, 0, 0.3);
+}
+
+.addon-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    flex: 1;
+}
+
+.addon-header input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--secondary-color);
+    margin-top: 0.2rem;
+}
+
+.addon-info h4 {
+    color: var(--text-light);
+    margin: 0 0 0.3rem 0;
+    font-size: 1rem;
+}
+
+.addon-desc {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.addon-price {
+    color: var(--secondary-color);
+    font-weight: 700;
+    font-size: 1.1rem;
+    white-space: nowrap;
+    margin-left: 1rem;
+}
+
+.empty {
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+}
+
+/* RESPONSIVE BOOKING PAGE */
+@media (max-width: 992px) {
+    .booking-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .price-summary {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .booking-container {
+        padding: 1.5rem 1rem;
+    }
+
+    .booking-card {
+        padding: 1.5rem;
+    }
+
+    .addon-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .addon-price {
+        margin-left: 2.8rem;
+        margin-top: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .booking-card h2 {
+        font-size: 1.3rem;
+    }
+
+    .addon-item {
+        padding: 1rem;
+    }
+
+    .addon-header {
+        width: 100%;
+    }
+
+    .price-summary {
+        margin-top: 2rem;
+    }
+}
+
+/* ========== PAYMENT PAGE STYLING ========== */
+
+.payment-container {
+    background: var(--bg-dark);
+    padding: 3rem 2rem;
+    min-height: calc(100vh - 300px);
+}
+
+.payment-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+/* ORDER SUMMARY SECTION */
+.order-summary-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-summary-card {
+    height: 100%;
+}
+
+.order-summary-card h2 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #dd0000;
+    padding-bottom: 1rem;
+}
+
+.summary-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.summary-section:last-of-type {
+    border-bottom: none;
+}
+
+.summary-section h3 {
+    font-size: 0.9rem;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.summary-text {
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.summary-price {
+    font-size: 1.1rem;
+    color: #ff4444;
+    font-weight: 700;
+}
+
+.summary-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.summary-list li {
+    color: #ddd;
+    padding: 0.4rem 0;
+    font-size: 0.95rem;
+}
+
+.summary-list li.no-addons {
+    color: #888;
+    font-style: italic;
+}
+
+.total-section {
+    background: rgba(255, 68, 68, 0.1);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border-left: 3px solid #dd0000;
+    border-bottom: none;
+}
+
+.total-section h3 {
+    color: #ff4444;
+}
+
+.total-price {
+    font-size: 1.8rem;
+    color: #ff4444;
+    font-weight: 700;
+}
+
+.back-to-booking-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.back-to-booking-link:hover {
+    color: #fff;
+}
+
+/* PAYMENT METHODS SECTION */
+.payment-methods-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-card-main {
+    flex: 1;
+}
+
+.payment-card h2 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid #dd0000;
+    padding-bottom: 1rem;
+}
+
+.payment-intro {
+    color: #aaa;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+/* PAYMENT METHOD OPTIONS */
+.payment-method-option {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.payment-radio {
+    display: none;
+}
+
+.payment-radio:checked + .payment-label {
+    background: rgba(221, 0, 0, 0.15);
+    border: 2px solid #dd0000;
+}
+
+.payment-label {
+    display: block;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.payment-label:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.payment-method-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.payment-icon {
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0.5rem;
+}
+
+.payment-method-info h4 {
+    color: #fff;
+    margin: 0 0 0.3rem 0;
+    font-size: 1rem;
+}
+
+.payment-method-info p {
+    color: #aaa;
+    margin: 0;
+    font-size: 0.85rem;
+}
+
+/* SECURITY INFO */
+.security-info {
+    background: rgba(34, 139, 34, 0.1);
+    border-left: 3px solid #22a822;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+}
+
+.security-info p {
+    color: #a8d5a8;
+    font-size: 0.9rem;
+    margin: 0.3rem 0;
+}
+
+.security-info p:first-child {
+    font-weight: 600;
+}
+
+/* PAYMENT BUTTON */
+.payment-button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #dd0000 0%, #ff4444 100%);
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 1rem;
+}
+
+.payment-button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(221, 0, 0, 0.4);
+}
+
+.payment-button:active {
+    transform: scale(0.98);
+}
+
+/* RESPONSIVE PAYMENT PAGE */
+@media (max-width: 992px) {
+    .payment-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .payment-methods-section {
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .payment-container {
+        padding: 2rem 1rem;
+    }
+
+    .payment-wrapper {
+        gap: 1.5rem;
+    }
+
+    .order-summary-card h2,
+    .payment-card h2 {
+        font-size: 1.3rem;
+    }
+
+    .payment-method-header {
+        gap: 0.75rem;
+    }
+
+    .payment-icon {
+        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
+    }
+
+    .payment-method-info h4 {
+        font-size: 0.95rem;
+    }
+
+    .total-price {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .payment-container {
+        padding: 1.5rem 1rem;
+    }
+
+    .payment-wrapper {
+        gap: 1rem;
+    }
+
+    .order-summary-card h2,
+    .payment-card h2 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .summary-section {
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .payment-label {
+        padding: 0.75rem;
+    }
+
+    .payment-method-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .payment-icon {
+        width: 100%;
+        justify-content: flex-start;
+        margin-left: 0;
+    }
+
+    .total-price {
+        font-size: 1.3rem;
+    }
+
+    .payment-button {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* ========== GCASH QR PAGE STYLING ========== */
+
+.gcash-qr-container {
+    background: var(--bg-dark);
+    padding: 3rem 2rem;
+    min-height: calc(100vh - 300px);
+}
+
+.qr-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.qr-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.qr-card h2 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.qr-instruction {
+    color: #aaa;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+/* QR CODE BOX */
+.qr-code-box {
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(221, 0, 0, 0.4);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.qr-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.qr-module {
+    background: #fff;
+    width: 100%;
+    height: 100%;
+}
+
+.qr-module.blank {
+    background: transparent;
+}
+
+.qr-amount {
+    color: #ff4444;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+/* TIMER SECTION */
+.timer-section {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(221, 0, 0, 0.08);
+    border-left: 3px solid #dd0000;
+    border-radius: 0.5rem;
+}
+
+.timer-text {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.timer-display {
+    font-size: 2.5rem;
+    color: #ff4444;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 0.5rem;
+}
+
+.timer-subtitle {
+    color: #888;
+    font-size: 0.8rem;
+}
+
+/* PAYMENT INSTRUCTIONS */
+.payment-instructions {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.payment-instructions h3 {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.payment-instructions ol {
+    list-style-position: inside;
+    padding-left: 0;
+}
+
+.payment-instructions li {
+    color: #ddd;
+    margin-bottom: 0.6rem;
+    line-height: 1.5;
+}
+
+/* CONTINUE BUTTON */
+.continue-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #dd0000 0%, #ff4444 100%);
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+}
+
+.continue-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(221, 0, 0, 0.4);
+}
+
+.continue-btn:active {
+    transform: scale(0.98);
+}
+
+/* ========== PAYMENT PROOF PAGE STYLING ========== */
+
+.payment-proof-container {
+    background: var(--bg-dark);
+    padding: 3rem 2rem;
+    min-height: calc(100vh - 300px);
+}
+
+.proof-wrapper {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.proof-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.proof-card h2 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.proof-subtitle {
+    color: #aaa;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+/* FILE UPLOAD SECTION */
+.upload-section {
+    margin-bottom: 2rem;
+}
+
+.file-input-wrapper {
+    position: relative;
+}
+
+.file-input {
+    display: none;
+}
+
+.file-label {
+    display: block;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.file-label:hover {
+    border-color: rgba(221, 0, 0, 0.4);
+    background: rgba(221, 0, 0, 0.05);
+}
+
+.upload-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.upload-text {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.upload-hint {
+    color: #888;
+    font-size: 0.85rem;
+}
+
+/* PREVIEW */
+.preview-container {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 0.5rem;
+}
+
+.preview-label {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.preview-image {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.remove-file-btn {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 68, 68, 0.2);
+    color: #ff4444;
+    border: 1px solid #ff4444;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.remove-file-btn:hover {
+    background: rgba(255, 68, 68, 0.3);
+}
+
+/* PAYMENT SUMMARY */
+.payment-summary {
+    background: rgba(221, 0, 0, 0.08);
+    border-left: 3px solid #dd0000;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.payment-summary h3 {
+    color: #ff4444;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    color: #ddd;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.summary-row .amount {
+    color: #ff4444;
+    font-weight: 700;
+}
+
+/* REQUIREMENTS */
+.requirements {
+    background: rgba(34, 139, 34, 0.08);
+    border-left: 3px solid #22a822;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.requirements h3 {
+    color: #22a822;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.requirements ul {
+    list-style: none;
+    padding: 0;
+}
+
+.requirements li {
+    color: #a8d5a8;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+/* SUBMIT BUTTON */
+.submit-proof-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #dd0000 0%, #ff4444 100%);
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.submit-proof-btn:hover:not(:disabled) {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(221, 0, 0, 0.4);
+}
+
+.submit-proof-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ========== CONFIRMATION PAGE STYLING ========== */
+
+.confirmation-container {
+    background: var(--bg-dark);
+    padding: 3rem 2rem;
+    min-height: calc(100vh - 300px);
+}
+
+.confirmation-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 2rem;
+    background: linear-gradient(135deg, #22a822 0%, #44dd44 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #fff;
+    animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.confirmation-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 2.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.confirmation-card h1 {
+    font-size: 2rem;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.confirmation-subtitle {
+    color: #aaa;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+/* VERIFICATION TIMER */
+.verification-timer {
+    background: rgba(34, 139, 34, 0.1);
+    border: 2px solid rgba(34, 139, 34, 0.3);
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.timer-label {
+    color: #aaa;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.timer-display-large {
+    font-size: 3rem;
+    color: #22a822;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 0.5rem;
+}
+
+.timer-info {
+    color: #a8d5a8;
+    font-size: 0.9rem;
+}
+
+/* BOOKING DETAILS */
+.booking-details {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.8rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.booking-details h3 {
+    color: #fff;
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+.detail-value {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.detail-value.amount {
+    color: #ff4444;
+    font-size: 1.1rem;
+}
+
+.status-processing {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ffa500;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #ffa500;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* WHAT TO EXPECT */
+.what-to-expect {
+    margin-bottom: 2rem;
+}
+
+.what-to-expect h3 {
+    color: #fff;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.expectation-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+}
+
+.expectation-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+}
+
+.expectation-item:hover {
+    border-left-color: #dd0000;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.expectation-icon {
+    font-size: 1.8rem;
+    min-width: 50px;
+    text-align: center;
+}
+
+.expectation-item h4 {
+    color: #fff;
+    margin: 0 0 0.3rem 0;
+    font-size: 0.95rem;
+}
+
+.expectation-item p {
+    color: #aaa;
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+/* NEXT STEPS */
+.next-steps {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.8rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.next-steps h3 {
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.next-steps ul {
+    list-style: none;
+    padding: 0;
+}
+
+.next-steps li {
+    color: #ddd;
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.next-steps strong {
+    color: #ff4444;
+}
+
+/* CONFIRMATION ACTIONS */
+.confirmation-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.confirm-btn {
+    padding: 1rem;
+    background: linear-gradient(135deg, #dd0000 0%, #ff4444 100%);
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(221, 0, 0, 0.4);
+}
+
+.secondary-btn {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* SUPPORT INFO */
+.support-info {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.8rem;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.support-info p {
+    color: #aaa;
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+}
+
+.contact-details {
+    color: #ddd !important;
+    margin-top: 1rem;
+}
+
+.contact-details a {
+    color: #ff4444;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.contact-details a:hover {
+    color: #ff6666;
+}
+
+/* RESPONSIVE GCASH PAGES */
+@media (max-width: 768px) {
+    .qr-card {
+        padding: 1.5rem;
+    }
+
+    .timer-display {
+        font-size: 2rem;
+    }
+
+    .confirmation-card {
+        padding: 1.5rem;
+    }
+
+    .confirmation-card h1 {
+        font-size: 1.5rem;
+    }
+
+    .timer-display-large {
+        font-size: 2rem;
+    }
+
+    .expectation-list {
+        grid-template-columns: 1fr;
+    }
+
+    .confirmation-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .qr-card,
+    .proof-card,
+    .confirmation-card {
+        padding: 1.25rem;
+    }
+
+    .qr-code-box {
+        padding: 1.5rem;
+    }
+
+    .timer-display {
+        font-size: 1.8rem;
+    }
+
+    .confirmation-card h1 {
+        font-size: 1.3rem;
+    }
+
+    .timer-display-large {
+        font-size: 1.8rem;
+    }
+
+    .continue-btn,
+    .submit-proof-btn,
+    .confirm-btn,
+    .secondary-btn {
+        padding: 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    .expectation-item {
+        padding: 0.75rem;
+        gap: 0.75rem;
+    }
+
+    .expectation-icon {
+        font-size: 1.5rem;
+    }
+
+    .expectation-item h4 {
+        font-size: 0.85rem;
+    }
+}
+

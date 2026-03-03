@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Proof - JiggerOnTheMix</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.5rem;">
+                    <img src="logo.png" alt="JiggerOnTheMix" class="logo-img">
+                    <span class="logo-text">JiggerOnTheMix</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#events" class="nav-link">Events</a></li>
+                <li><a href="bartenders.html" class="nav-link">Bartenders</a></li>
+                <li><a href="drinks-packages.html" class="nav-link">Packages</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section package-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Submit Payment Proof</h1>
+            <p class="hero-subtitle">Upload a screenshot of your GCash confirmation</p>
+        </div>
+    </section>
+
+    <!-- PAYMENT PROOF CONTAINER -->
+    <section class="payment-proof-container">
+        <div class="proof-wrapper">
+            <div class="proof-card">
+                <h2>Upload Payment Screenshot</h2>
+                <p class="proof-subtitle">Please attach a screenshot showing your successful GCash transaction confirmation</p>
+
+                <!-- FILE UPLOAD SECTION -->
+                <div class="upload-section">
+                    <div class="file-input-wrapper">
+                        <input type="file" id="proofFile" accept="image/*" class="file-input">
+                        <label for="proofFile" class="file-label">
+                            <div class="upload-icon">📸</div>
+                            <p class="upload-text">Click to upload payment screenshot</p>
+                            <p class="upload-hint">PNG, JPG, or GIF (Max 5MB)</p>
+                        </label>
+                    </div>
+
+                    <!-- PREVIEW -->
+                    <div id="previewContainer" class="preview-container" style="display: none;">
+                        <p class="preview-label">Preview:</p>
+                        <img id="previewImage" src="" alt="Payment Screenshot Preview" class="preview-image">
+                        <button class="remove-file-btn" id="removeFileBtn">✕ Remove</button>
+                    </div>
+                </div>
+
+                <!-- PAYMENT DETAILS SUMMARY -->
+                <div class="payment-summary">
+                    <h3>Payment Details</h3>
+                    <div class="summary-row">
+                        <span>Total Amount:</span>
+                        <span class="amount" id="summaryAmount">₱7,000</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Payment Method:</span>
+                        <span>GCash</span>
+                    </div>
+                </div>
+
+                <!-- REQUIREMENTS -->
+                <div class="requirements">
+                    <h3>Requirements for valid proof:</h3>
+                    <ul>
+                        <li>✓ GCash transaction confirmation screen visible</li>
+                        <li>✓ Transaction date and time clearly shown</li>
+                        <li>✓ Amount must match booking total</li>
+                        <li>✓ Transaction reference number visible (optional but helpful)</li>
+                    </ul>
+                </div>
+
+                <!-- SUBMIT BUTTON -->
+                <button class="submit-proof-btn" id="submitProofBtn" disabled>Submit Payment Proof</button>
+
+                <a href="gcash-qr.html" class="back-link">← Back</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About JiggerOnTheMix</h4>
+                <p>Premium mobile bar service specializing in elevating your events with professional mixology, expert bartenders, and unforgettable experiences.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#events">Recent Events</a></li>
+                    <li><a href="bartenders.html">Our Bartenders</a></li>
+                    <li><a href="drinks-packages.html">Drinks & Packages</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/share/16U9SrDSPY/?mibextid=wwXIfr">Facebook</a>
+                    <a href="https://www.instagram.com/jigger_onthemix?igsh=cWJkdjR1anVxdXBv">Instagram</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <p>Get updates on new packages and event specials</p>
+                <input type="email" placeholder="Your email" class="newsletter-input">
+                <button class="newsletter-btn">Subscribe</button>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 JiggerOnTheMix. All rights reserved. Licensed & Insured.</p>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="gcash-payment-proof.js"></script>
+</body>
+</html>

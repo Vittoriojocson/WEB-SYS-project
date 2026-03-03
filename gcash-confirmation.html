@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation - JiggerOnTheMix</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.5rem;">
+                    <img src="logo.png" alt="JiggerOnTheMix" class="logo-img">
+                    <span class="logo-text">JiggerOnTheMix</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#events" class="nav-link">Events</a></li>
+                <li><a href="bartenders.html" class="nav-link">Bartenders</a></li>
+                <li><a href="drinks-packages.html" class="nav-link">Packages</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONFIRMATION CONTAINER -->
+    <section class="confirmation-container">
+        <div class="confirmation-wrapper">
+            <!-- SUCCESS ICON -->
+            <div class="success-icon">✓</div>
+
+            <!-- MAIN MESSAGE -->
+            <div class="confirmation-card">
+                <h1>Thank You for Your Booking!</h1>
+                <p class="confirmation-subtitle">Your payment has been received and is being verified</p>
+
+                <!-- COUNTDOWN TIMER -->
+                <div class="verification-timer">
+                    <p class="timer-label">Confirmation arriving in:</p>
+                    <div class="timer-display-large" id="confirmationTimer">10:00</div>
+                    <p class="timer-info">via Email & SMS</p>
+                </div>
+
+                <!-- BOOKING DETAILS -->
+                <div class="booking-details">
+                    <h3>Booking Summary</h3>
+                    
+                    <div class="detail-row">
+                        <span class="detail-label">Order Total:</span>
+                        <span class="detail-value amount" id="detailAmount">₱7,000</span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-label">Payment Method:</span>
+                        <span class="detail-value">GCash</span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-label">Status:</span>
+                        <span class="detail-value status-processing">
+                            <span class="status-dot"></span> Processing
+                        </span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-label">Submitted At:</span>
+                        <span class="detail-value" id="submittedTime">Just now</span>
+                    </div>
+                </div>
+
+                <!-- WHAT TO EXPECT -->
+                <div class="what-to-expect">
+                    <h3>What to expect:</h3>
+                    <div class="expectation-list">
+                        <div class="expectation-item">
+                            <span class="expectation-icon">📧</span>
+                            <div>
+                                <h4>Email Confirmation</h4>
+                                <p>Within 10 minutes, check your email for booking confirmation details</p>
+                            </div>
+                        </div>
+
+                        <div class="expectation-item">
+                            <span class="expectation-icon">📱</span>
+                            <div>
+                                <h4>Text Message (SMS)</h4>
+                                <p>You'll also receive a text message with your booking reference number</p>
+                            </div>
+                        </div>
+
+                        <div class="expectation-item">
+                            <span class="expectation-icon">🚀</span>
+                            <div>
+                                <h4>Event Planning</h4>
+                                <p>Our team will be in touch to finalize event details and confirm date/time</p>
+                            </div>
+                        </div>
+
+                        <div class="expectation-item">
+                            <span class="expectation-icon">✨</span>
+                            <div>
+                                <h4>Get Ready</h4>
+                                <p>Sit back and relax! We'll handle the rest and make your event amazing</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEXT STEPS -->
+                <div class="next-steps">
+                    <h3>Important Notes:</h3>
+                    <ul>
+                        <li>Your booking is <strong>pending verification</strong> until we confirm payment receipt</li>
+                        <li>If you don't receive confirmation within <strong>15 minutes</strong>, please contact us</li>
+                        <li>Keep your booking reference number safe for future communications</li>
+                        <li>You can manage or modify your booking through the confirmation email</li>
+                    </ul>
+                </div>
+
+                <!-- ACTION BUTTONS -->
+                <div class="confirmation-actions">
+                    <a href="index.html#home" class="confirm-btn">Back to Home</a>
+                    <a href="index.html#contact" class="secondary-btn">Contact Us</a>
+                </div>
+
+                <!-- SUPPORT INFO -->
+                <div class="support-info">
+                    <p>Questions? Need to reach us quickly?</p>
+                    <p class="contact-details">
+                        <strong>WhatsApp:</strong> <a href="https://wa.me/1234567890">Message us</a> | 
+                        <strong>Call:</strong> 0917-123-4567 | 
+                        <strong>Email:</strong> <a href="mailto:booking@jiggeronthemix.com">booking@jiggeronthemix.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About JiggerOnTheMix</h4>
+                <p>Premium mobile bar service specializing in elevating your events with professional mixology, expert bartenders, and unforgettable experiences.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#events">Recent Events</a></li>
+                    <li><a href="bartenders.html">Our Bartenders</a></li>
+                    <li><a href="drinks-packages.html">Drinks & Packages</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/share/16U9SrDSPY/?mibextid=wwXIfr">Facebook</a>
+                    <a href="https://www.instagram.com/jigger_onthemix?igsh=cWJkdjR1anVxdXBv">Instagram</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <p>Get updates on new packages and event specials</p>
+                <input type="email" placeholder="Your email" class="newsletter-input">
+                <button class="newsletter-btn">Subscribe</button>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 JiggerOnTheMix. All rights reserved. Licensed & Insured.</p>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="gcash-confirmation.js"></script>
+</body>
+</html>

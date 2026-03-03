@@ -77,13 +77,56 @@
     -->
     <section id="home" class="hero">
         <div class="hero-content">
+            <p class="hero-badge">🏆 The Philippines' Premier Mobile Bar Since 2020</p>
             <h1 class="hero-title">JiggerOnTheMix</h1>
             <p class="hero-subtitle">Premium Mobile Bar Service for Your Events</p>
-            <!-- Call-to-action button - scrolls to contact section -->
-            <a href="#contact" class="cta-button">Book Now</a>
+            <p class="hero-tagline">Creating Unforgettable Experiences • Professional Bartenders • Premium Spirits</p>
+            <!-- Call-to-action buttons -->
+            <div class="hero-buttons">
+                <a href="drinks-packages.html" class="cta-button primary">Book Now</a>
+                <a href="drinks-packages.html" class="cta-button secondary">View Packages</a>
+            </div>
         </div>
         <!-- Animated wave background element -->
         <div class="hero-background"></div>
+    </section>
+
+    <!-- 
+        STATS/SOCIAL PROOF SECTION
+        KEY FEATURES:
+        - Quick credibility indicators
+        - Shows experience, events served, and client satisfaction
+        - Eye-catching numbers with icons
+        
+        HOW IT FUNCTIONS:
+        - .stats-section uses flexbox for horizontal layout
+        - Each .stat-item contains icon, number, and label
+        - Numbers are emphasized with larger font and color
+        - Responsive: stacks vertically on mobile
+    -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-item">
+                <span class="stat-icon">🎯</span>
+                <h3 class="stat-number">500+</h3>
+                <p class="stat-label">Events Served</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">⭐</span>
+                <h3 class="stat-number">6+</h3>
+                <p class="stat-label">Years Experience</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">😊</span>
+                <h3 class="stat-number">100%</h3>
+                <p class="stat-label">Client Satisfaction</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">🍸</span>
+                <h3 class="stat-number">27+</h3>
+                <p class="stat-label">Signature Drinks</p>
+            </div>
+        </div>
     </section>
 
     <!-- 
@@ -136,6 +179,113 @@
                 <p>Party mobile bar with mixologists, craft cocktails, and an energetic atmosphere to celebrate in style.</p>
                 <p class="event-date">📅 August 10, 2025</p>
                 <button class="event-btn">View Details</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+        BAR SETUP SHOWCASE SECTION
+        KEY FEATURES:
+        - Visual showcase of different bar lighting/setup options
+        - Inspired by Mixed Mobile Bar's "Choose Your Bar" section
+        - Shows customization options available to clients
+        - Grid layout with hover effects
+        
+        HOW IT FUNCTIONS:
+        - .bar-showcase uses CSS Grid for card layout
+        - Each .bar-option card has gradient background representing lighting
+        - Hover effects reveal setup details
+        - Visual differentiation between classic and premium options
+        - Click to view more details or select for booking
+    -->
+    <section id="bar-setups" class="bar-showcase">
+        <h2 class="section-title">Choose Your Bar Setup</h2>
+        <p class="section-subtitle">Customizable mobile bar designs with LED lighting to match your event theme</p>
+        <div class="bar-options-grid">
+            <!-- Classic White Setup -->
+            <div class="bar-option-card" data-setup="warm-white">
+                <div class="bar-option-overlay">
+                    <h3>Classic White</h3>
+                    <p>Elegant warm white lighting for sophisticated events</p>
+                    <span class="bar-tag">Popular</span>
+                </div>
+            </div>
+            <!-- Blue Light Setup -->
+            <div class="bar-option-card" data-setup="blue">
+                <div class="bar-option-overlay">
+                    <h3>Blue Elegance</h3>
+                    <p>Modern blue LED lighting for contemporary vibes</p>
+                    <span class="bar-tag">Trendy</span>
+                </div>
+            </div>
+            <!-- Pink/Red Setup -->
+            <div class="bar-option-card" data-setup="pink">
+                <div class="bar-option-overlay">
+                    <h3>Pink Passion</h3>
+                    <p>Romantic pink accent for weddings & celebrations</p>
+                    <span class="bar-tag">Romantic</span>
+                </div>
+            </div>
+            <!-- Premium Black Setup -->
+            <div class="bar-option-card" data-setup="black">
+                <div class="bar-option-overlay">
+                    <h3>Premium Black</h3>
+                    <p>Sleek black finish for upscale corporate events</p>
+                    <span class="bar-tag">Premium</span>
+                </div>
+            </div>
+        </div>
+        <div class="bar-cta">
+            <a href="drinks-packages.html" class="cta-button">Customize Your Bar</a>
+        </div>
+    </section>
+
+    <!-- 
+        WHY CHOOSE US SECTION
+        KEY FEATURES:
+        - Highlights unique selling propositions
+        - Differentiates from competitors
+        - Builds trust and credibility
+        - Inspired by Mixed Mobile Bar's "Why Us?" section
+        
+        HOW IT FUNCTIONS:
+        - .why-us-section contains grid of feature cards
+        - Each card emphasizes a key benefit
+        - Icons and bold typography draw attention
+        - Professional layout establishes authority
+    -->
+    <section id="why-us" class="why-us-section">
+        <h2 class="section-title">Why Choose JiggerOnTheMix?</h2>
+        <div class="why-us-grid">
+            <div class="why-card">
+                <div class="why-icon">🎓</div>
+                <h3>Certified Professionals</h3>
+                <p>All our bartenders are certified, trained, and experienced in high-end event service</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">💎</div>
+                <h3>Premium Ingredients</h3>
+                <p>We use only top-shelf spirits, fresh ingredients, and craft mixers for every drink</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🎨</div>
+                <h3>Custom Packages</h3>
+                <p>Flexible packages tailored to your event size, theme, and budget requirements</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🚚</div>
+                <h3>Full Setup Included</h3>
+                <p>Complete mobile bar setup, teardown, and cleaning - you do nothing but enjoy</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">⚡</div>
+                <h3>Quick Response</h3>
+                <p>Fast quote turnaround and responsive communication throughout your booking</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🛡️</div>
+                <h3>Fully Insured</h3>
+                <p>Licensed, insured, and compliant with all safety regulations for your peace of mind</p>
             </div>
         </div>
     </section>
@@ -197,6 +347,47 @@
                 <h3>Flexible Packages</h3>
                 <p>Customizable service packages from 2-hour events to full-day celebrations with various budget options.</p>
             </div>
+        </div>
+    </section>
+
+    <!-- 
+        BOOK NOW SECTION
+        KEY FEATURES:
+        - Mid-page call-to-action to encourage bookings
+        - Large button with eye-catching design
+        - Grid of 3 quick benefit callouts before main CTA
+        
+        HOW IT FUNCTIONS:
+        - .booking-cta-section provides prominent visual break
+        - 3-column grid (.booking-benefits) showcases quick value props
+        - Main .book-now-cta button links to drinks-packages.html
+        - Gradient background and hover effects draw attention
+        - Responsive: benefits stack to 1 column on mobile
+    -->
+    <section class="booking-cta-section">
+        <div class="booking-cta-content">
+            <h2>Ready to Elevate Your Event?</h2>
+            <p>Browse our packages, select your favorite drinks, and customize your booking in just a few clicks</p>
+            
+            <div class="booking-benefits">
+                <div class="benefit-item">
+                    <span class="benefit-icon">⚡</span>
+                    <h4>Quick & Easy</h4>
+                    <p>Simple booking process in under 5 minutes</p>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">💎</span>
+                    <h4>Customizable</h4>
+                    <p>Choose drinks, add-ons, and customizations</p>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">🎉</span>
+                    <h4>Flexible Pricing</h4>
+                    <p>See exact prices before you commit</p>
+                </div>
+            </div>
+
+            <a href="drinks-packages.html" class="cta-button book-now-btn">Start Booking Now</a>
         </div>
     </section>
 

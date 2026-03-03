@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Your Drinks - JiggerOnTheMix</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.5rem;">
+                    <img src="logo.png" alt="JiggerOnTheMix" class="logo-img">
+                    <span class="logo-text">JiggerOnTheMix</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#events" class="nav-link">Events</a></li>
+                <li><a href="bartenders.html" class="nav-link">Bartenders</a></li>
+                <li><a href="drinks-packages.html" class="nav-link">Packages</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section package-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Select Your Drinks</h1>
+            <p class="hero-subtitle" id="packageSubtitle">Choose your favorite beverages for your event</p>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <section class="drinks-selection-container">
+        <div class="selection-wrapper">
+            <!-- PACKAGE SUMMARY -->
+            <div class="package-summary-card" id="packageSummary">
+                <h2>Your Selected Package</h2>
+                <div class="package-details">
+                    <p><strong id="packageName">Basic - Small Event</strong></p>
+                    <p id="packagePrice">₱6,500 - 8,500</p>
+                    <p id="packageDesc">Perfect for intimate gatherings (50-100 Pax)</p>
+                </div>
+            </div>
+
+            <!-- DRINKS SELECTION -->
+            <div class="drinks-selection-form">
+                <h2>Available Drinks</h2>
+                <p class="selection-intro">Select the drinks you'd like included in your package</p>
+
+                <!-- COCKTAILS SECTION -->
+                <div class="drinks-category-section">
+                    <h3 class="category-header">🍹 Signature Cocktails</h3>
+                    <div class="drinks-checkbox-grid" id="cocktailsSection">
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="Mojito" data-category="cocktails">
+                            <span>Mojito</span>
+                        </label>
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="Margarita" data-category="cocktails">
+                            <span>Margarita</span>
+                        </label>
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="Piña Colada" data-category="cocktails">
+                            <span>Piña Colada</span>
+                        </label>
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="Daiquiri" data-category="cocktails">
+                            <span>Daiquiri</span>
+                        </label>
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="Old Fashioned" data-category="cocktails">
+                            <span>Old Fashioned</span>
+                        </label>
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="Manhattan" data-category="cocktails">
+                            <span>Manhattan</span>
+                        </label>
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="Negroni" data-category="cocktails">
+                            <span>Negroni</span>
+                        </label>
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="Sazerac" data-category="cocktails">
+                            <span>Sazerac</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- SHOTS SECTION -->
+                <div class="drinks-category-section">
+                    <h3 class="category-header">🥃 Shots</h3>
+                    <div class="drinks-checkbox-grid" id="shotsSection">
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="Tequila Shot" data-category="shots">
+                            <span>Tequila Shot</span>
+                        </label>
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="Jäger Bomb" data-category="shots">
+                            <span>Jäger Bomb</span>
+                        </label>
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="Kamikaze" data-category="shots">
+                            <span>Kamikaze</span>
+                        </label>
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="B-52" data-category="shots">
+                            <span>B-52</span>
+                        </label>
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="Irish Car Bomb" data-category="shots">
+                            <span>Irish Car Bomb</span>
+                        </label>
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="Patron Silver" data-category="shots">
+                            <span>Patron Silver</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- MOCKTAILS SECTION -->
+                <div class="drinks-category-section">
+                    <h3 class="category-header">🥤 Mocktails</h3>
+                    <div class="drinks-checkbox-grid" id="mocktailsSection">
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="Virgin Mojito" data-category="mocktails">
+                            <span>Virgin Mojito</span>
+                        </label>
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="Shirley Temple" data-category="mocktails">
+                            <span>Shirley Temple</span>
+                        </label>
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="Cucumber Cooler" data-category="mocktails">
+                            <span>Cucumber Cooler</span>
+                        </label>
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="Lemonade Punch" data-category="mocktails">
+                            <span>Lemonade Punch</span>
+                        </label>
+                        <label class="drink-checkbox-label">
+                            <input type="checkbox" class="drink-checkbox" value="Virgin Piña Colada" data-category="mocktails">
+                            <span>Virgin Piña Colada</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- SELECTED DRINKS SUMMARY -->
+                <div class="selected-drinks-summary">
+                    <h3>Selected Drinks</h3>
+                    <div id="selectedDrinksList" class="selected-drinks-list">
+                        <p class="empty-selection">No drinks selected yet</p>
+                    </div>
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="selection-buttons">
+                    <a href="drinks-packages.html" class="back-btn">← Back to Packages</a>
+                    <button class="proceed-btn" id="proceedBtn">Proceed to Booking</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About JiggerOnTheMix</h4>
+                <p>Premium mobile bar service specializing in elevating your events with professional mixology, expert bartenders, and unforgettable experiences.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#events">Recent Events</a></li>
+                    <li><a href="bartenders.html">Our Bartenders</a></li>
+                    <li><a href="drinks-packages.html">Drinks & Packages</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/share/16U9SrDSPY/?mibextid=wwXIfr">Facebook</a>
+                    <a href="https://www.instagram.com/jigger_onthemix?igsh=cWJkdjR1anVxdXBv">Instagram</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <p>Get updates on new packages and event specials</p>
+                <input type="email" placeholder="Your email" class="newsletter-input">
+                <button class="newsletter-btn">Subscribe</button>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 JiggerOnTheMix. All rights reserved. Licensed & Insured.</p>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="drinks-selection.js"></script>
+</body>
+</html>

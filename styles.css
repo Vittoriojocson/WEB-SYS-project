@@ -2010,7 +2010,7 @@ section {
  * - Matches Mixed Mobile Bar professional style
  */
 .package-variant-card {
-    background: white;
+    background: #000;
     border: none;
     border-radius: 12px;
     overflow: hidden;
@@ -2027,7 +2027,7 @@ section {
 }
 
 .package-variant-card.premium-variant {
-    background: white;
+    background: #000;
     border: none;
 }
 
@@ -2118,7 +2118,7 @@ section {
 
 .variant-header h4 {
     font-size: 1.6rem;
-    color: #000;
+    color: #fff;
     margin: 0 0 0.3rem 0;
     font-weight: 700;
     line-height: 1.2;
@@ -2151,6 +2151,29 @@ section {
     line-height: 1.1;
 }
 
+.variant-price-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #aaa;
+    margin-bottom: 0.8rem;
+}
+
+.variant-pricing-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+}
+
+.variant-pricing-list li {
+    padding: 0.4rem 0;
+    color: #ccc;
+    border-bottom: none;
+}
+
 .variant-features {
     list-style: none;
     padding: 0;
@@ -2160,7 +2183,7 @@ section {
 
 .variant-features li {
     padding: 0.5rem 0;
-    color: #333;
+    color: #ccc;
     font-size: 0.9rem;
     line-height: 1.6;
     border-bottom: none;

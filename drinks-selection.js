@@ -10,6 +10,41 @@
 
 // Package information database
 const packageDatabase = {
+    'unlimited-4hr': {
+        name: '4hrs Unlimited Drink',
+        tier: 'Premium',
+        price: '₱7,000 - ₱50,000',
+        description: 'Cocktails, Shooters & Mocktails (30-500 Pax)',
+        features: '4-6 Cocktails and Shooters, 1-2 Mocktails, Freebies Included'
+    },
+    'consumable-100': {
+        name: '3hrs Service - 100 Drinks',
+        tier: 'Basic',
+        price: '₱6,000',
+        description: 'Consumable Drink Package (100 Drinks Total)',
+        features: '3 Hours Service, Choice of 3 Cocktails, 2 Shooters, 1 Mocktail'
+    },
+    'consumable-150': {
+        name: '3hrs Service - 150 Drinks',
+        tier: 'Basic',
+        price: '₱7,000',
+        description: 'Consumable Drink Package (150 Drinks Total)',
+        features: '3 Hours Service, Choice of 3 Cocktails, 2 Shooters, 1 Mocktail'
+    },
+    'consumable-200': {
+        name: '3hrs Service - 200 Drinks',
+        tier: 'Basic',
+        price: '₱8,000',
+        description: 'Consumable Drink Package (200 Drinks Total)',
+        features: '3 Hours Service, Choice of 3 Cocktails, 2 Shooters, 1 Mocktail'
+    },
+    'consumable-300': {
+        name: '3hrs Service - 300 Drinks',
+        tier: 'Basic',
+        price: '₱10,000',
+        description: 'Consumable Drink Package (300 Drinks Total)',
+        features: '3 Hours Service, Choice of 3 Cocktails, 2 Shooters, 1 Mocktail'
+    },
     'small-basic': {
         name: 'Small Event',
         tier: 'Basic',

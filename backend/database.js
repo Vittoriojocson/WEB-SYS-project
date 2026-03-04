@@ -115,6 +115,12 @@ export function initializeDatabase() {
             guest_count INTEGER,
             price_quote REAL,
             status TEXT DEFAULT 'pending',
+            payment_proof TEXT,
+            payment_method TEXT,
+            customer_email TEXT,
+            customer_name TEXT,
+            approved_at DATETIME,
+            verification_sent INTEGER DEFAULT 0,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (contact_id) REFERENCES contact_messages(id)
         )
@@ -133,17 +139,63 @@ export function initializeDatabase() {
         )
     `;
 
+    // Customer Orders Table
+    const createCustomerOrdersTable = `
+        CREATE TABLE IF NOT EXISTS customer_orders (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_name TEXT NOT NULL,
+            customer_email TEXT NOT NULL,
+            customer_phone TEXT,
+            event_location TEXT NOT NULL,
+            city TEXT,
+            province TEXT,
+            postal_code TEXT,
+            package_id TEXT NOT NULL,
+            package_name TEXT NOT NULL,
+            package_price TEXT,
+            selected_drinks TEXT NOT NULL,
+            guest_count INTEGER,
+            event_date DATETIME,
+            event_time TEXT,
+            special_requests TEXT,
+            status TEXT DEFAULT 'pending',
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            notes TEXT
+        )
+    `;
+
     // Create all tables
     const tables = [
         createContactTable,
         createNewsletterTable,
         createBookingsTable,
-        createEmailLogTable
+        createEmailLogTable,
+        createCustomerOrdersTable
     ];
 
     tables.forEach((sql) => {
         database.run(sql, (err) => {
             if (err) console.error('Table creation error:', err);
+        });
+    });
+
+    // Migrate existing bookings table to add new columns (if they don't exist)
+    const migrations = [
+        `ALTER TABLE bookings ADD COLUMN payment_proof TEXT`,
+        `ALTER TABLE bookings ADD COLUMN payment_method TEXT`,
+        `ALTER TABLE bookings ADD COLUMN customer_email TEXT`,
+        `ALTER TABLE bookings ADD COLUMN customer_name TEXT`,
+        `ALTER TABLE bookings ADD COLUMN approved_at DATETIME`,
+        `ALTER TABLE bookings ADD COLUMN verification_sent INTEGER DEFAULT 0`,
+        `ALTER TABLE customer_orders ADD COLUMN event_time TEXT`
+    ];
+
+    migrations.forEach((sql) => {
+        database.run(sql, (err) => {
+            // Ignore error if column already exists
+            if (err && !err.message.includes('duplicate column name')) {
+                console.error('Migration error:', err.message);
+            }
         });
     });
 

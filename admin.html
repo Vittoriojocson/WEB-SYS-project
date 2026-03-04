@@ -4,267 +4,948 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - JiggerOnTheMix</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Admin-specific overrides and additions */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            background: var(--primary-color);
         }
 
-        .container {
+        .admin-navbar {
+            background: rgba(0, 0, 0, 0.95);
+            border-bottom: 2px solid var(--secondary-color);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .admin-navbar .navbar-container {
             max-width: 1400px;
             margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        h1 {
-            color: white;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2.5em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        .admin-title {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            font-weight: 700;
         }
 
-        .stats-grid {
+        .admin-user {
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .admin-container {
+            max-width: 1600px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Dashboard Stats Cards */
+        .stats-dashboard {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .stat-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .stat-card h3 {
-            color: #667eea;
-            font-size: 0.9em;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .stat-card .number {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .tab-button {
-            padding: 12px 24px;
-            background: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 600;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(221, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
             transition: all 0.3s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .tab-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        .stat-card:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(221, 0, 0, 0.3);
         }
 
-        .tab-button.active {
-            background: #667eea;
-            color: white;
+        .stat-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
         }
 
-        .tab-content {
+        .stat-icon {
+            font-size: 2rem;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .stat-change {
+            font-size: 0.85rem;
+            color: #4ade80;
+            margin-top: 0.5rem;
+        }
+
+        .stat-change.negative {
+            color: #f87171;
+        }
+
+        /* Navigation Tabs */
+        .admin-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid rgba(221, 0, 0, 0.2);
+            padding-bottom: 0;
+            overflow-x: auto;
+        }
+
+        .admin-tab {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+        }
+
+        .admin-tab:hover {
+            color: var(--accent-color);
+        }
+
+        .admin-tab.active {
+            color: var(--secondary-color);
+            border-bottom-color: var(--secondary-color);
+        }
+
+        /* Tab Content */
+        .tab-panel {
             display: none;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            animation: fadeIn 0.3s;
         }
 
-        .tab-content.active {
+        .tab-panel.active {
             display: block;
         }
 
-        table {
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Calendar View */
+        .calendar-container {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(221, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .calendar-month {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .calendar-btn {
+            padding: 0.5rem 1.5rem;
+            background: rgba(221, 0, 0, 0.1);
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .calendar-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1rem;
+        }
+
+        .calendar-day-label {
+            text-align: center;
+            font-weight: 600;
+            color: var(--secondary-color);
+            padding: 0.5rem;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            min-height: 80px;
+        }
+
+        .calendar-day:hover {
+            border-color: var(--secondary-color);
+            background: rgba(221, 0, 0, 0.1);
+        }
+
+        .calendar-day.other-month {
+            opacity: 0.3;
+        }
+
+        .calendar-day.today {
+            border: 2px solid var(--secondary-color);
+            background: rgba(221, 0, 0, 0.2);
+        }
+
+        .calendar-day.has-event {
+            background: rgba(221, 0, 0, 0.15);
+        }
+
+        .calendar-day-number {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .calendar-day-events {
+            font-size: 0.7rem;
+            color: var(--secondary-color);
+            margin-top: 0.25rem;
+        }
+
+        .event-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            position: absolute;
+            bottom: 5px;
+        }
+
+        /* Data Table */
+        .data-table-container {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(221, 0, 0, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 2px solid rgba(221, 0, 0, 0.2);
+        }
+
+        .table-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1.5rem;
+            background: rgba(221, 0, 0, 0.1);
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .action-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .data-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
         }
 
-        thead {
-            background: #667eea;
-            color: white;
+        .data-table thead {
+            background: rgba(221, 0, 0, 0.1);
         }
 
-        th, td {
-            padding: 12px;
+        .data-table th {
+            padding: 1rem;
             text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
+            color: var(--secondary-color);
             font-weight: 600;
             text-transform: uppercase;
-            font-size: 0.9em;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
         }
 
-        tr:hover {
-            background: #f5f5f5;
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
         }
 
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
+        .data-table tbody tr {
+            transition: all 0.3s;
+        }
+
+        .data-table tbody tr:hover {
+            background: rgba(221, 0, 0, 0.05);
+        }
+
+        /* Status Badge */
+        .status-badge {
+            padding: 0.4rem 1rem;
             border-radius: 20px;
-            font-size: 0.85em;
+            font-size: 0.85rem;
             font-weight: 600;
+            text-transform: uppercase;
+            display: inline-block;
         }
 
-        .badge.new {
-            background: #4CAF50;
-            color: white;
+        .status-badge.pending {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+            border: 1px solid #fbbf24;
         }
 
-        .badge.active {
-            background: #2196F3;
-            color: white;
+        .status-badge.confirmed {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            border: 1px solid #22c55e;
         }
 
-        .badge.pending {
-            background: #FF9800;
-            color: white;
+        .status-badge.processing {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            border: 1px solid #3b82f6;
         }
 
+        .status-badge.completed {
+            background: rgba(168, 85, 247, 0.2);
+            color: #a855f7;
+            border: 1px solid #a855f7;
+        }
+
+        .status-badge.cancelled {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid #ef4444;
+        }
+
+        .status-badge.approved {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            border: 1px solid #22c55e;
+        }
+
+        /* Quick Action Buttons */
+        .quick-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .quick-btn {
+            padding: 0.4rem 0.8rem;
+            background: rgba(221, 0, 0, 0.1);
+            border: 1px solid rgba(221, 0, 0, 0.3);
+            border-radius: 6px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .quick-btn:hover {
+            background: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--primary-color);
+            border: 2px solid var(--secondary-color);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            color: var(--secondary-color);
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Loading State */
         .loading {
             text-align: center;
-            padding: 40px;
-            color: #667eea;
-            font-size: 1.2em;
+            padding: 3rem;
+            color: var(--text-light);
+            font-size: 1.2rem;
         }
 
-        .error {
-            background: #f44336;
-            color: white;
-            padding: 15px;
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        /* Time Selection */
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .time-slot {
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
-            margin: 20px 0;
-        }
-
-        .refresh-btn {
-            padding: 10px 20px;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 6px;
+            color: var(--text-light);
+            text-align: center;
             cursor: pointer;
-            font-size: 1em;
-            margin-bottom: 20px;
+            transition: all 0.3s;
         }
 
-        .refresh-btn:hover {
-            background: #45a049;
+        .time-slot:hover {
+            border-color: var(--secondary-color);
+            background: rgba(221, 0, 0, 0.1);
         }
 
+        .time-slot.booked {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .time-slot.selected {
+            background: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            table {
-                font-size: 0.85em;
+            .calendar-grid {
+                gap: 0.5rem;
             }
 
-            th, td {
-                padding: 8px;
+            .calendar-day {
+                min-height: 60px;
             }
 
-            h1 {
-                font-size: 1.8em;
+            .stats-dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-tabs {
+                flex-wrap: nowrap;
+                overflow-x: scroll;
+            }
+
+            .data-table {
+                font-size: 0.85rem;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 0.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>📊 Admin Dashboard</h1>
+    <!-- Admin Navigation -->
+    <nav class="admin-navbar">
+        <div class="navbar-container">
+            <div class="admin-title">
+                <span>🍸</span> JiggerOnTheMix Admin
+            </div>
+            <div class="admin-user">
+                <span>👤 Admin User</span>
+                <a href="index.html" style="color: var(--secondary-color); text-decoration: none;">← Back to Website</a>
+            </div>
+        </div>
+    </nav>
 
-        <div class="stats-grid" id="statsGrid">
+    <!-- Main Admin Container -->
+    <div class="admin-container">
+        <!-- Dashboard Stats -->
+        <div class="stats-dashboard">
             <div class="stat-card">
-                <h3>Total Contacts</h3>
-                <div class="number" id="totalContacts">-</div>
+                <div class="stat-card-header">
+                    <span class="stat-icon">📧</span>
+                    <span class="stat-label">Total Contacts</span>
+                </div>
+                <div class="stat-value" id="totalContacts">-</div>
+                <div class="stat-change">+5 this week</div>
             </div>
             <div class="stat-card">
-                <h3>New Contacts</h3>
-                <div class="number" id="newContacts">-</div>
+                <div class="stat-card-header">
+                    <span class="stat-icon">📅</span>
+                    <span class="stat-label">Total Bookings</span>
+                </div>
+                <div class="stat-value" id="totalBookings">-</div>
+                <div class="stat-change">+3 this month</div>
             </div>
             <div class="stat-card">
-                <h3>Subscribers</h3>
-                <div class="number" id="totalSubscribers">-</div>
+                <div class="stat-card-header">
+                    <span class="stat-icon">🛒</span>
+                    <span class="stat-label">Customer Orders</span>
+                </div>
+                <div class="stat-value" id="totalOrders">-</div>
+                <div class="stat-change">+8 pending</div>
             </div>
             <div class="stat-card">
-                <h3>Total Bookings</h3>
-                <div class="number" id="totalBookings">-</div>
+                <div class="stat-card-header">
+                    <span class="stat-icon">📬</span>
+                    <span class="stat-label">Subscribers</span>
+                </div>
+                <div class="stat-value" id="totalSubscribers">-</div>
+                <div class="stat-change">+12 this week</div>
             </div>
         </div>
 
-        <div class="tabs">
-            <button class="tab-button active" onclick="switchTab('contacts')">📧 Contact Messages</button>
-            <button class="tab-button" onclick="switchTab('subscribers')">📬 Newsletter Subscribers</button>
-            <button class="tab-button" onclick="switchTab('bookings')">📅 Bookings</button>
+        <!-- Navigation Tabs -->
+        <div class="admin-tabs">
+            <button class="admin-tab active" onclick="switchTab('calendar')">📅 Calendar</button>
+            <button class="admin-tab" onclick="switchTab('orders')">🛒 Customer Orders</button>
+            <button class="admin-tab" onclick="switchTab('bookings')">📝 Bookings</button>
+            <button class="admin-tab" onclick="switchTab('contacts')">📧 Contacts</button>
+            <button class="admin-tab" onclick="switchTab('subscribers')">📬 Subscribers</button>
         </div>
 
-        <div id="contactsTab" class="tab-content active">
-            <button class="refresh-btn" onclick="loadContacts()">🔄 Refresh</button>
-            <div id="contactsContent" class="loading">Loading...</div>
+        <!-- Calendar Tab -->
+        <div id="calendarTab" class="tab-panel active">
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <div class="calendar-month" id="currentMonth">March 2026</div>
+                    <div class="calendar-nav">
+                        <button class="calendar-btn" onclick="previousMonth()">← Previous</button>
+                        <button class="calendar-btn" onclick="today()">Today</button>
+                        <button class="calendar-btn" onclick="nextMonth()">Next →</button>
+                    </div>
+                </div>
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- Calendar days will be generated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Events for Selected Day -->
+            <div class="data-table-container">
+                <div class="table-header">
+                    <div class="table-title" id="selectedDateTitle">Events for Today</div>
+                    <div class="table-actions">
+                        <button class="action-btn" onclick="refreshCalendar()">🔄 Refresh</button>
+                    </div>
+                </div>
+                <div id="dayEventsContent" class="loading">Loading events...</div>
+            </div>
         </div>
 
-        <div id="subscribersTab" class="tab-content">
-            <button class="refresh-btn" onclick="loadSubscribers()">🔄 Refresh</button>
-            <div id="subscribersContent" class="loading">Loading...</div>
+        <!-- Customer Orders Tab -->
+        <div id="ordersTab" class="tab-panel">
+            <div class="data-table-container">
+                <div class="table-header">
+                    <div class="table-title">Customer Orders</div>
+                    <div class="table-actions">
+                        <button class="action-btn" onclick="loadOrders()">🔄 Refresh</button>
+                    </div>
+                </div>
+                <div id="ordersContent" class="loading">Loading orders...</div>
+            </div>
         </div>
 
-        <div id="bookingsTab" class="tab-content">
-            <button class="refresh-btn" onclick="loadBookings()">🔄 Refresh</button>
-            <div id="bookingsContent" class="loading">Loading...</div>
+        <!-- Bookings Tab -->
+        <div id="bookingsTab" class="tab-panel">
+            <div class="data-table-container">
+                <div class="table-header">
+                    <div class="table-title">Bookings</div>
+                    <div class="table-actions">
+                        <button class="action-btn" onclick="loadBookings()">🔄 Refresh</button>
+                    </div>
+                </div>
+                <div id="bookingsContent" class="loading">Loading bookings...</div>
+            </div>
+        </div>
+
+        <!-- Contacts Tab -->
+        <div id="contactsTab" class="tab-panel">
+            <div class="data-table-container">
+                <div class="table-header">
+                    <div class="table-title">Contact Messages</div>
+                    <div class="table-actions">
+                        <button class="action-btn" onclick="loadContacts()">🔄 Refresh</button>
+                    </div>
+                </div>
+                <div id="contactsContent" class="loading">Loading contacts...</div>
+            </div>
+        </div>
+
+        <!-- Subscribers Tab -->
+        <div id="subscribersTab" class="tab-panel">
+            <div class="data-table-container">
+                <div class="table-header">
+                    <div class="table-title">Newsletter Subscribers</div>
+                    <div class="table-actions">
+                        <button class="action-btn" onclick="loadSubscribers()">🔄 Refresh</button>
+                    </div>
+                </div>
+                <div id="subscribersContent" class="loading">Loading subscribers...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
         </div>
     </div>
 
     <script src="config.js"></script>
     <script>
         const API_URL = window.APP_CONFIG.API_URL;
+        let currentDate = new Date();
+        let selectedDate = new Date();
+        let allOrders = [];
+        let allBookings = [];
 
-        // Switch between tabs
-        function switchTab(tab) {
-            // Update button states
-            document.querySelectorAll('.tab-button').forEach(btn => {
-                btn.classList.remove('active');
+        // Tab Switching
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                tab.classList.remove('active');
             });
             event.target.classList.add('active');
 
-            // Update tab content
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
+            // Update tab panels
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.remove('active');
             });
-            document.getElementById(`${tab}Tab`).classList.add('active');
+            document.getElementById(`${tabName}Tab`).classList.add('active');
 
-            // Load data if not already loaded
-            if (tab === 'contacts') loadContacts();
-            if (tab === 'subscribers') loadSubscribers();
-            if (tab === 'bookings') loadBookings();
+            // Load data for the tab
+            switch(tabName) {
+                case 'calendar':
+                    renderCalendar();
+                    break;
+                case 'orders':
+                    loadOrders();
+                    break;
+                case 'bookings':
+                    loadBookings();
+                    break;
+                case 'contacts':
+                    loadContacts();
+                    break;
+                case 'subscribers':
+                    loadSubscribers();
+                    break;
+            }
         }
 
-        // Load statistics
+        // Calendar Functions
+        function renderCalendar() {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+
+            // Update month display
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'];
+            document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+
+            // Get first day of month and number of days
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const daysInMonth = lastDay.getDate();
+            const startingDayOfWeek = firstDay.getDay();
+
+            // Build calendar grid
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = '';
+
+            // Add day labels
+            const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            dayLabels.forEach(label => {
+                const dayLabel = document.createElement('div');
+                dayLabel.className = 'calendar-day-label';
+                dayLabel.textContent = label;
+                grid.appendChild(dayLabel);
+            });
+
+            // Add empty cells for days before month starts
+            for (let i = 0; i < startingDayOfWeek; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'calendar-day other-month';
+                grid.appendChild(emptyCell);
+            }
+
+            // Add days of the month
+            const today = new Date();
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayCell = document.createElement('div');
+                dayCell.className = 'calendar-day';
+                
+                const currentDay = new Date(year, month, day);
+                
+                // Check if today
+                if (currentDay.toDateString() === today.toDateString()) {
+                    dayCell.classList.add('today');
+                }
+
+                // Check if has events
+                const hasEvents = checkDayHasEvents(currentDay);
+                if (hasEvents) {
+                    dayCell.classList.add('has-event');
+                    const dot = document.createElement('div');
+                    dot.className = 'event-dot';
+                    dayCell.appendChild(dot);
+                }
+
+                // Day number
+                const dayNumber = document.createElement('div');
+                dayNumber.className = 'calendar-day-number';
+                dayNumber.textContent = day;
+                dayCell.appendChild(dayNumber);
+
+                // Event count
+                const eventCount = getEventCount(currentDay);
+                if (eventCount > 0) {
+                    const eventsLabel = document.createElement('div');
+                    eventsLabel.className = 'calendar-day-events';
+                    eventsLabel.textContent = `${eventCount} event${eventCount > 1 ? 's' : ''}`;
+                    dayCell.appendChild(eventsLabel);
+                }
+
+                // Click handler
+                dayCell.onclick = () => selectDate(currentDay);
+
+                grid.appendChild(dayCell);
+            }
+
+            // Load events for today
+            loadDayEvents(selectedDate);
+        }
+
+        function checkDayHasEvents(date) {
+            const dateStr = date.toISOString().split('T')[0];
+            return allOrders.some(order => order.event_date?.startsWith(dateStr)) ||
+                   allBookings.some(booking => booking.event_date?.startsWith(dateStr));
+        }
+
+        function getEventCount(date) {
+            const dateStr = date.toISOString().split('T')[0];
+            const orderCount = allOrders.filter(order => order.event_date?.startsWith(dateStr)).length;
+            const bookingCount = allBookings.filter(booking => booking.event_date?.startsWith(dateStr)).length;
+            return orderCount + bookingCount;
+        }
+
+        function selectDate(date) {
+            selectedDate = date;
+            loadDayEvents(date);
+            
+            // Highlight selected day
+            document.querySelectorAll('.calendar-day').forEach(day => {
+                day.style.background = '';
+            });
+            event.currentTarget.style.background = 'rgba(221, 0, 0, 0.3)';
+        }
+
+        function loadDayEvents(date) {
+            const dateStr = date.toISOString().split('T')[0];
+            const formattedDate = date.toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+
+            document.getElementById('selectedDateTitle').textContent = `Events for ${formattedDate}`;
+
+            const dayOrders = allOrders.filter(order => order.event_date?.startsWith(dateStr));
+            const dayBookings = allBookings.filter(booking => booking.event_date?.startsWith(dateStr));
+
+            const content = document.getElementById('dayEventsContent');
+            
+            if (dayOrders.length === 0 && dayBookings.length === 0) {
+                content.innerHTML = '<div style="padding: 2rem; text-align: center; color: rgba(255,255,255,0.5);">No events scheduled for this date</div>';
+                return;
+            }
+
+            let html = '<table class="data-table"><thead><tr>' +
+                '<th>Time</th><th>Type</th><th>Customer</th><th>Package</th><th>Location</th><th>Status</th><th>Actions</th>' +
+                '</tr></thead><tbody>';
+
+            dayOrders.forEach(order => {
+                html += `
+                    <tr>
+                        <td><strong>${order.event_time || 'TBD'}</strong></td>
+                        <td>🛒 Order</td>
+                        <td>${order.customer_name}<br><small>${order.customer_email}</small></td>
+                        <td>${order.package_name}<br><small>${order.guest_count || 'N/A'} guests</small></td>
+                        <td>${order.event_location}<br><small>${order.city || ''}</small></td>
+                        <td><span class="status-badge ${order.status}">${order.status}</span></td>
+                        <td>
+                            <div class="quick-actions">
+                                <button class="quick-btn" onclick="viewOrderDetails(${order.id})">📄 View</button>
+                                <button class="quick-btn" onclick="updateOrderStatus(${order.id})">✏️ Edit</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            dayBookings.forEach(booking => {
+                html += `
+                    <tr>
+                        <td><strong>TBD</strong></td>
+                        <td>📅 Booking</td>
+                        <td>${booking.customer_name || 'N/A'}<br><small>${booking.customer_email || 'N/A'}</small></td>
+                        <td>${booking.package_type}</td>
+                        <td>-</td>
+                        <td><span class="status-badge ${booking.status}">${booking.status}</span></td>
+                        <td>
+                            <div class="quick-actions">
+                                <button class="quick-btn" onclick="viewBookingDetails(${booking.id})">📄 View</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += '</tbody></table>';
+            content.innerHTML = html;
+        }
+
+        function previousMonth() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        }
+
+        function nextMonth() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        }
+
+        function today() {
+            currentDate = new Date();
+            selectedDate = new Date();
+            renderCalendar();
+        }
+
+        async function refreshCalendar() {
+            await loadAllCalendarData();
+            renderCalendar();
+        }
+
+        async function loadAllCalendarData() {
+            try {
+                const [ordersRes, bookingsRes] = await Promise.all([
+                    fetch(`${API_URL}/api/orders/list?limit=1000`),
+                    fetch(`${API_URL}/api/admin/bookings?limit=1000`)
+                ]);
+
+                const ordersData = await ordersRes.json();
+                const bookingsData = await bookingsRes.json();
+
+                if (ordersData.success) {
+                    allOrders = ordersData.data.orders;
+                }
+                if (bookingsData.success) {
+                    allBookings = bookingsData.data.bookings;
+                }
+            } catch (error) {
+                console.error('Error loading calendar data:', error);
+            }
+        }
+
+        // Load Statistics
         async function loadStatistics() {
             try {
                 const response = await fetch(`${API_URL}/api/admin/statistics`);
@@ -272,104 +953,81 @@
                 
                 if (data.success) {
                     document.getElementById('totalContacts').textContent = data.data.total_contacts;
-                    document.getElementById('newContacts').textContent = data.data.new_contacts;
-                    document.getElementById('totalSubscribers').textContent = data.data.total_subscribers;
                     document.getElementById('totalBookings').textContent = data.data.total_bookings;
+                    document.getElementById('totalOrders').textContent = data.data.total_orders || 0;
+                    document.getElementById('totalSubscribers').textContent = data.data.total_subscribers;
                 }
             } catch (error) {
                 console.error('Error loading statistics:', error);
             }
         }
 
-        // Load contact messages
-        async function loadContacts() {
-            const content = document.getElementById('contactsContent');
-            content.innerHTML = '<div class="loading">Loading contacts...</div>';
+        // Load Orders
+        async function loadOrders() {
+            const content = document.getElementById('ordersContent');
+            content.innerHTML = '<div class="loading">Loading orders...</div>';
 
             try {
-                const response = await fetch(`${API_URL}/api/admin/contacts?limit=100`);
+                const response = await fetch(`${API_URL}/api/orders/list?limit=100`);
                 const data = await response.json();
 
-                if (data.success && data.data.contacts.length > 0) {
-                    content.innerHTML = `
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Event</th>
-                                    <th>Package</th>
-                                    <th>Details</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${data.data.contacts.map(contact => `
-                                    <tr>
-                                        <td>${contact.id}</td>
-                                        <td>${contact.name}</td>
-                                        <td>${contact.email}</td>
-                                        <td>${contact.event_name}</td>
-                                        <td>${contact.package || 'N/A'}</td>
-                                        <td>${contact.details.substring(0, 50)}...</td>
-                                        <td><span class="badge ${contact.status}">${contact.status}</span></td>
-                                        <td>${new Date(contact.created_at).toLocaleDateString()}</td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    `;
+                if (data.success && data.data.orders.length > 0) {
+                    let html = '<table class="data-table"><thead><tr>' +
+                        '<th>ID</th><th>Customer</th><th>Package</th><th>Event Date/Time</th><th>Location</th><th>Drinks</th><th>Status</th><th>Actions</th>' +
+                        '</tr></thead><tbody>';
+
+                    data.data.orders.forEach(order => {
+                        html += `
+                            <tr>
+                                <td>#${order.id}</td>
+                                <td>
+                                    <strong>${order.customer_name}</strong><br>
+                                    <small>${order.customer_email}</small>
+                                    ${order.customer_phone ? `<br><small>📞 ${order.customer_phone}</small>` : ''}
+                                </td>
+                                <td>
+                                    <strong>${order.package_name}</strong><br>
+                                    <small>${order.package_price}</small>
+                                    ${order.guest_count ? `<br><small>👥 ${order.guest_count} guests</small>` : ''}
+                                </td>
+                                <td>
+                                    ${order.event_date ? new Date(order.event_date).toLocaleDateString() : 'TBD'}<br>
+                                    ${order.event_time ? `<small>🕒 ${order.event_time}</small>` : '<small>Time TBD</small>'}
+                                </td>
+                                <td>
+                                    ${order.event_location}<br>
+                                    ${order.city ? `<small>${order.city}, ${order.province || ''}</small>` : ''}
+                                </td>
+                                <td>
+                                    <button class="quick-btn" onclick="viewDrinks(${order.id}, ${JSON.stringify(order.selected_drinks).replace(/"/g, '&quot;')})">
+                                        🍹 View (${order.selected_drinks.length})
+                                    </button>
+                                </td>
+                                <td><span class="status-badge ${order.status}">${order.status}</span></td>
+                                <td>
+                                    <select onchange="updateOrderStatusQuick(${order.id}, this.value)" style="padding: 5px; border-radius: 4px; background: rgba(0,0,0,0.3); color: white; border: 1px solid #dd0000;">
+                                        <option value="">Update...</option>
+                                        <option value="confirmed">Confirm</option>
+                                        <option value="processing">Processing</option>
+                                        <option value="completed">Complete</option>
+                                        <option value="cancelled">Cancel</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        `;
+                    });
+
+                    html += '</tbody></table>';
+                    content.innerHTML = html;
                 } else {
-                    content.innerHTML = '<p>No contact messages found.</p>';
+                    content.innerHTML = '<div style="padding: 2rem; text-align: center; color: rgba(255,255,255,0.5);">No orders found</div>';
                 }
             } catch (error) {
-                content.innerHTML = `<div class="error">Error loading contacts: ${error.message}</div>`;
+                content.innerHTML = `<div style="padding: 2rem; color: #ef4444;">Error loading orders: ${error.message}</div>`;
             }
         }
 
-        // Load newsletter subscribers
-        async function loadSubscribers() {
-            const content = document.getElementById('subscribersContent');
-            content.innerHTML = '<div class="loading">Loading subscribers...</div>';
-
-            try {
-                const response = await fetch(`${API_URL}/api/admin/subscribers?limit=100`);
-                const data = await response.json();
-
-                if (data.success && data.data.subscribers.length > 0) {
-                    content.innerHTML = `
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Email</th>
-                                    <th>Subscribed At</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${data.data.subscribers.map(sub => `
-                                    <tr>
-                                        <td>${sub.id}</td>
-                                        <td>${sub.email}</td>
-                                        <td>${new Date(sub.subscribed_at).toLocaleString()}</td>
-                                        <td><span class="badge active">${sub.active ? 'Active' : 'Inactive'}</span></td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    `;
-                } else {
-                    content.innerHTML = '<p>No subscribers found.</p>';
-                }
-            } catch (error) {
-                content.innerHTML = `<div class="error">Error loading subscribers: ${error.message}</div>`;
-            }
-        }
-
-        // Load bookings
+        // Load Bookings (similar structure to old admin)
         async function loadBookings() {
             const content = document.getElementById('bookingsContent');
             content.innerHTML = '<div class="loading">Loading bookings...</div>';
@@ -379,48 +1037,201 @@
                 const data = await response.json();
 
                 if (data.success && data.data.bookings.length > 0) {
-                    content.innerHTML = `
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Contact ID</th>
-                                    <th>Package</th>
-                                    <th>Event Date</th>
-                                    <th>Guests</th>
-                                    <th>Price</th>
-                                    <th>Status</th>
-                                    <th>Created</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${data.data.bookings.map(booking => `
-                                    <tr>
-                                        <td>${booking.id}</td>
-                                        <td>${booking.contact_id}</td>
-                                        <td>${booking.package_type}</td>
-                                        <td>${booking.event_date ? new Date(booking.event_date).toLocaleDateString() : 'TBD'}</td>
-                                        <td>${booking.guest_count || 'N/A'}</td>
-                                        <td>${booking.price_quote ? '$' + booking.price_quote : 'TBD'}</td>
-                                        <td><span class="badge ${booking.status}">${booking.status}</span></td>
-                                        <td>${new Date(booking.created_at).toLocaleDateString()}</td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    `;
+                    let html = '<table class="data-table"><thead><tr>' +
+                        '<th>ID</th><th>Customer</th><th>Package</th><th>Event Date</th><th>Payment</th><th>Status</th><th>Actions</th>' +
+                        '</tr></thead><tbody>';
+
+                    data.data.bookings.forEach(booking => {
+                        html += `
+                            <tr>
+                                <td>#${booking.id}</td>
+                                <td>
+                                    <strong>${booking.customer_name || 'N/A'}</strong><br>
+                                    <small>${booking.customer_email || 'N/A'}</small>
+                                </td>
+                                <td>${booking.package_type}<br><small>₱${booking.price_quote?.toLocaleString()}</small></td>
+                                <td>${booking.event_date ? new Date(booking.event_date).toLocaleDateString() : 'TBD'}</td>
+                                <td>
+                                    ${booking.payment_method || 'N/A'}<br>
+                                    ${booking.payment_proof ? '<button class="quick-btn" onclick="viewPaymentProof(\'' + booking.payment_proof + '\')">📷 View</button>' : 'No proof'}
+                                </td>
+                                <td><span class="status-badge ${booking.status}">${booking.status}</span></td>
+                                <td>
+                                    ${booking.status === 'pending' ? 
+                                        `<button class="quick-btn" onclick="approveBooking(${booking.id})">✓ Approve</button>` : 
+                                        (booking.verification_sent ? '✓ Verified' : 'N/A')}
+                                </td>
+                            </tr>
+                        `;
+                    });
+
+                    html += '</tbody></table>';
+                    content.innerHTML = html;
                 } else {
-                    content.innerHTML = '<p>No bookings found.</p>';
+                    content.innerHTML = '<div style="padding: 2rem; text-align: center; color: rgba(255,255,255,0.5);">No bookings found</div>';
                 }
             } catch (error) {
-                content.innerHTML = `<div class="error">Error loading bookings: ${error.message}</div>`;
+                content.innerHTML = `<div style="padding: 2rem; color: #ef4444;">Error loading bookings: ${error.message}</div>`;
             }
         }
 
-        // Initialize on page load
-        window.addEventListener('DOMContentLoaded', () => {
-            loadStatistics();
-            loadContacts();
+        // Load Contacts
+        async function loadContacts() {
+            const content = document.getElementById('contactsContent');
+            content.innerHTML = '<div class="loading">Loading contacts...</div>';
+
+            try {
+                const response = await fetch(`${API_URL}/api/admin/contacts?limit=100`);
+                const data = await response.json();
+
+                if (data.success && data.data.contacts.length > 0) {
+                    let html = '<table class="data-table"><thead><tr>' +
+                        '<th>ID</th><th>Name</th><th>Email</th><th>Event</th><th>Package</th><th>Status</th><th>Created</th>' +
+                        '</tr></thead><tbody>';
+
+                    data.data.contacts.forEach(contact => {
+                        html += `
+                            <tr>
+                                <td>#${contact.id}</td>
+                                <td>${contact.name}</td>
+                                <td>${contact.email}</td>
+                                <td>${contact.event_name}</td>
+                                <td>${contact.package || 'N/A'}</td>
+                                <td><span class="status-badge ${contact.status}">${contact.status}</span></td>
+                                <td>${new Date(contact.created_at).toLocaleDateString()}</td>
+                            </tr>
+                        `;
+                    });
+
+                    html += '</tbody></table>';
+                    content.innerHTML = html;
+                } else {
+                    content.innerHTML = '<div style="padding: 2rem; text-align: center; color: rgba(255,255,255,0.5);">No contacts found</div>';
+                }
+            } catch (error) {
+                content.innerHTML = `<div style="padding: 2rem; color: #ef4444;">Error loading contacts: ${error.message}</div>`;
+            }
+        }
+
+        // Load Subscribers
+        async function loadSubscribers() {
+            const content = document.getElementById('subscribersContent');
+            content.innerHTML = '<div class="loading">Loading subscribers...</div>';
+
+            try {
+                const response = await fetch(`${API_URL}/api/admin/subscribers?limit=100`);
+                const data = await response.json();
+
+                if (data.success && data.data.subscribers.length > 0) {
+                    let html = '<table class="data-table"><thead><tr>' +
+                        '<th>ID</th><th>Email</th><th>Subscribed At</th><th>Status</th>' +
+                        '</tr></thead><tbody>';
+
+                    data.data.subscribers.forEach(subscriber => {
+                        html += `
+                            <tr>
+                                <td>#${subscriber.id}</td>
+                                <td>${subscriber.email}</td>
+                                <td>${new Date(subscriber.subscribed_at).toLocaleDateString()}</td>
+                                <td><span class="status-badge ${subscriber.active ? 'confirmed' : 'cancelled'}">${subscriber.active ? 'Active' : 'Inactive'}</span></td>
+                            </tr>
+                        `;
+                    });
+
+                    html += '</tbody></table>';
+                    content.innerHTML = html;
+                } else {
+                    content.innerHTML = '<div style="padding: 2rem; text-align: center; color: rgba(255,255,255,0.5);">No subscribers found</div>';
+                }
+            } catch (error) {
+                content.innerHTML = `<div style="padding: 2rem; color: #ef4444;">Error loading subscribers: ${error.message}</div>`;
+            }
+        }
+
+        // View Drinks Modal
+        function viewDrinks(orderId, drinks) {
+            const drinksList = Array.isArray(drinks) ? drinks : [];
+            const modal = document.getElementById('adminModal');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalBody.innerHTML = `
+                <h2 class="modal-title">Selected Drinks - Order #${orderId}</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    ${drinksList.map(drink => `
+                        <div style="padding: 1rem; background: rgba(221, 0, 0, 0.1); border: 1px solid rgba(221, 0, 0, 0.3); border-radius: 8px; color: var(--text-light);">
+                            🍹 ${drink}
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            modal.classList.add('active');
+        }
+
+        // View Payment Proof
+        function viewPaymentProof(proofData) {
+            const modal = document.getElementById('adminModal');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalBody.innerHTML = `
+                <h2 class="modal-title">Payment Proof</h2>
+                <img src="${proofData}" alt="Payment Proof" style="max-width: 100%; border-radius: 8px; margin-top: 1rem;">
+            `;
+            modal.classList.add('active');
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById('adminModal').classList.remove('active');
+        }
+
+        // Update Order Status Quick
+        async function updateOrderStatusQuick(orderId, newStatus) {
+            if (!newStatus) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/api/orders/${orderId}/status`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: newStatus })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    alert(`✅ Order #${orderId} updated to "${newStatus}"`);
+                    loadOrders();
+                    loadAllCalendarData();
+                }
+            } catch (error) {
+                alert(`❌ Error: ${error.message}`);
+            }
+        }
+
+        // Approve Booking
+        async function approveBooking(bookingId) {
+            if (!confirm(`Approve booking #${bookingId}? This will send verification email.`)) return;
+
+            try {
+                const response = await fetch(`${API_URL}/api/admin/approve-booking/${bookingId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    alert(`✅ Booking approved!`);
+                    loadBookings();
+                    loadAllCalendarData();
+                }
+            } catch (error) {
+                alert(`❌ Error: ${error.message}`);
+            }
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', async () => {
+            await loadStatistics();
+            await loadAllCalendarData();
+            renderCalendar();
         });
     </script>
 </body>

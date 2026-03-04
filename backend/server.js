@@ -38,6 +38,7 @@ import contactRoutes from './routes/contact.js';
 import newsletterRoutes from './routes/newsletter.js';
 import bookingRoutes from './routes/booking.js';
 import adminRoutes from './routes/admin.js';
+import ordersRoutes from './routes/orders.js';
 
 // Load environment variables
 dotenv.config();
@@ -108,6 +109,7 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/newsletter', newsletterRoutes);
 app.use('/api/booking', bookingRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/orders', ordersRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

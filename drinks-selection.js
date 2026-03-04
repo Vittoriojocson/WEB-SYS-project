@@ -364,16 +364,189 @@ function updateSelectedDrinksList() {
     sessionStorage.setItem('selectedDrinks', JSON.stringify(selectedDrinks));
 }
 
+// ==================== DATE & TIME SELECTION ====================
+/**
+ * Handles date and time selection before drinks selection
+ * - Sets minimum date to today
+ * - Validates date/time input
+ * - Stores confirmed date/time in sessionStorage
+ * - Shows/hides drinks selection based on confirmation
+ */
+
+// Initialize date/time selection
+function initializeDateTimeSelection() {
+    const dateInput = document.getElementById('eventDateSelect');
+    const timeInput = document.getElementById('eventTimeSelect');
+    const confirmBtn = document.getElementById('confirmDateTime');
+    const changeDateTimeBtn = document.getElementById('changeDateTimeBtn');
+    const selectedDisplay = document.getElementById('selectedDateTimeDisplay');
+    const displayDateTime = document.getElementById('displayDateTime');
+    const drinksSection = document.querySelector('.drinks-selection-form');
+    const dateTimeCard = document.querySelector('.date-time-selection-card');
+
+    // Set minimum date to today
+    const today = new Date();
+    const minDate = today.toISOString().split('T')[0];
+    dateInput.setAttribute('min', minDate);
+    dateInput.value = minDate; // Set default to today
+
+    // Check if date/time already confirmed (from sessionStorage)
+    const savedDateTime = sessionStorage.getItem('confirmedDateTime');
+    if (savedDateTime) {
+        const { date, time } = JSON.parse(savedDateTime);
+        dateInput.value = date;
+        timeInput.value = time;
+        showConfirmedDateTime(date, time);
+        if (drinksSection) drinksSection.style.display = 'block';
+    } else {
+        // Hide drinks section until date/time confirmed
+        if (drinksSection) drinksSection.style.display = 'none';
+    }
+
+    // Enable/disable confirm button based on inputs
+    function updateConfirmButton() {
+        if (dateInput.value && timeInput.value) {
+            confirmBtn.disabled = false;
+        } else {
+            confirmBtn.disabled = true;
+        }
+    }
+
+    // Listen for input changes
+    dateInput.addEventListener('change', updateConfirmButton);
+    timeInput.addEventListener('change', updateConfirmButton);
+
+    // Initial check
+    updateConfirmButton();
+
+    // Confirm date/time button
+    confirmBtn.addEventListener('click', function() {
+        const selectedDate = dateInput.value;
+        const selectedTime = timeInput.value;
+
+        if (!selectedDate || !selectedTime) {
+            alert('Please select both date and time for your event.');
+            return;
+        }
+
+        // Save to sessionStorage
+        sessionStorage.setItem('confirmedDateTime', JSON.stringify({
+            date: selectedDate,
+            time: selectedTime
+        }));
+
+        // Show confirmation
+        showConfirmedDateTime(selectedDate, selectedTime);
+
+        // Show drinks section
+        if (drinksSection) {
+            drinksSection.style.display = 'block';
+            drinksSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+
+    // Change date/time button
+    if (changeDateTimeBtn) {
+        changeDateTimeBtn.addEventListener('click', function() {
+            // Hide confirmation, show inputs
+            selectedDisplay.style.display = 'none';
+            confirmBtn.style.display = 'inline-block';
+            dateInput.disabled = false;
+            timeInput.disabled = false;
+            dateTimeCard.classList.remove('confirmed');
+
+            // Optionally hide drinks section again
+            // if (drinksSection) drinksSection.style.display = 'none';
+        });
+    }
+
+    function showConfirmedDateTime(date, time) {
+        // Format the date nicely
+        const dateObj = new Date(date + 'T00:00:00');
+        const formattedDate = dateObj.toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric'
+        });
+
+        // Format time to 12-hour format
+        const [hours, minutes] = time.split(':');
+        const hour = parseInt(hours);
+        const ampm = hour >= 12 ? 'PM' : 'AM';
+        const displayHour = hour % 12 || 12;
+        const formattedTime = `${displayHour}:${minutes} ${ampm}`;
+
+        // Update display
+        displayDateTime.textContent = `${formattedDate} at ${formattedTime}`;
+        selectedDisplay.style.display = 'flex';
+        confirmBtn.style.display = 'none';
+
+        // Disable inputs
+        dateInput.disabled = true;
+        timeInput.disabled = true;
+
+        // Add confirmed styling
+        dateTimeCard.classList.add('confirmed');
+    }
+}
+
 // Handle proceed to booking button
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize date/time selection
+    initializeDateTimeSelection();
     const proceedBtn = document.getElementById('proceedBtn');
     
     if (proceedBtn) {
-        proceedBtn.addEventListener('click', function() {
+        proceedBtn.addEventListener('click', async function() {
             const checkboxes = document.querySelectorAll('.drink-checkbox:checked');
             
             if (checkboxes.length === 0) {
-                alert('Please select at least one drink before proceeding to booking.');
+                alert('Please select at least one drink before proceeding.');
+                return;
+            }
+
+            // Get customer information from form
+            const customerName = document.getElementById('customerName').value.trim();
+            const customerEmail = document.getElementById('customerEmail').value.trim();
+            const customerPhone = document.getElementById('customerPhone').value.trim();
+            const eventLocation = document.getElementById('eventLocation').value.trim();
+            const city = document.getElementById('city').value.trim();
+            const province = document.getElementById('province').value.trim();
+            const postalCode = document.getElementById('postalCode').value.trim();
+            const guestCount = document.getElementById('guestCount').value;
+            const specialRequests = document.getElementById('specialRequests').value.trim();
+
+            // Get confirmed date/time from sessionStorage (required)
+            const confirmedDateTime = sessionStorage.getItem('confirmedDateTime');
+            let finalEventDate = null;
+            let finalEventTime = null;
+
+            if (confirmedDateTime) {
+                const { date, time } = JSON.parse(confirmedDateTime);
+                finalEventDate = date;
+                finalEventTime = time;
+            } else {
+                alert('Please confirm your event date and time before proceeding.');
+                document.getElementById('dateTimeSelection').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            // Validate required fields
+            if (!customerName || customerName.length < 2) {
+                alert('Please enter your full name (minimum 2 characters).');
+                document.getElementById('customerName').focus();
+                return;
+            }
+
+            if (!customerEmail || !isValidEmail(customerEmail)) {
+                alert('Please enter a valid email address.');
+                document.getElementById('customerEmail').focus();
+                return;
+            }
+
+            if (!eventLocation || eventLocation.length < 5) {
+                alert('Please enter the event location/venue (minimum 5 characters).');
+                document.getElementById('eventLocation').focus();
                 return;
             }
 
@@ -381,14 +554,77 @@ document.addEventListener('DOMContentLoaded', function() {
             const selectedDrinks = Array.from(checkboxes).map(cb => cb.value);
             const packageInfo = JSON.parse(sessionStorage.getItem('packageInfo'));
 
-            // Store booking info in session
-            sessionStorage.setItem('selectedDrinks', JSON.stringify(selectedDrinks));
+            if (!packageInfo) {
+                alert('Package information is missing. Please select a package again.');
+                window.location.href = 'drinks-packages.html';
+                return;
+            }
 
-            // Redirect to booking page for add-ons and customization
-            window.location.href = 'booking.html';
+            // Prepare order data
+            const orderData = {
+                customer_name: customerName,
+                customer_email: customerEmail,
+                customer_phone: customerPhone || null,
+                event_location: eventLocation,
+                city: city || null,
+                province: province || null,
+                postal_code: postalCode || null,
+                package_id: packageInfo.id,
+                package_name: packageInfo.name,
+                package_price: packageInfo.price,
+                selected_drinks: selectedDrinks,
+                guest_count: guestCount ? parseInt(guestCount) : null,
+                event_date: finalEventDate || null,
+                event_time: finalEventTime || null,
+                special_requests: specialRequests || null
+            };
+
+            // Show loading state
+            proceedBtn.disabled = true;
+            proceedBtn.textContent = 'Submitting...';
+
+            try {
+                // Submit order to backend
+                const API_URL = window.APP_CONFIG?.API_URL || 'http://localhost:5000';
+                const response = await fetch(`${API_URL}/api/orders/create`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(orderData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert(`✅ Order submitted successfully!\n\nOrder ID: #${result.data.order.id}\n\nWe will contact you at ${customerEmail} to confirm your booking.`);
+                    
+                    // Clear session storage
+                    sessionStorage.removeItem('selectedDrinks');
+                    sessionStorage.removeItem('packageInfo');
+                    
+                    // Redirect to home page
+                    window.location.href = 'index.html';
+                } else {
+                    throw new Error(result.errors?.join(', ') || 'Failed to submit order');
+                }
+            } catch (error) {
+                console.error('Error submitting order:', error);
+                alert(`❌ Failed to submit order:\n${error.message}\n\nPlease try again or contact us directly.`);
+                
+                // Restore button state
+                proceedBtn.disabled = false;
+                proceedBtn.textContent = 'Submit Order';
+            }
         });
     }
 
     // Initialize page
     initializePage();
 });
+
+// Email validation helper
+function isValidEmail(email) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+}

@@ -3188,6 +3188,181 @@ section {
     color: var(--secondary-color);
 }
 
+/* Date & Time Selection Card */
+.date-time-selection-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(221, 0, 0, 0.4);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.date-time-selection-card.confirmed {
+    border-color: rgba(34, 197, 94, 0.5);
+    background: rgba(34, 197, 94, 0.05);
+}
+
+.date-time-selection-card h2 {
+    font-size: 1.8rem;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.date-time-intro {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+}
+
+.date-time-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.date-time-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.date-time-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.date-time-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 0.3rem;
+}
+
+.label-icon {
+    font-size: 1.2rem;
+}
+
+.date-time-input {
+    padding: 0.9rem 1.2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(221, 0, 0, 0.3);
+    border-radius: 8px;
+    color: var(--text-light);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.date-time-input:hover {
+    border-color: rgba(221, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.date-time-input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 0 3px rgba(221, 0, 0, 0.1);
+}
+
+.date-time-input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.date-time-input::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+.input-hint {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+.date-time-confirm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.confirm-datetime-btn {
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--secondary-color), #aa0000);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(221, 0, 0, 0.3);
+}
+
+.confirm-datetime-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(221, 0, 0, 0.4);
+    background: linear-gradient(135deg, #ff0000, var(--secondary-color));
+}
+
+.confirm-datetime-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.selected-datetime-display {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: rgba(34, 197, 94, 0.1);
+    border: 2px solid rgba(34, 197, 94, 0.4);
+    border-radius: 8px;
+    color: var(--text-light);
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.datetime-icon {
+    color: #22c55e;
+    font-size: 1.3rem;
+}
+
+.selected-datetime-display span {
+    flex: 1;
+}
+
+.change-datetime-btn {
+    padding: 0.5rem 1rem;
+    background: rgba(221, 0, 0, 0.2);
+    border: 1px solid var(--secondary-color);
+    border-radius: 6px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.change-datetime-btn:hover {
+    background: var(--secondary-color);
+    transform: scale(1.05);
+}
+
 .drinks-selection-form {
     background: rgba(255, 255, 255, 0.05);
     border: 2px solid rgba(221, 0, 0, 0.2);
@@ -3314,6 +3489,84 @@ section {
     display: inline-block;
 }
 
+/* Customer Information Form */
+.customer-info-section {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(221, 0, 0, 0.2);
+    border-radius: 12px;
+}
+
+.customer-info-section .section-title {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.customer-info-section .section-subtitle {
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.customer-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.form-row .full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 0.8rem 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--white);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+    font-family: inherit;
+}
+
 .selection-buttons {
     display: flex;
     gap: 1.5rem;
@@ -3379,6 +3632,15 @@ section {
     .proceed-btn {
         width: 100%;
     }
+
+    .date-time-row {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .confirm-datetime-btn {
+        width: 100%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -3400,6 +3662,24 @@ section {
 
     .package-summary-card {
         padding: 1.5rem;
+    }
+
+    .date-time-selection-card {
+        padding: 1.5rem;
+    }
+
+    .date-time-selection-card h2 {
+        font-size: 1.4rem;
+    }
+
+    .date-time-row {
+        gap: 1rem;
+    }
+
+    .selected-datetime-display {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
     }
 
     .drinks-list-items {

@@ -37,17 +37,28 @@ router.post('/create', async (req, res) => {
             contact_id,
             package_type,
             event_date,
-            guest_count
+            guest_count,
+            payment_proof,
+            payment_method,
+            customer_email,
+            customer_name
         } = req.body;
 
-        // Verify contact exists
-        const contact = await getRow(
-            'SELECT * FROM contact_messages WHERE id = ?',
-            [contact_id]
-        );
+        // Validate required fields
+        if (!customer_email || !customer_name) {
+            return res.status(400).json(errorResponse('Customer email and name are required', 400));
+        }
 
-        if (!contact) {
-            return res.status(404).json(errorResponse('Contact not found', 404));
+        // Verify contact exists (optional - can create booking without prior contact)
+        if (contact_id) {
+            const contact = await getRow(
+                'SELECT * FROM contact_messages WHERE id = ?',
+                [contact_id]
+            );
+
+            if (!contact) {
+                return res.status(404).json(errorResponse('Contact not found', 404));
+            }
         }
 
         // Validate package type
@@ -58,11 +69,24 @@ router.post('/create', async (req, res) => {
         // Get base price
         const priceQuote = PACKAGE_PRICING[package_type].min;
 
-        // Create booking
+        // Create booking with payment proof
         const result = await runQuery(
-            `INSERT INTO bookings (contact_id, package_type, event_date, guest_count, price_quote, status)
-             VALUES (?, ?, ?, ?, ?, 'pending')`,
-            [contact_id, package_type, event_date, guest_count, priceQuote]
+            `INSERT INTO bookings 
+             (contact_id, package_type, event_date, guest_count, price_quote, 
+              payment_proof, payment_method, customer_email, customer_name, 
+              status, verification_sent)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', 0)`,
+            [
+                contact_id || null, 
+                package_type, 
+                event_date, 
+                guest_count, 
+                priceQuote,
+                payment_proof || null,
+                payment_method || null,
+                customer_email,
+                customer_name
+            ]
         );
 
         const booking = await getRow(
@@ -72,7 +96,7 @@ router.post('/create', async (req, res) => {
 
         res.status(201).json(successResponse(
             { booking: booking },
-            'Booking created successfully',
+            'Booking created successfully. Awaiting admin approval.',
             201
         ));
 

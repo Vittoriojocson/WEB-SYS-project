@@ -7,6 +7,11 @@
  * - Proceeds to contact form with booking info
  */
 
+const TRANSPORT_FEE = 2000;
+const BEER_BAR_BASE_PRICE = 7000;
+const BEER_BAR_STEP_PRICE = 500;
+const GUEST_TIER_STEPS = [30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 350, 400, 450, 500];
+
 let selectedAddons = [];
 let basePrice = 0;
 
@@ -30,6 +35,9 @@ function initializeBooking() {
         }
     }
 
+    // Set dynamic Beer Bar add-on pricing based on selected package size
+    applyDynamicBeerBarPrice(packageInfo);
+
     // Display drinks
     displaySelectedDrinks(selectedDrinks);
 
@@ -41,6 +49,56 @@ function initializeBooking() {
 
     // Update price summary
     updatePriceSummary();
+}
+
+function extractPackageSize(packageInfo) {
+    if (!packageInfo) return GUEST_TIER_STEPS[0];
+
+    const packageText = `${packageInfo.name || ''} ${packageInfo.description || ''}`;
+
+    const paxRangeMatch = packageText.match(/(\d+)\s*-\s*(\d+)\s*Pax/i);
+    if (paxRangeMatch) {
+        return parseInt(paxRangeMatch[1], 10);
+    }
+
+    const paxMatch = packageText.match(/(\d+)\s*Pax/i);
+    if (paxMatch) {
+        return parseInt(paxMatch[1], 10);
+    }
+
+    const drinksMatch = packageText.match(/(\d+)\s*Drinks/i);
+    if (drinksMatch) {
+        return parseInt(drinksMatch[1], 10);
+    }
+
+    const fallbackNumber = packageText.match(/(\d+)/);
+    if (fallbackNumber) {
+        return parseInt(fallbackNumber[1], 10);
+    }
+
+    return GUEST_TIER_STEPS[0];
+}
+
+function calculateBeerBarPrice(packageSize) {
+    const tierIndex = GUEST_TIER_STEPS.findIndex(tier => packageSize <= tier);
+    const resolvedIndex = tierIndex === -1 ? GUEST_TIER_STEPS.length - 1 : tierIndex;
+    return BEER_BAR_BASE_PRICE + (resolvedIndex * BEER_BAR_STEP_PRICE);
+}
+
+function applyDynamicBeerBarPrice(packageInfo) {
+    const beerCheckbox = document.querySelector('.addon-checkbox[data-addon="beer"]');
+    if (!beerCheckbox) return;
+
+    const packageSize = extractPackageSize(packageInfo);
+    const beerBarPrice = calculateBeerBarPrice(packageSize);
+
+    beerCheckbox.setAttribute('data-price', String(beerBarPrice));
+
+    const addonItem = beerCheckbox.closest('.addon-item');
+    const addonPriceEl = addonItem ? addonItem.querySelector('.addon-price') : null;
+    if (addonPriceEl) {
+        addonPriceEl.textContent = `₱${beerBarPrice.toLocaleString()}`;
+    }
 }
 
 // Display selected drinks
@@ -117,12 +175,16 @@ function updatePriceSummary() {
     const addonsLineItems = document.getElementById('addonsLineItems');
     addonsLineItems.innerHTML = addonsHtml;
 
+    // Add transport fee to total
+    const grandTotal = total + TRANSPORT_FEE;
+
     // Update total price
     document.getElementById('packageTotal').textContent = `₱${basePrice.toLocaleString()}`;
-    document.getElementById('totalPrice').textContent = `₱${total.toLocaleString()}`;
+    document.getElementById('transportFee').textContent = `₱${TRANSPORT_FEE.toLocaleString()}`;
+    document.getElementById('totalPrice').textContent = `₱${grandTotal.toLocaleString()}`;
 
-    // Store total in session
-    sessionStorage.setItem('bookingTotal', total);
+    // Store total in session (with transport fee)
+    sessionStorage.setItem('bookingTotal', grandTotal);
 }
 
 // Get selected customizations

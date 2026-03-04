@@ -1,5 +1,8 @@
 // ========== PAYMENT PAGE LOGIC ==========
 
+// Constants
+const TRANSPORT_FEE = 2000;
+
 // Data loaded from sessionStorage
 let bookingData = {
     package: {},
@@ -30,7 +33,7 @@ function loadOrderSummary() {
         bookingData.drinks = selectedDrinks;
         bookingData.addons = selectedAddons;
         bookingData.customizations = selectedCustomizations;
-        bookingData.total = bookingTotal;
+        bookingData.total = Number(bookingTotal);
 
         // Display package info
         const packageDisplay = `${packageInfo.tier || 'Unknown'} - ${packageInfo.name || 'Unknown Package'}`;
@@ -49,8 +52,11 @@ function loadOrderSummary() {
         // Display customizations
         displaySelectedCustomizations(selectedCustomizations);
 
-        // Display total
-        document.getElementById('summaryTotal').textContent = `₱${Number(bookingTotal).toLocaleString()}`;
+        // Calculate and display total (base + add-ons + transport fee)
+        const addonsTotal = selectedAddons.reduce((sum, addon) => sum + Number(addon.price || 0), 0);
+        const grandTotal = basePrice + addonsTotal + TRANSPORT_FEE;
+        bookingData.total = grandTotal;
+        document.getElementById('summaryTotal').textContent = `₱${grandTotal.toLocaleString()}`;
 
     } catch (error) {
         console.error('Error loading order summary:', error);
@@ -99,8 +105,9 @@ function displaySelectedCustomizations(customizations) {
     }
 
     const customizationLabels = {
-        'extra-setup': 'Additional Bar Setup',
+        'hours': 'Extra Service Hours',
         'extra-hours': 'Extra Service Hours',
+        'extra-setup': 'Additional Bar Setup',
         'extra-bartender': 'Additional Bartender',
         'premium-decor': 'Premium Bar Décor'
     };
@@ -113,10 +120,10 @@ function displaySelectedCustomizations(customizations) {
 // Extract price from package price string (e.g., "₱6,500 - 8,500" -> 6500)
 function extractPrice(priceString) {
     if (!priceString) return 7000;
-    
-    const matches = priceString.match(/\d+/g);
-    if (matches && matches.length > 0) {
-        return parseInt(matches[0]);
+
+    const match = priceString.match(/₱\s*([\d,]+)/);
+    if (match && match[1]) {
+        return parseInt(match[1].replace(/,/g, ''), 10);
     }
     return 7000;
 }

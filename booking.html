@@ -68,40 +68,35 @@
                     <div class="customization-section">
                         <div class="customization-group">
                             <label>
-                                <input type="checkbox" class="customization-checkbox" value="bars" data-qty="1">
-                                <span>Additional Bar Setup</span>
-                            </label>
-                            <p class="customization-desc">Add an extra bar for larger events</p>
-                        </div>
-
-                        <div class="customization-group">
-                            <label>
                                 <input type="checkbox" class="customization-checkbox" value="hours" data-qty="1">
                                 <span>Extra Service Hours</span>
                             </label>
                             <p class="customization-desc">Extend service beyond standard duration</p>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="customization-group">
-                            <label>
-                                <input type="checkbox" class="customization-checkbox" value="bartenders" data-qty="1">
-                                <span>Additional Bartender</span>
-                            </label>
-                            <p class="customization-desc">Add more professional bartending staff</p>
-                        </div>
+                <!-- ADD-ONS -->
+                <div class="booking-card addons-card">
+                    <h2>Add-Ons</h2>
+                    <p class="addon-intro">Enhance your event with these optional services</p>
 
-                        <div class="customization-group">
-                            <label>
-                                <input type="checkbox" class="customization-checkbox" value="decor" data-qty="1">
-                                <span>Premium Bar Décor</span>
-                            </label>
-                            <p class="customization-desc">Themed bar setup with premium decorations</p>
+                    <div class="addon-items">
+                        <div class="addon-item">
+                            <div class="addon-header">
+                                <input type="checkbox" class="addon-checkbox" data-addon="beer" data-price="7000">
+                                <div class="addon-info">
+                                    <h4>🍺 Beer Bar</h4>
+                                    <p class="addon-desc">Premium craft & imported beers</p>
+                                </div>
+                            </div>
+                            <span class="addon-price">₱7,000</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- RIGHT COLUMN: ADD-ONS & PRICING -->
+            <!-- RIGHT COLUMN: PRICING -->
             <div class="booking-summary-section">
                 <!-- PRICE SUMMARY -->
                 <div class="booking-card price-summary">
@@ -114,6 +109,11 @@
 
                     <div id="addonsLineItems"></div>
 
+                    <div class="price-line">
+                        <span>Transport Fee</span>
+                        <span id="transportFee">₱2,000</span>
+                    </div>
+
                     <div class="price-divider"></div>
 
                     <div class="price-line total">
@@ -123,102 +123,6 @@
 
                     <button class="proceed-to-contact-btn" id="proceedToContactBtn">Proceed to Contact Info</button>
                     <a href="drinks-selection.html" class="back-link">← Change Drinks</a>
-                </div>
-
-                <!-- ADD-ONS -->
-                <div class="booking-card addons-card">
-                    <h2>Premium Add-Ons</h2>
-                    <p class="addon-intro">Enhance your event with these optional services</p>
-
-                    <div class="addon-items">
-                        <div class="addon-item">
-                            <div class="addon-header">
-                                <input type="checkbox" class="addon-checkbox" data-addon="wine" data-price="3500">
-                                <div class="addon-info">
-                                    <h4>🍷 Wine Selection</h4>
-                                    <p class="addon-desc">Premium red, white & rosé wines</p>
-                                </div>
-                            </div>
-                            <span class="addon-price">₱3,500</span>
-                        </div>
-
-                        <div class="addon-item">
-                            <div class="addon-header">
-                                <input type="checkbox" class="addon-checkbox" data-addon="coffee" data-price="2000">
-                                <div class="addon-info">
-                                    <h4>☕ Coffee Bar</h4>
-                                    <p class="addon-desc">Specialty espresso & coffee drinks</p>
-                                </div>
-                            </div>
-                            <span class="addon-price">₱2,000</span>
-                        </div>
-
-                        <div class="addon-item">
-                            <div class="addon-header">
-                                <input type="checkbox" class="addon-checkbox" data-addon="mocktail" data-price="1500">
-                                <div class="addon-info">
-                                    <h4>🥤 Mocktail Station</h4>
-                                    <p class="addon-desc">Non-alcoholic specialty drinks</p>
-                                </div>
-                            </div>
-                            <span class="addon-price">₱1,500</span>
-                        </div>
-
-                        <div class="addon-item">
-                            <div class="addon-header">
-                                <input type="checkbox" class="addon-checkbox" data-addon="beer" data-price="2000">
-                                <div class="addon-info">
-                                    <h4>🍺 Craft Beer Selection</h4>
-                                    <p class="addon-desc">Premium craft & imported beers</p>
-                                </div>
-                            </div>
-                            <span class="addon-price">₱2,000</span>
-                        </div>
-
-                        <div class="addon-item">
-                            <div class="addon-header">
-                                <input type="checkbox" class="addon-checkbox" data-addon="charcuterie" data-price="3000">
-                                <div class="addon-info">
-                                    <h4>🥃 Charcuterie & Graze</h4>
-                                    <p class="addon-desc">Premium cheeses & appetizers</p>
-                                </div>
-                            </div>
-                            <span class="addon-price">₱3,000</span>
-                        </div>
-
-                        <div class="addon-item">
-                            <div class="addon-header">
-                                <input type="checkbox" class="addon-checkbox" data-addon="dj" data-price="5000">
-                                <div class="addon-info">
-                                    <h4>🎵 DJ & Music</h4>
-                                    <p class="addon-desc">Professional DJ service</p>
-                                </div>
-                            </div>
-                            <span class="addon-price">₱5,000</span>
-                        </div>
-
-                        <div class="addon-item">
-                            <div class="addon-header">
-                                <input type="checkbox" class="addon-checkbox" data-addon="flair" data-price="2500">
-                                <div class="addon-info">
-                                    <h4>📸 Flair Bartending Show</h4>
-                                    <p class="addon-desc">Bartender entertainment & tricks</p>
-                                </div>
-                            </div>
-                            <span class="addon-price">₱2,500</span>
-                        </div>
-
-                        <div class="addon-item">
-                            <div class="addon-header">
-                                <input type="checkbox" class="addon-checkbox" data-addon="vip" data-price="4000">
-                                <div class="addon-info">
-                                    <h4>🏆 VIP Lounge Setup</h4>
-                                    <p class="addon-desc">Premium VIP area with exclusive service</p>
-                                </div>
-                            </div>
-                            <span class="addon-price">₱4,000</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

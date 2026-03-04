@@ -3207,6 +3207,20 @@ section {
     margin-bottom: 2rem;
 }
 
+.selection-limits-info {
+    background: rgba(255, 193, 7, 0.15);
+    border-left: 3px solid #ffc107;
+    border-radius: 0.4rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.selection-limits-info .limits-text {
+    color: #ffc107;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
 .drinks-category-section {
     margin-bottom: 2.5rem;
 }
@@ -3581,7 +3595,7 @@ section {
 
 /* ADD-ONS SECTION */
 .addons-card {
-    max-height: 600px;
+    max-height: 450px;
     overflow-y: auto;
 }
 
@@ -3781,6 +3795,20 @@ section {
 .summary-list li.no-addons {
     color: #888;
     font-style: italic;
+}
+
+.fee-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ddd;
+    padding: 0.6rem 0;
+    font-size: 0.95rem;
+}
+
+.fee-price {
+    color: #ff4444;
+    font-weight: 700;
 }
 
 .total-section {

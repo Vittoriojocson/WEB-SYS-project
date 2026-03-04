@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // Display booking total amount
 function displayAmount() {
     const bookingTotal = sessionStorage.getItem('bookingTotal') || '7000';
-    document.getElementById('detailAmount').textContent = `₱${Number(bookingTotal).toLocaleString()}`;
+    const totalAmount = Number(bookingTotal);
+    document.getElementById('detailAmount').textContent = `₱${totalAmount.toLocaleString()}`;
 }
 
 // Display submitted time

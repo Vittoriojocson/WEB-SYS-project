@@ -98,7 +98,75 @@
 
             <!-- RIGHT COLUMN: PAYMENT METHODS -->
             <div class="payment-methods-section">
-                <div class="payment-card payment-card-main">
+                <!-- CUSTOMER INFORMATION -->
+                <div class="payment-card customer-details-card">
+                    <h2>📋 Customer Information</h2>
+                    <p class="payment-intro">Please provide your details to complete the booking</p>
+
+                    <form id="customerDetailsForm" class="customer-details-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="customerName">Full Name *</label>
+                                <input type="text" id="customerName" name="customerName" required 
+                                       placeholder="Juan Dela Cruz" minlength="2">
+                            </div>
+                            <div class="form-group">
+                                <label for="customerEmail">Email Address *</label>
+                                <input type="email" id="customerEmail" name="customerEmail" required 
+                                       placeholder="juan@example.com">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="customerPhone">Phone Number *</label>
+                                <input type="tel" id="customerPhone" name="customerPhone" required
+                                       placeholder="+63 912 345 6789">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="eventLocation">Event Location/Venue *</label>
+                                <input type="text" id="eventLocation" name="eventLocation" required 
+                                       placeholder="Full address or venue name" minlength="5">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City/Municipality</label>
+                                <input type="text" id="city" name="city" 
+                                       placeholder="e.g., Manila, Quezon City">
+                            </div>
+                            <div class="form-group">
+                                <label for="province">Province/Region</label>
+                                <input type="text" id="province" name="province" 
+                                       placeholder="e.g., Metro Manila">
+                            </div>
+                        </div>
+
+                        <button type="button" class="confirm-details-btn" id="confirmDetailsBtn">
+                            ✓ Confirm Details & Continue
+                        </button>
+                    </form>
+
+                    <div class="confirmed-details-display" id="confirmedDetailsDisplay" style="display: none;">
+                        <div class="confirmed-badge">✓ Details Confirmed</div>
+                        <div class="confirmed-info">
+                            <p><strong id="displayName"></strong></p>
+                            <p><span id="displayEmail"></span></p>
+                            <p><span id="displayPhone"></span></p>
+                            <p><span id="displayLocation"></span></p>
+                        </div>
+                        <button type="button" class="edit-details-btn" id="editDetailsBtn">
+                            ✏️ Edit Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PAYMENT METHOD SELECTION (Hidden until details confirmed) -->
+                <div class="payment-card payment-card-main" id="paymentMethodCard" style="display: none;">
                     <h2>Select Payment Method</h2>
                     <p class="payment-intro">Choose your preferred payment option to complete your booking</p>
 

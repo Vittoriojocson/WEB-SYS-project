@@ -497,7 +497,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const proceedBtn = document.getElementById('proceedBtn');
     
     if (proceedBtn) {
-        proceedBtn.addEventListener('click', async function() {
+        proceedBtn.addEventListener('click', function() {
             const checkboxes = document.querySelectorAll('.drink-checkbox:checked');
             
             if (checkboxes.length === 0) {
@@ -505,48 +505,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Get customer information from form
-            const customerName = document.getElementById('customerName').value.trim();
-            const customerEmail = document.getElementById('customerEmail').value.trim();
-            const customerPhone = document.getElementById('customerPhone').value.trim();
-            const eventLocation = document.getElementById('eventLocation').value.trim();
-            const city = document.getElementById('city').value.trim();
-            const province = document.getElementById('province').value.trim();
-            const postalCode = document.getElementById('postalCode').value.trim();
-            const guestCount = document.getElementById('guestCount').value;
-            const specialRequests = document.getElementById('specialRequests').value.trim();
-
             // Get confirmed date/time from sessionStorage (required)
             const confirmedDateTime = sessionStorage.getItem('confirmedDateTime');
-            let finalEventDate = null;
-            let finalEventTime = null;
-
-            if (confirmedDateTime) {
-                const { date, time } = JSON.parse(confirmedDateTime);
-                finalEventDate = date;
-                finalEventTime = time;
-            } else {
+            if (!confirmedDateTime) {
                 alert('Please confirm your event date and time before proceeding.');
                 document.getElementById('dateTimeSelection').scrollIntoView({ behavior: 'smooth' });
-                return;
-            }
-
-            // Validate required fields
-            if (!customerName || customerName.length < 2) {
-                alert('Please enter your full name (minimum 2 characters).');
-                document.getElementById('customerName').focus();
-                return;
-            }
-
-            if (!customerEmail || !isValidEmail(customerEmail)) {
-                alert('Please enter a valid email address.');
-                document.getElementById('customerEmail').focus();
-                return;
-            }
-
-            if (!eventLocation || eventLocation.length < 5) {
-                alert('Please enter the event location/venue (minimum 5 characters).');
-                document.getElementById('eventLocation').focus();
                 return;
             }
 
@@ -560,62 +523,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Prepare order data
-            const orderData = {
-                customer_name: customerName,
-                customer_email: customerEmail,
-                customer_phone: customerPhone || null,
-                event_location: eventLocation,
-                city: city || null,
-                province: province || null,
-                postal_code: postalCode || null,
-                package_id: packageInfo.id,
-                package_name: packageInfo.name,
-                package_price: packageInfo.price,
-                selected_drinks: selectedDrinks,
-                guest_count: guestCount ? parseInt(guestCount) : null,
-                event_date: finalEventDate || null,
-                event_time: finalEventTime || null,
-                special_requests: specialRequests || null
-            };
+            // Store selected drinks and date/time in sessionStorage
+            sessionStorage.setItem('selectedDrinks', JSON.stringify(selectedDrinks));
+            sessionStorage.setItem('confirmedDateTime', confirmedDateTime);
 
-            // Show loading state
-            proceedBtn.disabled = true;
-            proceedBtn.textContent = 'Submitting...';
-
-            try {
-                // Submit order to backend
-                const API_URL = window.APP_CONFIG?.API_URL || 'http://localhost:5000';
-                const response = await fetch(`${API_URL}/api/orders/create`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(orderData)
-                });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    alert(`✅ Order submitted successfully!\n\nOrder ID: #${result.data.order.id}\n\nWe will contact you at ${customerEmail} to confirm your booking.`);
-                    
-                    // Clear session storage
-                    sessionStorage.removeItem('selectedDrinks');
-                    sessionStorage.removeItem('packageInfo');
-                    
-                    // Redirect to home page
-                    window.location.href = 'index.html';
-                } else {
-                    throw new Error(result.errors?.join(', ') || 'Failed to submit order');
-                }
-            } catch (error) {
-                console.error('Error submitting order:', error);
-                alert(`❌ Failed to submit order:\n${error.message}\n\nPlease try again or contact us directly.`);
-                
-                // Restore button state
-                proceedBtn.disabled = false;
-                proceedBtn.textContent = 'Submit Order';
-            }
+            // Redirect to payment page
+            window.location.href = 'payment.html';
         });
     }
 
@@ -623,7 +536,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializePage();
 });
 
-// Email validation helper
+// Email validation helper (kept for potential future use)
 function isValidEmail(email) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);

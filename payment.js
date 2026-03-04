@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadOrderSummary();
     setupPaymentMethods();
     setupPaymentButton();
+    setupCustomerDetailsForm();
 });
 
 // Load order summary from sessionStorage
@@ -169,7 +170,14 @@ function updatePaymentMethodVisuals(selectedMethod) {
 function setupPaymentButton() {
     const paymentBtn = document.getElementById('proceedPaymentBtn');
     
-    paymentBtn.addEventListener('click', function() {
+    paymentBtn.addEventListener('click', async function() {
+        // Check if customer details are confirmed
+        const customerDetails = JSON.parse(sessionStorage.getItem('customerDetails') || '{}');
+        if (!customerDetails.name || !customerDetails.email) {
+            alert('Please confirm your customer details before proceeding.');
+            return;
+        }
+
         const selectedPayment = document.querySelector('.payment-radio:checked');
         
         if (!selectedPayment) {
@@ -177,12 +185,12 @@ function setupPaymentButton() {
             return;
         }
 
-        processPayment(selectedPayment.value);
+        await processPayment(selectedPayment.value);
     });
 }
 
 // Process payment
-function processPayment(paymentMethod) {
+async function processPayment(paymentMethod) {
     const paymentMethodNames = {
         'card': 'Credit/Debit Card',
         'gcash': 'GCash',
@@ -190,13 +198,63 @@ function processPayment(paymentMethod) {
         'bank': 'Bank Transfer'
     };
 
+    // Get customer details from sessionStorage
+    const customerDetails = JSON.parse(sessionStorage.getItem('customerDetails') || '{}');
+    const packageInfo = JSON.parse(sessionStorage.getItem('packageInfo') || '{}');
+    const selectedDrinks = JSON.parse(sessionStorage.getItem('selectedDrinks') || '[]');
+    const confirmedDateTime = JSON.parse(sessionStorage.getItem('confirmedDateTime') || '{}');
+
+    // Validate all required data is present
+    if (!customerDetails.name || !customerDetails.email || !customerDetails.phone || !customerDetails.location) {
+        alert('Customer information is incomplete. Please refresh and try again.');
+        return;
+    }
+
+    if (!packageInfo.id || !packageInfo.name) {
+        alert('Package information is missing. Please go back and select a package again.');
+        window.location.href = 'drinks-packages.html';
+        return;
+    }
+
+    if (!selectedDrinks || selectedDrinks.length === 0) {
+        alert('No drinks selected. Please go back and select drinks.');
+        window.location.href = 'drinks-selection.html';
+        return;
+    }
+
+    if (!confirmedDateTime.date || !confirmedDateTime.time) {
+        alert('Event date/time is missing. Please go back and confirm your event details.');
+        window.location.href = 'drinks-selection.html';
+        return;
+    }
+
+    // Prepare order data for backend
+    const orderData = {
+        customer_name: customerDetails.name,
+        customer_email: customerDetails.email,
+        customer_phone: customerDetails.phone,
+        event_location: customerDetails.location,
+        city: customerDetails.city || null,
+        province: customerDetails.province || null,
+        postal_code: null,
+        package_id: packageInfo.id || packageInfo.name,
+        package_name: packageInfo.name,
+        package_price: packageInfo.price,
+        selected_drinks: selectedDrinks,
+        guest_count: null,
+        event_date: confirmedDateTime.date,
+        event_time: confirmedDateTime.time,
+        special_requests: null
+    };
+
     // Store payment method in sessionStorage
     sessionStorage.setItem('paymentMethod', paymentMethod);
     sessionStorage.setItem('paymentMethodName', paymentMethodNames[paymentMethod]);
     
-    // Store complete order information
+    // Store complete order information including customer details
     const completeOrder = {
         timestamp: new Date().toISOString(),
+        customer: customerDetails,
         package: bookingData.package,
         drinks: bookingData.drinks,
         addons: bookingData.addons,
@@ -208,21 +266,59 @@ function processPayment(paymentMethod) {
     
     sessionStorage.setItem('completeOrder', JSON.stringify(completeOrder));
 
-    // Handle GCash specially - route to QR code page
-    if (paymentMethod === 'gcash') {
-        window.location.href = 'gcash-qr.html';
-        return;
+    // Show loading state
+    const paymentBtn = document.getElementById('proceedPaymentBtn');
+    if (paymentBtn) {
+        paymentBtn.disabled = true;
+        paymentBtn.textContent = 'Submitting Order...';
     }
 
-    // For other payment methods, show confirmation
-    const confirmMessage = `Processing payment via ${paymentMethodNames[paymentMethod]}...\n\nTotal Amount: ₱${Number(bookingData.total).toLocaleString()}\n\nYou will be redirected to complete your payment.`;
-    
-    if (confirm(confirmMessage)) {
-        // In production, redirect to actual payment gateway
-        // For now, redirect to contact form with order data
-        setTimeout(() => {
-            window.location.href = 'index.html#contact';
-        }, 500);
+    try {
+        // Submit order to backend
+        const API_URL = window.APP_CONFIG?.API_URL || 'http://localhost:5000';
+        const response = await fetch(`${API_URL}/api/orders/create`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderData)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            // Store order ID
+            sessionStorage.setItem('orderId', result.data.order.id);
+
+            // Handle GCash specially - route to QR code page
+            if (paymentMethod === 'gcash') {
+                window.location.href = 'gcash-qr.html';
+                return;
+            }
+
+            // For other payment methods, show confirmation
+            alert(`✅ Order submitted successfully!\n\nOrder ID: #${result.data.order.id}\n\nPayment Method: ${paymentMethodNames[paymentMethod]}\n\nWe will contact you at ${customerDetails.email} to confirm your booking.`);
+            
+            // Clear session storage
+            sessionStorage.removeItem('selectedDrinks');
+            sessionStorage.removeItem('packageInfo');
+            sessionStorage.removeItem('confirmedDateTime');
+            sessionStorage.removeItem('customerDetails');
+            
+            // Redirect to home page
+            window.location.href = 'index.html';
+        } else {
+            throw new Error(result.errors?.join(', ') || 'Failed to submit order');
+        }
+    } catch (error) {
+        console.error('Error submitting order:', error);
+        alert(`❌ Failed to submit order:\n${error.message}\n\nPlease try again or contact us directly.`);
+        
+        // Restore button state
+        if (paymentBtn) {
+            paymentBtn.disabled = false;
+            paymentBtn.textContent = 'Proceed to Payment';
+        }
     }
 }
 
@@ -232,4 +328,156 @@ function formatCurrency(amount) {
         style: 'currency',
         currency: 'PHP'
     }).format(amount);
+}
+
+// ========== CUSTOMER DETAILS FORM ==========
+// Setup customer details form
+function setupCustomerDetailsForm() {
+    const confirmBtn = document.getElementById('confirmDetailsBtn');
+    const editBtn = document.getElementById('editDetailsBtn');
+    const form = document.getElementById('customerDetailsForm');
+    const confirmedDisplay = document.getElementById('confirmedDetailsDisplay');
+    const paymentMethodCard = document.getElementById('paymentMethodCard');
+
+    // Check if customer details already confirmed (from sessionStorage)
+    const savedCustomerDetails = sessionStorage.getItem('customerDetails');
+    if (savedCustomerDetails) {
+        const details = JSON.parse(savedCustomerDetails);
+        populateForm(details);
+        showConfirmedDetails(details);
+        showPaymentMethods();
+    }
+
+    // Confirm details button
+    if (confirmBtn) {
+        confirmBtn.addEventListener('click', function() {
+            if (validateCustomerForm()) {
+                const customerDetails = getCustomerFormData();
+                saveCustomerDetails(customerDetails);
+                showConfirmedDetails(customerDetails);
+                showPaymentMethods();
+            }
+        });
+    }
+
+    // Edit details button
+    if (editBtn) {
+        editBtn.addEventListener('click', function() {
+            hideConfirmedDetails();
+            hidePaymentMethods();
+        });
+    }
+}
+
+// Validate customer form
+function validateCustomerForm() {
+    const customerName = document.getElementById('customerName').value.trim();
+    const customerEmail = document.getElementById('customerEmail').value.trim();
+    const customerPhone = document.getElementById('customerPhone').value.trim();
+    const eventLocation = document.getElementById('eventLocation').value.trim();
+
+    if (!customerName || customerName.length < 2) {
+        alert('Please enter your full name (minimum 2 characters).');
+        document.getElementById('customerName').focus();
+        return false;
+    }
+
+    if (!customerEmail || !isValidEmail(customerEmail)) {
+        alert('Please enter a valid email address.');
+        document.getElementById('customerEmail').focus();
+        return false;
+    }
+
+    if (!customerPhone || customerPhone.length < 10) {
+        alert('Please enter a valid phone number (minimum 10 digits).');
+        document.getElementById('customerPhone').focus();
+        return false;
+    }
+
+    if (!eventLocation || eventLocation.length < 5) {
+        alert('Please enter the event location/venue (minimum 5 characters).');
+        document.getElementById('eventLocation').focus();
+        return false;
+    }
+
+    return true;
+}
+
+// Email validation
+function isValidEmail(email) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+}
+
+// Get customer form data
+function getCustomerFormData() {
+    return {
+        name: document.getElementById('customerName').value.trim(),
+        email: document.getElementById('customerEmail').value.trim(),
+        phone: document.getElementById('customerPhone').value.trim(),
+        location: document.getElementById('eventLocation').value.trim(),
+        city: document.getElementById('city').value.trim() || '',
+        province: document.getElementById('province').value.trim() || ''
+    };
+}
+
+// Populate form with saved data
+function populateForm(details) {
+    document.getElementById('customerName').value = details.name;
+    document.getElementById('customerEmail').value = details.email;
+    document.getElementById('customerPhone').value = details.phone;
+    document.getElementById('eventLocation').value = details.location;
+    document.getElementById('city').value = details.city || '';
+    document.getElementById('province').value = details.province || '';
+}
+
+// Save customer details to sessionStorage
+function saveCustomerDetails(details) {
+    sessionStorage.setItem('customerDetails', JSON.stringify(details));
+}
+
+// Show confirmed details display
+function showConfirmedDetails(details) {
+    const form = document.getElementById('customerDetailsForm');
+    const confirmedDisplay = document.getElementById('confirmedDetailsDisplay');
+
+    // Update display with customer info
+    document.getElementById('displayName').textContent = details.name;
+    document.getElementById('displayEmail').textContent = details.email;
+    document.getElementById('displayPhone').textContent = details.phone;
+    
+    let locationText = details.location;
+    if (details.city) locationText += `, ${details.city}`;
+    if (details.province) locationText += `, ${details.province}`;
+    document.getElementById('displayLocation').textContent = locationText;
+
+    // Hide form, show confirmed display
+    form.style.display = 'none';
+    confirmedDisplay.style.display = 'block';
+}
+
+// Hide confirmed details display
+function hideConfirmedDetails() {
+    const form = document.getElementById('customerDetailsForm');
+    const confirmedDisplay = document.getElementById('confirmedDetailsDisplay');
+
+    form.style.display = 'block';
+    confirmedDisplay.style.display = 'none';
+}
+
+// Show payment methods section
+function showPaymentMethods() {
+    const paymentMethodCard = document.getElementById('paymentMethodCard');
+    if (paymentMethodCard) {
+        paymentMethodCard.style.display = 'block';
+        paymentMethodCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+// Hide payment methods section
+function hidePaymentMethods() {
+    const paymentMethodCard = document.getElementById('paymentMethodCard');
+    if (paymentMethodCard) {
+        paymentMethodCard.style.display = 'none';
+    }
 }

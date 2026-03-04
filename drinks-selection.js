@@ -227,7 +227,9 @@ function initializePage() {
         
         // Store package ID for booking
         sessionStorage.setItem('selectedPackage', packageId);
-        sessionStorage.setItem('packageInfo', JSON.stringify(packageInfo));
+        // Include the package ID in the packageInfo object
+        const packageInfoWithId = { ...packageInfo, id: packageId };
+        sessionStorage.setItem('packageInfo', JSON.stringify(packageInfoWithId));
         sessionStorage.setItem('selectedPackageId', packageId);
     }
 
